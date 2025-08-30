@@ -1484,15 +1484,15 @@
             <source src="./assets/first-light-bg.mp4" type="video/mp4">
           </video>
 
-        <div class="techshowcase-hero-content" id="techshowcase-heroContent">
-          <h1 class="techshowcase-hero-title">Our Technologies</h1>
-          <p class="techshowcase-hero-subtitle">Transforming Maritime Operations</p>
-        </div>
+          <div class="techshowcase-hero-content" id="techshowcase-heroContent">
+            <h1 class="techshowcase-hero-title">Our Technologies</h1>
+            <p class="techshowcase-hero-subtitle">Transforming Maritime Operations</p>
+          </div>
 
-        <div class="techshowcase-scroll-indicator">
-          <span class="techshowcase-scroll-text">Scroll Down</span>
-          <div class="techshowcase-scroll-arrow"></div>
-        </div>
+          <div class="techshowcase-scroll-indicator">
+            <span class="techshowcase-scroll-text">Scroll Down</span>
+            <div class="techshowcase-scroll-arrow"></div>
+          </div>
       </section>
 
       <!-- Main Content - Unchanged except for class names -->
@@ -1672,6 +1672,21 @@
         video.addEventListener('loadeddata', () => {
           video.play().catch(e => console.log('Video autoplay failed:', e));
         });
+      });
+      // Splash Screen Logic
+      const splashScreen = document.getElementById('splash-screen');
+
+      function hideSplashScreen() {
+        splashScreen.classList.add('hidden');
+        document.body.style.overflow = 'auto'; // Ensure scrolling is enabled
+      }
+
+      // Hide splash screen after 3 seconds, regardless of load event
+      setTimeout(hideSplashScreen, 3000);
+
+      // Also try hiding on window load
+      window.addEventListener('load', () => {
+        hideSplashScreen();
       });
 
       // Initialize Services section video and sticky-bg position
@@ -2048,14 +2063,14 @@
           // Calculate scroll progress within the technology section
           let scrollProgress = 0;
           if (scrollY >= heroTop - windowHeight && scrollY <= heroBottom) {
-  scrollProgress = Math.min(
-    Math.max(
-      (scrollY - (heroTop - windowHeight)) / (heroHeight + windowHeight * 2), // Adjusted denominator for slower scroll
-      0
-    ),
-    1 // Cap at 1 for normalized progress
-  );
-}
+            scrollProgress = Math.min(
+              Math.max(
+                (scrollY - (heroTop - windowHeight)) / (heroHeight + windowHeight * 2), // Adjusted denominator for slower scroll
+                0
+              ),
+              1 // Cap at 1 for normalized progress
+            );
+          }
 
           // Apply transformations based on scroll progress
           const scale = 1 - (scrollProgress * 0.5); // Scale from 1 to 0.5
