@@ -1,0 +1,2244 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Maritime Support Solutions</title>
+  <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
+  <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./technologies/tech.css">
+  <style>
+    :root {
+      --bg-color: #000000;
+      --text-color: #ffffff;
+      --text-secondary: rgba(255, 255, 255, 0.85);
+      --text-tertiary: rgba(255, 255, 255, 0.6);
+      --accent-color: #00bfff;
+      --accent-secondary: #2563eb;
+      --overlay-color: rgba(0, 0, 0, 0.7);
+      --glass-bg: rgba(255, 255, 255, 0.1);
+      --glass-border: rgba(255, 255, 255, 0.4);
+      --diamond-border: rgba(255, 255, 255, 0.6);
+      --floating-dot: rgba(37, 99, 235, 0.4);
+      --gradient-overlay: linear-gradient(135deg, rgba(0, 0, 0, 0), rgba(0, 0, 0, 0.4));
+      --video-overlay: linear-gradient(to bottom, rgba(0, 0, 0, 0.3), rgba(0, 0, 0, 0.7));
+    }
+
+    [data-theme="light"] {
+      --bg-color: #ffffff;
+      --text-color: #000000;
+      --text-secondary: rgba(0, 0, 0, 0.85);
+      --text-tertiary: rgba(0, 0, 0, 0.6);
+      --accent-color: #0066cc;
+      --accent-secondary: #1e40af;
+      --overlay-color: rgba(255, 255, 255, 0.7);
+      --glass-bg: rgba(0, 0, 0, 0.1);
+      --glass-border: rgba(0, 0, 0, 0.4);
+      --diamond-border: rgba(0, 0, 0, 0.6);
+      --floating-dot: rgba(37, 99, 235, 0.6);
+      --gradient-overlay: linear-gradient(135deg, rgba(255, 255, 255, 0), rgba(255, 255, 255, 0.4));
+      --video-overlay: linear-gradient(to bottom, rgba(255, 255, 255, 0.084), rgba(255, 255, 255, 0.319));
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background: var(--bg-color);
+      color: var(--text-color);
+      overflow-x: hidden;
+      cursor: grab;
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+
+    /* Theme Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 50%;
+      right: 20px;
+      transform: translateY(-50%);
+      z-index: 1001;
+      background: var(--glass-bg);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      border: 1px solid var(--glass-border);
+      border-radius: 50px;
+      padding: 8px;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      min-width: 60px;
+      height: 60px;
+      justify-content: center;
+    }
+
+    .theme-toggle:hover {
+      transform: translateY(-50%) scale(1.1);
+      background: var(--glass-bg);
+    }
+
+    .theme-icon {
+      width: 24px;
+      height: 24px;
+      fill: var(--text-color);
+      transition: all 0.3s ease;
+    }
+
+    .theme-toggle .sun-icon {
+      opacity: 0;
+      transform: rotate(180deg) scale(0);
+    }
+
+    .theme-toggle .moon-icon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    [data-theme="light"] .theme-toggle .sun-icon {
+      opacity: 1;
+      transform: rotate(0deg) scale(1);
+    }
+
+    [data-theme="light"] .theme-toggle .moon-icon {
+      opacity: 0;
+      transform: rotate(-180deg) scale(0);
+    }
+
+    /* Splash Screen Styles */
+    .splash-screen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100vh;
+      background: var(--bg-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      z-index: 3000;
+      opacity: 1;
+      transition: opacity 0.5s ease, background-color 0.3s ease;
+    }
+
+    .splash-screen.hidden {
+      opacity: 0;
+      pointer-events: none;
+    }
+
+    .splash-text {
+      font-size: 3.5rem;
+      font-weight: bold;
+      color: var(--bg-color);
+      letter-spacing: 2px;
+      display: inline-block;
+      text-align: center;
+    }
+
+    .splash-text span {
+      display: inline-block;
+      color: var(--bg-color);
+      animation: colorChange 2s ease forwards;
+      animation-delay: calc(0.05s * var(--i));
+    }
+
+    @keyframes colorChange {
+      0% {
+        color: var(--bg-color);
+      }
+
+      100% {
+        color: var(--text-tertiary);
+      }
+    }
+
+    /* Navbar Styles */
+    .navbar {
+      position: fixed;
+      top: 20px;
+      left: 20px;
+      right: 20px;
+      z-index: 1000;
+      padding: 10px 5%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      background: transparent;
+      transition: all 0.3s ease;
+      border-radius: 70px;
+      max-width: 100vw;
+    }
+
+    .logo img {
+      width: 120px;
+      height: 70px;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle {
+      background: var(--glass-bg);
+      backdrop-filter: blur(2px);
+      -webkit-backdrop-filter: blur(8px);
+      color: var(--text-color);
+      font-size: 0.9rem;
+      font-weight: 300;
+      letter-spacing: 1px;
+      cursor: pointer;
+      padding: 12px 20px;
+      border-radius: 10px;
+      position: relative;
+      overflow: hidden;
+      border: none;
+      outline: none;
+      min-width: 80px;
+      height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s ease;
+    }
+
+    .menu-toggle.scrolled {
+      padding: 10px;
+      min-width: 44px;
+      width: 44px;
+    }
+
+    .menu-toggle::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: rgba(255, 255, 255, 0.05);
+      z-index: -1;
+    }
+
+    [data-theme="light"] .menu-toggle::before {
+      background: rgba(0, 0, 0, 0.05);
+    }
+
+    .menu-toggle:hover::before {
+      left: 0;
+    }
+
+    .menu-toggle:hover {
+      transform: translateY(-1px);
+    }
+
+    .menu-text {
+      opacity: 1;
+      transition: opacity 0.3s ease;
+    }
+
+    .hamburger {
+      position: absolute;
+      width: 16px;
+      height: 12px;
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .hamburger span {
+      display: block;
+      position: absolute;
+      height: 2px;
+      width: 100%;
+      background: var(--text-color);
+      border-radius: 1px;
+      transition: all 0.3s ease;
+    }
+
+    .hamburger span:nth-child(1) {
+      top: 0;
+    }
+
+    .hamburger span:nth-child(2) {
+      top: 10px;
+    }
+
+    .menu-toggle.scrolled .menu-text {
+      opacity: 0;
+    }
+
+    .menu-toggle.scrolled .hamburger {
+      opacity: 1;
+    }
+
+    .menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100vh;
+      background: rgba(31, 31, 31, 0.267);
+      backdrop-filter: blur(25px);
+      -webkit-backdrop-filter: blur(8px);
+      z-index: 2000;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.5s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    [data-theme="light"] .menu-overlay {
+      background: rgba(240, 240, 240, 0.267);
+    }
+
+    .menu-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .menu-close {
+      position: absolute;
+      top: 35px;
+      right: 5%;
+      background: transparent;
+      border: none;
+      color: var(--text-tertiary);
+      font-size: 2.5rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      font-weight: 200;
+      line-height: 1;
+    }
+
+    .menu-close:hover {
+      color: var(--text-color);
+      transform: rotate(90deg);
+    }
+
+    .menu-items {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      text-align: center;
+      font-family: 'Montserrat', sans-serif;
+    }
+
+    .menu-items li {
+      margin: 25px 0;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: all 0.6s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .menu-overlay.active .menu-items li {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(1) {
+      transition-delay: 0.1s;
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(2) {
+      transition-delay: 0.2s;
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(3) {
+      transition-delay: 0.3s;
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(4) {
+      transition-delay: 0.4s;
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(5) {
+      transition-delay: 0.5s;
+    }
+
+    .menu-overlay.active .menu-items li:nth-child(6) {
+      transition-delay: 0.6s;
+    }
+
+    .menu-items a {
+      color: var(--text-secondary);
+      text-decoration: none;
+      font-size: 4rem;
+      font-weight: bold;
+      letter-spacing: 3px;
+      transition: all 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+      display: block;
+      position: relative;
+    }
+
+    .menu-items a:hover {
+      color: var(--text-color);
+      transform: translateX(20px);
+      letter-spacing: 4px;
+      font-weight: 700;
+    }
+
+    .menu-items a::before {
+      content: '';
+      position: absolute;
+      left: -40px;
+      top: 50%;
+      transform: translateY(-50%);
+      width: 0;
+      height: 1px;
+      background: var(--text-color);
+      transition: width 0.4s cubic-bezier(0.77, 0, 0.175, 1);
+    }
+
+    .menu-items a:hover::before {
+      width: 30px;
+    }
+
+    /* Common Section Styling */
+    .section {
+      min-height: 100vh;
+      position: relative;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      overflow: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .section-bg {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .section-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      background: var(--bg-color);
+      z-index: -1;
+      transition: background-color 0.3s ease;
+    }
+
+    .section-content {
+      max-width: 1200px;
+      margin: 0 auto;
+      padding: 0 5%;
+      z-index: 1;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    /* Hero Section */
+    .hero-section {
+      min-height: 100vh;
+      position: relative;
+      overflow: hidden;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .hero-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100vh;
+      object-fit: cover;
+      z-index: -2;
+    }
+
+    .hero-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100vh;
+      background: var(--gradient-overlay);
+      z-index: -1;
+      transition: background 0.8s ease;
+    }
+
+    .hero-overlay.fade {
+      background: var(--bg-color);
+    }
+
+    .hero-content {
+      display: none;
+    }
+
+    /* About Section */
+    .about-section {
+      position: relative;
+      min-height: 100vh;
+      overflow: hidden;
+      padding: 80px 5%;
+      display: flex;
+      align-items: center;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    .about-content h4 {
+      color: var(--accent-color);
+      font-size: 1.1rem;
+      letter-spacing: 3px;
+      margin-bottom: 15px;
+      text-transform: uppercase;
+      font-weight: 600;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .about-content h2 {
+      font-size: 3rem;
+      margin-bottom: 20px;
+      line-height: 1.2;
+      font-weight: 800;
+      letter-spacing: -1px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease 0.2s, transform 0.8s ease 0.2s;
+    }
+
+    .about-content p {
+      font-size: 1.15rem;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      margin-bottom: 30px;
+      max-width: 600px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease 0.4s, transform 0.8s ease 0.4s;
+    }
+
+    .about-content .btn {
+      font-size: 1rem;
+      padding: 12px 28px;
+      font-weight: 600;
+      border-radius: 30px;
+      opacity: 0;
+      transform: translateY(50px);
+      transition: opacity 0.8s ease 0.6s, transform 0.8s ease 0.6s;
+    }
+
+    .about-content.visible h4,
+    .about-content.visible h2,
+    .about-content.visible p,
+    .about-content.visible .btn {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Vision & Mission */
+    .mv-section {
+      min-height: 100vh;
+      width: 100%;
+      max-width: 100vw;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      position: relative;
+      transition: all 0.8s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+      background: var(--bg-color);
+    }
+
+    .mv-section::before {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      background-image:
+        linear-gradient(var(--floating-dot) 1px, transparent 1px),
+        linear-gradient(90deg, var(--floating-dot) 1px, transparent 1px);
+      background-size: 60px 60px;
+      opacity: 0;
+      transition: opacity 1s ease;
+      pointer-events: none;
+    }
+
+    .mv-section.mv-active::before {
+      opacity: 0.3;
+    }
+
+    .mv-section-content {
+      text-align: center;
+      max-width: 1000px;
+      width: 100%;
+      padding: 0 5%;
+      opacity: 0;
+      transform: translateY(60px);
+      transition: all 1.2s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    }
+
+    .mv-section.mv-active .mv-section-content {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mv-section-header {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin-bottom: 60px;
+      gap: 40px;
+    }
+
+    .mv-section-number {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--accent-secondary);
+      letter-spacing: 0.3em;
+      opacity: 0;
+      transform: translateX(-30px);
+      transition: all 1s ease 0.3s;
+    }
+
+    .mv-section.mv-active .mv-section-number {
+      opacity: 0.8;
+      transform: translateX(0);
+    }
+
+    .mv-section-divider {
+      width: 120px;
+      height: 1px;
+      background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
+      position: relative;
+      opacity: 0;
+      transform: scaleX(0);
+      transition: all 1s ease 0.5s;
+    }
+
+    .mv-section.mv-active .mv-section-divider {
+      opacity: 0.6;
+      transform: scaleX(1);
+    }
+
+    .mv-section-divider::after {
+      content: '';
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 8px;
+      height: 8px;
+      background: var(--accent-secondary);
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      box-shadow: 0 0 15px var(--accent-secondary);
+      opacity: 0;
+      transition: opacity 0.5s ease 1s;
+    }
+
+    .mv-section.mv-active .mv-section-divider::after {
+      opacity: 0.6;
+    }
+
+    .mv-section-label {
+      font-size: 1.4rem;
+      font-weight: 300;
+      color: var(--accent-secondary);
+      letter-spacing: 0.3em;
+      opacity: 0;
+      transform: translateX(30px);
+      transition: all 1s ease 0.3s;
+    }
+
+    .mv-section.mv-active .mv-section-label {
+      opacity: 0.8;
+      transform: translateX(0);
+    }
+
+    .mv-section-title {
+      font-size: clamp(4rem, 12vw, 8rem);
+      font-weight: 700;
+      margin-bottom: 60px;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+      position: relative;
+      left: 12%;
+      letter-spacing: 0.02em;
+      opacity: 0;
+      transform: translateY(40px);
+      transition: all 1.2s ease 0.6s;
+    }
+
+    .mv-section.mv-active .mv-section-title {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mv-section-title::after {
+      content: '';
+      position: absolute;
+      bottom: -15px;
+      left: 50%;
+      width: 0;
+      height: 3px;
+      background: linear-gradient(90deg, transparent, var(--accent-secondary), transparent);
+      transform: translateX(-50%);
+      transition: width 1.2s ease 1.2s;
+    }
+
+    .mv-section.mv-active .mv-section-title::after {
+      width: 250px;
+    }
+
+    .mv-section-description {
+      font-size: clamp(1.2rem, 3vw, 1.6rem);
+      font-weight: 300;
+      color: var(--text-secondary);
+      line-height: 1.8;
+      max-width: 800px;
+      margin: 0 auto;
+      opacity: 0;
+      transform: translateY(30px);
+      transition: all 1s ease 1s;
+    }
+
+    .mv-section.mv-active .mv-section-description {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    .mv-floating-elements {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      pointer-events: none;
+      overflow: hidden;
+    }
+
+    .mv-floating-dot {
+      position: absolute;
+      width: 6px;
+      height: 6px;
+      background: var(--floating-dot);
+      border-radius: 50%;
+      opacity: 0;
+      transition: opacity 0.8s ease;
+      animation: mv-float 10s ease-in-out infinite;
+    }
+
+    .mv-section.mv-active .mv-floating-dot {
+      opacity: 1;
+    }
+
+    .mv-floating-dot:nth-child(1) {
+      top: 15%;
+      left: 10%;
+      animation-delay: -3s;
+    }
+
+    .mv-floating-dot:nth-child(2) {
+      top: 25%;
+      right: 15%;
+      animation-delay: -7s;
+    }
+
+    .mv-floating-dot:nth-child(3) {
+      bottom: 25%;
+      left: 8%;
+      animation-delay: -1s;
+    }
+
+    .mv-floating-dot:nth-child(4) {
+      bottom: 35%;
+      right: 12%;
+      animation-delay: -5s;
+    }
+
+    .mv-floating-dot:nth-child(5) {
+      top: 60%;
+      left: 20%;
+      animation-delay: -9s;
+    }
+
+    .mv-floating-dot:nth-child(6) {
+      top: 45%;
+      right: 25%;
+      animation-delay: -2s;
+    }
+
+    @keyframes mv-float {
+
+      0%,
+      100% {
+        transform: translateY(0) scale(1);
+        opacity: 0.4;
+      }
+
+      50% {
+        transform: translateY(-40px) scale(1.3);
+        opacity: 0.8;
+      }
+    }
+
+    .mv-scroll-indicator {
+      position: absolute;
+      bottom: 40px;
+      left: 50%;
+      transform: translateX(-50%);
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 15px;
+      opacity: 1;
+      transition: opacity 0.8s ease;
+    }
+
+    .mv-section.mv-active .mv-scroll-indicator {
+      opacity: 0.7;
+    }
+
+    .mv-scroll-text {
+      font-size: 0.9rem;
+      color: var(--text-tertiary);
+      text-transform: uppercase;
+      letter-spacing: 0.1em;
+    }
+
+    .mv-scroll-icon {
+      width: 2px;
+      height: 30px;
+      background: linear-gradient(180deg, var(--accent-secondary), transparent);
+      border-radius: 1px;
+      position: relative;
+      animation: mv-scrollPulse 2s ease-in-out infinite;
+    }
+
+    .mv-scroll-icon::after {
+      content: '';
+      position: absolute;
+      top: 0;
+      left: -1px;
+      width: 4px;
+      height: 8px;
+      background: var(--accent-secondary);
+      border-radius: 2px;
+      animation: mv-scrollMove 2s ease-in-out infinite;
+    }
+
+    @keyframes mv-scrollPulse {
+
+      0%,
+      100% {
+        opacity: 0.5;
+      }
+
+      50% {
+        opacity: 1;
+      }
+    }
+
+    @keyframes mv-scrollMove {
+      0% {
+        transform: translateY(0);
+      }
+
+      50% {
+        transform: translateY(15px);
+      }
+
+      100% {
+        transform: translateY(0);
+      }
+    }
+
+    .mv-mission-section .mv-section-title {
+      background: linear-gradient(135deg, var(--text-color) 0%, #93c5fd 40%, var(--accent-secondary) 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mv-vision-section .mv-section-title {
+      transition: all 0.8s ease 0.4s;
+      background: linear-gradient(135deg, var(--text-color) 0%, #60a5fa 40%, #1d4ed8 100%);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+      background-clip: text;
+    }
+
+    .mv-vision-section .mv-scroll-indicator {
+      display: none;
+    }
+
+    /* Services Section */
+    .services-container {
+      position: relative;
+      min-height: 200vh;
+      width: 100%;
+      max-width: 100vw;
+      overflow-x: hidden;
+    }
+
+    .sticky-bg {
+      position: fixed;
+      top: 0;
+      left: 0;
+      height: 100vh;
+      width: 100%;
+      max-width: 100vw;
+      overflow: hidden;
+      z-index: -1;
+    }
+
+    .bg-video {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      object-fit: cover;
+      opacity: 0;
+      transition: opacity 1s ease;
+    }
+
+    .bg-video.active {
+      opacity: 1;
+    }
+
+    .video-overlay {
+      position: absolute;
+      top: 0;
+      left: 0;
+      width: 100%;
+      max-width: 100vw;
+      height: 100%;
+      background: var(--video-overlay);
+      pointer-events: none;
+      z-index: 1;
+      transition: background 0.3s ease;
+    }
+
+    .text-section {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: flex-start;
+      padding-left: 5%;
+      z-index: 2;
+      position: relative;
+      width: 100%;
+      max-width: 100vw;
+    }
+
+    h1 {
+      font-size: 5rem;
+      margin: 0;
+      max-width: 600px;
+      transition: transform 0.4s ease, filter 0.4s ease;
+      color: var(--text-color);
+    }
+
+    .text-section.blur h1 {
+      transform: scale(1.1);
+      filter: blur(4px) brightness(0.7);
+    }
+
+    .fixed-bottom {
+      position: fixed;
+      bottom: 30px;
+      left: 5%;
+      text-align: left;
+      z-index: 5;
+      max-width: 500px;
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 0.5s ease, transform 0.5s ease;
+      pointer-events: none;
+    }
+
+    .fixed-bottom.visible {
+      opacity: 1;
+      transform: translateY(0);
+      pointer-events: auto;
+    }
+
+    .fixed-bottom p {
+      font-size: 1rem;
+      color: var(--text-secondary);
+      margin-bottom: 15px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 25px;
+      background: var(--glass-bg);
+      color: var(--text-color);
+      text-decoration: none;
+      border-radius: 6px;
+      border: 1px solid var(--glass-border);
+      backdrop-filter: blur(6px);
+      transition: all 0.3s ease;
+    }
+
+    .btn:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    [data-theme="light"] .btn:hover {
+      background: rgba(0, 0, 0, 0.3);
+    }
+
+    /* Floating Sidebar Styles */
+    .floating-nav {
+      position: fixed;
+      top: 50%;
+      left: 20px;
+      transform: translateY(-50%);
+      display: flex;
+      flex-direction: column;
+      gap: 40px;
+      z-index: 999;
+      font-family: 'Arial', sans-serif;
+    }
+
+    .nav-canvas {
+      position: absolute;
+      top: 0;
+      left: 0;
+      pointer-events: none;
+      z-index: 998;
+    }
+
+    .nav-item {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      cursor: pointer;
+    }
+
+    .nav-diamond {
+      width: 20px;
+      height: 20px;
+      background: transparent;
+      border: 2px solid var(--diamond-border);
+      transform: rotate(45deg);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: transform 0.3s ease, border-color 0.3s ease;
+    }
+
+    .nav-diamond span {
+      transform: rotate(-45deg);
+      color: var(--text-color);
+      font-size: 14px;
+      font-weight: 600;
+    }
+
+    .nav-item:not(.active) .nav-diamond span {
+      opacity: 0;
+      transition: opacity 0.3s ease;
+    }
+
+    .nav-label {
+      opacity: 0;
+      transform: translateX(-10px);
+      transition: opacity 0.4s ease, transform 0.4s ease;
+      font-size: 13px;
+      letter-spacing: 1px;
+      color: var(--text-secondary);
+      pointer-events: none;
+      margin-left: 15px;
+    }
+
+    .floating-nav:hover .nav-diamond span {
+      opacity: 1;
+    }
+
+    .floating-nav:hover .nav-label {
+      opacity: 1;
+      transform: translateX(0);
+    }
+
+    .floating-nav:hover .nav-item:nth-child(1) .nav-label {
+      transition-delay: 0.05s;
+    }
+
+    .floating-nav:hover .nav-item:nth-child(2) .nav-label {
+      transition-delay: 0.15s;
+    }
+
+    .floating-nav:hover .nav-item:nth-child(3) .nav-label {
+      transition-delay: 0.25s;
+    }
+
+    .floating-nav:hover .nav-item:nth-child(4) .nav-label {
+      transition-delay: 0.35s;
+    }
+
+    .floating-nav:hover .nav-item:nth-child(5) .nav-label {
+      transition-delay: 0.45s;
+    }
+
+    .floating-nav:hover .nav-item:nth-child(6) .nav-label {
+      transition-delay: 0.55s;
+    }
+
+    .nav-item.active .nav-diamond {
+      border-color: var(--accent-color);
+      transform: rotate(45deg) scale(1.1);
+    }
+
+    .nav-item:hover .nav-diamond {
+      border-color: var(--text-color);
+      transform: rotate(45deg) scale(1.15);
+    }
+
+    /* Responsive Design */
+    @media (max-width: 1024px) {
+      .splash-text {
+        font-size: 2.8rem;
+      }
+
+      .about-grid {
+        grid-template-columns: 1fr;
+        gap: 40px;
+      }
+
+      .about-content h2 {
+        font-size: 2.5rem;
+      }
+
+      .floating-nav {
+        left: 15px;
+      }
+
+      .navbar {
+        left: 15px;
+        right: 15px;
+      }
+
+      .theme-toggle {
+        right: 15px;
+      }
+    }
+
+    @media (max-width: 768px) {
+      .splash-text {
+        font-size: 2rem;
+      }
+
+      .menu-items a {
+        font-size: 2.8rem;
+      }
+
+      .fixed-bottom {
+        max-width: 90%;
+        left: 3%;
+      }
+
+      .about-content h2 {
+        font-size: 2rem;
+      }
+
+      .section-content {
+        padding: 0 3%;
+      }
+
+      .floating-nav {
+        left: 10px;
+        gap: 50px;
+      }
+
+      .nav-diamond {
+        width: 18px;
+        height: 18px;
+      }
+
+      .nav-diamond span {
+        font-size: 12px;
+      }
+
+      .nav-label {
+        font-size: 12px;
+      }
+
+      .mv-section-content {
+        padding: 0 3%;
+      }
+
+      .mv-section-header {
+        flex-direction: column;
+        gap: 25px;
+        margin-bottom: 40px;
+      }
+
+      .mv-section-divider {
+        width: 80px;
+      }
+
+      .navbar {
+        left: 10px;
+        right: 10px;
+      }
+
+      .theme-toggle {
+        right: 10px;
+        width: 50px;
+        height: 50px;
+      }
+
+      .theme-icon {
+        width: 20px;
+        height: 20px;
+      }
+
+      h1 {
+        font-size: 3.5rem;
+        max-width: 80%;
+      }
+    }
+
+    @media (max-width: 480px) {
+      .splash-text {
+        font-size: 1.5rem;
+      }
+
+      .menu-items a {
+        font-size: 2rem;
+      }
+
+      .section {
+        padding: 60px 2%;
+      }
+
+      .about-content h2 {
+        font-size: 1.8rem;
+      }
+
+      .floating-nav {
+        left: 8px;
+        gap: 40px;
+      }
+
+      .nav-diamond {
+        width: 16px;
+        height: 16px;
+      }
+
+      .nav-diamond span {
+        font-size: 10px;
+      }
+
+      .nav-label {
+        font-size: 10px;
+      }
+
+      .navbar {
+        left: 8px;
+        right: 8px;
+      }
+
+      .theme-toggle {
+        right: 8px;
+        width: 44px;
+        height: 44px;
+      }
+
+      .theme-icon {
+        width: 18px;
+        height: 18px;
+      }
+
+      h1 {
+        font-size: 2.5rem;
+        max-width: 90%;
+      }
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+  </style>
+</head>
+
+<body data-theme="light">
+  <!-- Theme Toggle Button -->
+  <button class="theme-toggle" id="theme-toggle" aria-label="Toggle theme">
+    <svg class="theme-icon sun-icon" viewBox="0 0 24 24">
+      <circle cx="12" cy="12" r="5" />
+      <line x1="12" y1="1" x2="12" y2="3" />
+      <line x1="12" y1="21" x2="12" y2="23" />
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64" />
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78" />
+      <line x1="1" y1="12" x2="3" y2="12" />
+      <line x1="21" y1="12" x2="23" y2="12" />
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36" />
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22" />
+    </svg>
+    <svg class="theme-icon moon-icon" viewBox="0 0 24 24">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+    </svg>
+  </button>
+
+  <!-- Splash Screen -->
+  <div class="splash-screen" id="splash-screen">
+    <div class="splash-text">
+      <span style="--i:1">M</span><span style="--i:2">a</span><span style="--i:3">r</span><span
+        style="--i:4">i</span><span style="--i:5">t</span><span style="--i:6">i</span><span style="--i:7">m</span><span
+        style="--i:8">e</span><span style="--i:9">&nbsp;</span><span style="--i:10">S</span><span
+        style="--i:11">u</span><span style="--i:12">p</span><span style="--i:13">p</span><span
+        style="--i:14">o</span><span style="--i:15">r</span><span style="--i:16">t</span><span
+        style="--i:17">&nbsp;</span><span style="--i:18">S</span><span style="--i:19">o</span><span
+        style="--i:20">l</span><span style="--i:21">u</span><span style="--i:22">t</span><span
+        style="--i:23">i</span><span style="--i:24">o</span><span style="--i:25">n</span><span style="--i:26">s</span>
+    </div>
+  </div>
+
+  <!-- Floating Navigation -->
+  <div class="floating-nav">
+    <canvas class="nav-canvas" width="100" height="600"></canvas>
+    <div class="nav-item active" data-section="home">
+      <div class="nav-diamond"><span>1</span></div>
+      <div class="nav-label">Home</div>
+    </div>
+    <div class="nav-item" data-section="about">
+      <div class="nav-diamond"><span>2</span></div>
+      <div class="nav-label">About</div>
+    </div>
+    <div class="nav-item" data-section="vision">
+      <div class="nav-diamond"><span>3</span></div>
+      <div class="nav-label">Vision</div>
+    </div>
+    <div class="nav-item" data-section="mission">
+      <div class="nav-diamond"><span>4</span></div>
+      <div class="nav-label">Mission</div>
+    </div>
+    <div class="nav-item" data-section="services">
+      <div class="nav-diamond"><span>5</span></div>
+      <div class="nav-label">Services</div>
+    </div>
+    <div class="nav-item" data-section="technologies">
+      <div class="nav-diamond"><span>6</span></div>
+      <div class="nav-label">Technologies</div>
+    </div>
+  </div>
+
+  <nav class="navbar" id="navbar">
+    <a href="#" class="logo"><img src="./company-logo.png" alt="Maritime Support Solutions Logo"></a>
+    <button class="menu-toggle" id="menu-toggle">
+      <span class="menu-text">Menu</span>
+      <div class="hamburger">
+        <span></span>
+        <span></span>
+      </div>
+    </button>
+  </nav>
+
+  <div class="menu-overlay" id="menu-overlay">
+    <button class="menu-close" id="menu-close">&times;</button>
+    <ul class="menu-items">
+      <li><a href="#home" data-target="home">Home</a></li>
+      <li><a href="#about" data-target="about">About Us</a></li>
+      <li><a href="#vision" data-target="vision">Vision</a></li>
+      <li><a href="#mission" data-target="mission">Mission</a></li>
+      <li><a href="#services" data-target="services">Services</a></li>
+      <li><a href="#technologies" data-target="technologies">Technologies</a></li>
+    </ul>
+  </div>
+
+  <div class="main-container">
+    <!-- Hero Section -->
+    <section class="hero-section" id="home">
+      <video class="hero-video" autoplay muted loop playsinline data-dark-src="./first-bg.mp4"
+        data-light-src="./first-light-bg.mp4">
+        <source src="./first-bg.mp4" type="video/mp4">
+        Your browser does not support the video tag.
+      </video>
+      <div class="hero-overlay"></div>
+      <div class="hero-content"></div>
+    </section>
+
+    <!-- About Section -->
+    <section class="section about-section" id="about">
+      <div class="about-overlay"></div>
+      <div class="section-content">
+        <div class="about-grid">
+          <div class="about-content">
+            <h4>ABOUT US</h4>
+            <h2>Business<br>Beyond Usual</h2>
+            <p>Maritime Support Solutions was established in 2021 by a team of shipping professionals with a combined
+              experience of 65 Years, in response to the need for high-quality and high-tech solutions in the Maritime
+              industry. Registered in Kannur – Kerala, India, one of the fastest developing districts, today our company
+              employs a team of experienced professionals who are ready to handle your needs.</p>
+            <a href="#vision" class="btn">Learn More</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Vision Section -->
+    <section class="mv-section mv-vision-section" id="vision">
+      <div class="mv-floating-elements">
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+      </div>
+      <div class="mv-section-content">
+        <div class="mv-section-header">
+          <span class="mv-section-number">01</span>
+          <div class="mv-section-divider"></div>
+          <span class="mv-section-label">VISION</span>
+        </div>
+        <h1 class="mv-section-title">Our Future</h1>
+        <p class="mv-section-description">
+          Be a trusted solutions provider in the maritime industry by utilizing new and viable technologies.
+        </p>
+        <div class="mv-scroll-indicator">
+          <span class="mv-scroll-text">Scroll</span>
+          <div class="mv-scroll-icon"></div>
+        </div>
+      </div>
+    </section>
+
+    <!-- Mission Section -->
+    <section class="mv-section mv-mission-section" id="mission">
+      <div class="mv-floating-elements">
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+        <div class="mv-floating-dot"></div>
+      </div>
+      <div class="mv-section-content">
+        <div class="mv-section-header">
+          <span class="mv-section-number">02</span>
+          <div class="mv-section-divider"></div>
+          <span class="mv-section-label">MISSION</span>
+        </div>
+        <h1 class="mv-section-title">Our Purpose</h1>
+        <p class="mv-section-description">
+          Harness the power of automation to optimize cost-effectiveness and increase productivity for our clients.
+        </p>
+      </div>
+    </section>
+
+    <!-- Services Section -->
+    <section class="services-container" id="services">
+      <div class="sticky-bg">
+        <video class="bg-video active" id="video1" autoplay muted loop playsinline data-dark-src="./business.mp4"
+          data-light-src="./business-light.mp4">
+          <source src="./business.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+        <video class="bg-video" id="video2" autoplay muted loop playsinline data-dark-src="./it2.mp4"
+          data-light-src="./it-light.mp4">
+          <source src="./it2.mp4" type="video/mp4">
+          Your browser does not support the video tag.
+        </video>
+        <div class="video-overlay"></div>
+      </div>
+      <div class="text-section" data-bg="video1">
+        <h1>Business Process Outsourcing Services</h1>
+      </div>
+      <div class="text-section" data-bg="video2">
+        <h1>IT Consulting</h1>
+      </div>
+      <div style="height: 50vh;"></div>
+      <div class="fixed-bottom" id="fixed-bottom">
+        <p id="fixed-paragraph">Driving AI transformation for products, platforms, and people.</p>
+        <a href="#" class="btn" id="fixed-button">Explore →</a>
+      </div>
+    </section>
+
+    <!-- Technologies Section -->
+    <div id="tech-container">
+      <section class="techshowcase-hero-section">
+        <div class="techshowcase-hero-video-container" id="techshowcase-heroVideoContainer">
+          <video class="techshowcase-hero-video" autoplay muted loop id="techshowcase-heroVideo">
+            <source src="../first-light-bg.mp4" type="video/mp4">
+          </video>
+
+        <div class="techshowcase-hero-content" id="techshowcase-heroContent">
+          <h1 class="techshowcase-hero-title">Our Technologies</h1>
+          <p class="techshowcase-hero-subtitle">Transforming Maritime Operations</p>
+        </div>
+
+        <div class="techshowcase-scroll-indicator">
+          <span class="techshowcase-scroll-text">Scroll Down</span>
+          <div class="techshowcase-scroll-arrow"></div>
+        </div>
+      </section>
+
+      <!-- Main Content - Unchanged except for class names -->
+      <main class="techshowcase-main-content">
+        <!-- Updated Tech Header -->
+        <section class="techshowcase-tech-header">
+          <div class="techshowcase-container">
+            <div class="techshowcase-header-content">
+              <div class="techshowcase-header-text">
+                <h2>Our Technologies</h2>
+                <p class="techshowcase-subtitle">Driving Maritime Excellence with Cutting-Edge Solutions</p>
+              </div>
+              <div class="techshowcase-header-description">
+                <p>In an era where technology defines progress, Maritime Support Solutions harnesses advanced,
+                  commercially viable innovations to empower our clients.</p>
+                <p>From navigating the challenges of the digital age to enhancing operational efficiency, our solutions
+                  ensure business continuity and transformative growth.</p>
+                <a href="#" class="techshowcase-cta-button">
+                  Discover Our Solutions
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <!-- Updated Technology Grid -->
+        <section class="techshowcase-technologies-section">
+          <div class="techshowcase-container">
+            <div class="techshowcase-tech-grid">
+              <!-- AI Technology -->
+              <div class="techshowcase-tech-item">
+                <div class="techshowcase-tech-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z" />
+                    <circle cx="12" cy="8" r="2" />
+                    <circle cx="8" cy="12" r="1.5" />
+                    <circle cx="16" cy="12" r="1.5" />
+                    <circle cx="12" cy="16" r="2" />
+                  </svg>
+                </div>
+                <h3 class="techshowcase-tech-title">Artificial Intelligence</h3>
+                <p class="techshowcase-tech-description">Empowering maritime operations with intelligent decision-making
+                  and predictive analytics.</p>
+                <ul class="techshowcase-tech-features">
+                  <li>Advanced Machine Learning</li>
+                  <li>Predictive Insights</li>
+                  <li>Automated Workflows</li>
+                  <li>Data-Driven Optimization</li>
+                </ul>
+                <a href="#" class="techshowcase-learn-more">
+                  Explore AI
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59z" />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Cloud Technology -->
+              <div class="techshowcase-tech-item">
+                <div class="techshowcase-tech-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M19.36 10.04C18.67 6.59 15.64 4 12 4 9.11 4 6.6 5.64 5.35 8.04 2.34 8.36 0 10.91 0 14c0 3.31 2.69 6 6 6h13c2.76 0 5-2.24 5-5 0-2.64-2.05-4.78-4.64-4.96z" />
+                  </svg>
+                </div>
+                <h3 class="techshowcase-tech-title">Cloud Technology</h3>
+                <p class="techshowcase-tech-description">Scalable, globally accessible cloud solutions for seamless
+                  maritime operations.</p>
+                <ul class="techshowcase-tech-features">
+                  <li>Flexible Infrastructure</li>
+                  <li>Global Reach</li>
+                  <li>Cost Efficiency</li>
+                  <li>Real-Time Data Sync</li>
+                </ul>
+                <a href="#" class="techshowcase-learn-more">
+                  Discover Cloud
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59z" />
+                  </svg>
+                </a>
+              </div>
+
+              <!-- Security & Backup -->
+              <div class="techshowcase-tech-item">
+                <div class="techshowcase-tech-icon">
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path
+                      d="M12,1L3,5V11C3,16.55 6.84,21.74 12,23C17.16,21.74 21,16.55 21,11V5L12,1M12,7C13.4,7 14.8,8.6 14.8,10V11H16V18H8V11H9.2V10C9.2,8.6 10.6,7 12,7M12,8.2C11.2,8.2 10.4,8.7 10.4,10V11H13.6V10C13.6,8.7 12.8,8.2 12,8.2Z" />
+                  </svg>
+                </div>
+                <h3 class="techshowcase-tech-title">High Availability & Security</h3>
+                <p class="techshowcase-tech-description">Robust security and backup systems ensuring uptime and data
+                  protection.</p>
+                <ul class="techshowcase-tech-features">
+                  <li>Continuous Monitoring</li>
+                  <li>End-to-End Encryption</li>
+                  <li>Automated Backups</li>
+                  <li>Disaster Recovery</li>
+                </ul>
+                <a href="#" class="techshowcase-learn-more">
+                  View Security
+                  <svg viewBox="0 0 24 24" fill="currentColor">
+                    <path d="M8.59 16.59L10 18l6-6-6-6-1.41 1.41L13.17 12l-4.58 4.59z" />
+                  </svg>
+                </a>
+              </div>
+            </div>
+          </div>
+        </section>
+    </div>
+  </div>
+
+  <script>
+    // Theme Toggle Logic
+    const themeToggle = document.getElementById('theme-toggle');
+    const body = document.body;
+
+    // Set default theme to light
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    body.setAttribute('data-theme', savedTheme);
+
+    // Function to switch video sources based on theme
+    function switchVideoSources(theme) {
+      const videos = document.querySelectorAll('video[data-dark-src][data-light-src]');
+      videos.forEach(video => {
+        const darkSrc = video.getAttribute('data-dark-src');
+        const lightSrc = video.getAttribute('data-light-src');
+        const source = video.querySelector('source');
+
+        if (theme === 'light') {
+          video.src = lightSrc;
+          if (source) source.src = lightSrc;
+        } else {
+          video.src = darkSrc;
+          if (source) source.src = darkSrc;
+        }
+
+        // Reload video to apply new source
+        video.load();
+
+        // Auto-play if it was playing before
+        if (video.classList.contains('active') || video.classList.contains('hero-video') || video.classList.contains('techshowcase-hero-video')) {
+          video.play().catch(e => console.log('Video autoplay failed:', e));
+        }
+      });
+    }
+
+    // Initialize videos with correct sources
+    switchVideoSources(savedTheme);
+
+    themeToggle.addEventListener('click', () => {
+      const currentTheme = body.getAttribute('data-theme');
+      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+      body.setAttribute('data-theme', newTheme);
+      localStorage.setItem('theme', newTheme);
+
+      // Switch video sources
+      switchVideoSources(newTheme);
+    });
+
+    // Splash Screen Logic
+    const splashScreen = document.getElementById('splash-screen');
+
+    window.addEventListener('load', () => {
+      setTimeout(() => {
+        splashScreen.classList.add('hidden');
+      }, 3000);
+
+      // Initialize videos
+      const videos = document.querySelectorAll('video');
+      videos.forEach(video => {
+        video.addEventListener('loadeddata', () => {
+          video.play().catch(e => console.log('Video autoplay failed:', e));
+        });
+      });
+
+      // Initialize Services section video and sticky-bg position
+      const servicesSection = document.querySelector('.services-container');
+      const stickyBg = document.querySelector('.sticky-bg');
+      const servicesRect = servicesSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+      if (servicesRect.top <= 0 && servicesRect.bottom >= windowHeight) {
+        stickyBg.style.position = 'fixed';
+        stickyBg.style.top = '0';
+      } else {
+        stickyBg.style.position = 'absolute';
+        stickyBg.style.top = servicesRect.top <= 0 ? 'auto' : '0';
+        stickyBg.style.bottom = servicesRect.top <= 0 ? '0' : 'auto';
+      }
+
+      // Set initial active video based on scroll position
+      let current = 'video1'; // Default to video1
+      const sections = document.querySelectorAll('.text-section');
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const screenCenter = windowHeight / 2;
+        if (sectionCenter <= screenCenter + 100) {
+          current = section.getAttribute('data-bg');
+        }
+      });
+      setActiveVideo(current);
+
+      const heroVideo = document.querySelector('.hero-video');
+      heroVideo.preload = 'auto'; // Preload video to reduce buffering
+      heroVideo.addEventListener('canplaythrough', () => {
+        heroVideo.play().catch(e => console.log('Hero video initial play failed:', e));
+      });
+      heroVideo.addEventListener('ended', () => {
+        heroVideo.currentTime = 0; // Reset to start
+        heroVideo.play().catch(e => console.log('Hero video replay failed:', e));
+      });
+
+      // Initialize sidebar
+      updateCanvasSize();
+      updateNav();
+    });
+
+    // Navigation Logic
+    const navbar = document.getElementById('navbar');
+    const menuToggle = document.getElementById('menu-toggle');
+    const menuOverlay = document.getElementById('menu-overlay');
+    const menuClose = document.getElementById('menu-close');
+    const menuItems = document.querySelectorAll('.menu-items a');
+
+    menuToggle.addEventListener('click', () => {
+      menuOverlay.classList.add('active');
+      document.body.style.overflow = 'hidden';
+    });
+
+    function closeMenu() {
+      menuOverlay.classList.remove('active');
+      document.body.style.overflow = 'auto';
+    }
+
+    menuClose.addEventListener('click', closeMenu);
+
+    menuItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        closeMenu();
+        const target = e.target.getAttribute('data-target');
+        const targetElement = document.getElementById(target);
+
+        if (targetElement) {
+          const offsetTop = targetElement.offsetTop - 60;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+          updateNav(); // Update sidebar active state
+        }
+      });
+    });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeMenu();
+      }
+    });
+
+    // Navbar scroll effect
+    let lastScrollY = 0;
+
+    window.addEventListener('scroll', () => {
+      const currentScrollY = window.scrollY;
+
+      if (currentScrollY > 100) {
+        navbar.classList.add('scrolled');
+        menuToggle.classList.add('scrolled');
+      } else {
+        navbar.classList.remove('scrolled');
+        menuToggle.classList.remove('scrolled');
+      }
+
+      lastScrollY = currentScrollY;
+    });
+
+    // Hero and About Section Scroll Effect
+    const heroSection = document.querySelector('.hero-section');
+    const heroOverlay = document.querySelector('.hero-overlay');
+    const aboutSection = document.querySelector('.about-section');
+    const aboutGrid = document.querySelector('.about-grid');
+    const aboutContent = document.querySelector('.about-content');
+    const aboutOverlay = document.querySelector('.about-overlay');
+    const mvSections = document.querySelectorAll('.mv-section');
+
+    // Services Video Section Logic
+    const sections = document.querySelectorAll('.text-section');
+    const videos = document.querySelectorAll('.bg-video');
+    const fixedBottom = document.getElementById('fixed-bottom');
+    const fixedParagraph = document.getElementById('fixed-paragraph');
+    const fixedButton = document.getElementById('fixed-button');
+    const stickyBg = document.querySelector('.sticky-bg');
+    const servicesSection = document.querySelector('.services-container');
+
+    const sectionData = {
+      video1: {
+        text: "Driving AI transformation for products, platforms, and people.",
+        btn: "Explore →",
+        link: "https://example.com/ai-strategy"
+      },
+      video2: {
+        text: "Launching flagship digital experiences — used daily by billions.",
+        btn: "Explore →",
+        link: "https://example.com/product-innovation"
+      },
+    };
+
+    function setActiveVideo(id) {
+      videos.forEach(video => {
+        video.classList.remove('active');
+        if (video.id === id) {
+          video.classList.add('active');
+          video.play().catch(e => console.log('Video autoplay failed:', e));
+        } else {
+          video.pause();
+        }
+      });
+      fixedParagraph.textContent = sectionData[id].text;
+      fixedButton.textContent = sectionData[id].btn;
+      fixedButton.href = sectionData[id].link;
+    }
+
+    // Floating Sidebar Logic
+    const navItems = document.querySelectorAll('.nav-item');
+    const navSections = document.querySelectorAll('section');
+    const canvas = document.querySelector('.nav-canvas');
+    const ctx = canvas.getContext('2d');
+    const navContainer = document.querySelector('.floating-nav');
+
+    const updateCanvasSize = () => {
+      const navRect = navContainer.getBoundingClientRect();
+      canvas.width = navRect.width;
+      canvas.height = navRect.height;
+    };
+
+    const drawDottedLines = (progress) => {
+      ctx.clearRect(0, 0, canvas.width, canvas.height);
+      const diamonds = document.querySelectorAll('.nav-diamond');
+      const positions = Array.from(diamonds).map(d => {
+        const rect = d.getBoundingClientRect();
+        const navRect = navContainer.getBoundingClientRect();
+        return {
+          x: rect.left - navRect.left + rect.width / 2,
+          y: rect.top - navRect.top + rect.height / 2
+        };
+      });
+
+      // Use theme-aware colors for canvas
+      const currentTheme = body.getAttribute('data-theme');
+      ctx.fillStyle = currentTheme === 'light' ?
+        'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)';
+
+      for (let i = 0; i < positions.length - 1; i++) {
+        const start = positions[i];
+        const end = positions[i + 1];
+        const segmentProgress = Math.min(Math.max((progress * (positions.length - 1) - i), 0), 1);
+
+        const totalDistance = Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2);
+        const dotSpacing = 10;
+        const dotRadius = 2;
+        const totalDots = Math.floor(totalDistance / dotSpacing);
+        const visibleDots = Math.max(1, Math.floor(totalDots * segmentProgress));
+
+        for (let j = 0; j < visibleDots; j++) {
+          const t = j / totalDots;
+          const x = start.x + (end.x - start.x) * t;
+          const y = start.y + (end.y - start.y) * t;
+          ctx.beginPath();
+          ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+          ctx.fill();
+        }
+      }
+    };
+
+    const updateNav = () => {
+      let current = '';
+      let scrollProgress = 0;
+
+      navSections.forEach((section, index) => {
+        const sectionTop = section.offsetTop;
+        const sectionHeight = section.clientHeight;
+        const scrollY = window.scrollY || window.pageYOffset;
+        if (scrollY >= sectionTop - window.innerHeight / 3) {
+          current = section.getAttribute('id');
+          scrollProgress = index / (navSections.length - 1);
+        }
+      });
+
+      navItems.forEach(item => {
+        item.classList.remove('active');
+        if (item.getAttribute('data-section') === current) {
+          item.classList.add('active');
+        }
+      });
+
+      drawDottedLines(scrollProgress);
+    };
+
+    window.addEventListener('scroll', () => {
+      const heroRect = heroSection.getBoundingClientRect();
+      const aboutRect = aboutSection.getBoundingClientRect();
+      const servicesRect = servicesSection.getBoundingClientRect();
+      const windowHeight = window.innerHeight;
+
+      // Hero and About overlay fade effect
+      const aboutScrollProgress = Math.max(0, Math.min(1, (windowHeight - aboutRect.top) / windowHeight));
+      if (aboutRect.top <= windowHeight && aboutRect.bottom >= 0) {
+        if (aboutScrollProgress > 0.5) {
+          heroOverlay.classList.add('fade');
+          aboutOverlay.classList.add('fade');
+        } else {
+          heroOverlay.classList.remove('fade');
+          aboutOverlay.classList.remove('fade');
+        }
+      } else {
+        heroOverlay.classList.remove('fade');
+        aboutOverlay.classList.remove('fade');
+      }
+
+      // About content visibility
+      if (aboutRect.top < windowHeight * 0.8 && aboutRect.bottom > 0) {
+        aboutGrid.classList.add('visible');
+        aboutContent.classList.add('visible');
+      } else {
+        aboutGrid.classList.remove('visible');
+        aboutContent.classList.remove('visible');
+      }
+
+      // Vision, Mission, and Technologies visibility
+      mvSections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const windowHeight = window.innerHeight;
+        if (rect.top < windowHeight * 0.8 && rect.bottom > 0) {
+          section.classList.add('mv-active');
+        } else {
+          section.classList.remove('mv-active');
+        }
+      });
+
+      // Fix sticky-bg position when Services section is in view
+      if (servicesRect.top <= 0 && servicesRect.bottom >= windowHeight) {
+        stickyBg.style.position = 'fixed';
+        stickyBg.style.top = '0';
+      } else {
+        stickyBg.style.position = 'absolute';
+        stickyBg.style.top = servicesRect.top <= 0 ? 'auto' : '0';
+        stickyBg.style.bottom = servicesRect.top <= 0 ? '0' : 'auto';
+      }
+
+      // Video switching logic
+      let current = '';
+      let showFixed = false;
+
+      sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionCenter = rect.top + rect.height / 2;
+        const screenCenter = windowHeight / 2;
+
+        if (Math.abs(sectionCenter - screenCenter) > 250) {
+          section.classList.add('blur');
+        } else {
+          section.classList.remove('blur');
+        }
+
+        if (Math.abs(sectionCenter - screenCenter) < 120) {
+          showFixed = true;
+        }
+
+        if (sectionCenter <= screenCenter + 350) {
+          current = section.getAttribute('data-bg');
+        }
+      });
+
+      if (current) setActiveVideo(current);
+
+      if (showFixed) {
+        fixedBottom.classList.add('visible');
+      } else {
+        fixedBottom.classList.remove('visible');
+      }
+
+      updateCanvasSize();
+      updateNav();
+    });
+
+    window.addEventListener('resize', () => {
+      updateCanvasSize();
+      updateNav();
+    });
+
+    navItems.forEach(item => {
+      item.addEventListener('click', (e) => {
+        e.preventDefault();
+        const sectionId = item.getAttribute('data-section');
+        const target = document.getElementById(sectionId);
+        if (target) {
+          const offsetTop = target.offsetTop - 60;
+          window.scrollTo({
+            top: offsetTop,
+            behavior: 'smooth'
+          });
+          updateNav(); // Update sidebar active state
+        }
+      });
+    });
+
+    class ProfessionalTechShowcase {
+      constructor() {
+        this.videoContainer = document.querySelector('.techshowcase-hero-video-container');
+        this.overlay = document.querySelector('.techshowcase-hero-overlay');
+        this.content = document.querySelector('.techshowcase-hero-content');
+        this.video = document.querySelector('.techshowcase-hero-video');
+        this.techSection = document.querySelector('.techshowcase-hero-section');
+        this.init();
+      }
+
+      init() {
+        // Check for critical elements
+        if (!this.videoContainer || !this.techSection || !this.video) {
+          console.error('TechShowcase initialization failed:', {
+            videoContainer: !!this.videoContainer,
+            techSection: !!this.techSection,
+            video: !!this.video,
+            overlay: !!this.overlay,
+            content: !!this.content
+          });
+          return;
+        }
+        console.log('TechShowcase initialized. Section height:', this.techSection.offsetHeight);
+        this.initScrollEffects();
+        this.initIntersectionObserver();
+        this.initVideoFallback();
+        this.initSmoothScrolling();
+      }
+
+      initScrollEffects() {
+        let ticking = false;
+
+        const updateScrollEffects = () => {
+          const scrollY = window.scrollY;
+          const windowHeight = window.innerHeight;
+          const heroTop = this.techSection.offsetTop;
+          const heroHeight = this.techSection.offsetHeight;
+          const heroBottom = heroTop + heroHeight;
+
+          // Calculate scroll progress within the technology section
+          let scrollProgress = 0;
+          if (scrollY >= heroTop - windowHeight && scrollY <= heroBottom) {
+  scrollProgress = Math.min(
+    Math.max(
+      (scrollY - (heroTop - windowHeight)) / (heroHeight + windowHeight * 2), // Adjusted denominator for slower scroll
+      0
+    ),
+    1 // Cap at 1 for normalized progress
+  );
+}
+
+          // Apply transformations based on scroll progress
+          const scale = 1 - (scrollProgress * 0.5); // Scale from 1 to 0.5
+          const borderRadius = scrollProgress * 20; // Border radius from 0 to 20px
+          const overlayOpacity = 1 - (scrollProgress * 0.6); // Overlay opacity from 1 to 0.4
+          const contentOpacity = Math.max(0, 1 - (scrollProgress * 1.8)); // Content opacity from 1 to 0
+          const contentTransform = scrollProgress * 150; // Content moves down by up to 150px
+
+          // Apply styles to video container and ensure video scales
+          this.videoContainer.style.transform = `scale(${scale})`;
+          this.videoContainer.style.borderRadius = `${borderRadius}px`;
+
+          // 👇 NEW: Shrink the video itself so background also scales
+          if (this.video) {
+            this.video.style.transform = `scale(${scale})`;
+            this.video.style.transition = 'transform 0.1s linear';
+          }
+
+          if (this.overlay) {
+            this.overlay.style.opacity = overlayOpacity;
+          }
+
+          if (this.content) {
+            this.content.style.opacity = contentOpacity;
+            this.content.style.transform = `translate(-50%, -50%) translateY(${contentTransform}px)`;
+          }
+
+          // Play/pause video based on visibility
+          if (scrollY >= heroTop - windowHeight && scrollY <= heroBottom + windowHeight) {
+            if (this.video && this.video.paused) {
+              this.video.play().catch(() => console.log('Technologies video autoplay failed'));
+            }
+          } else {
+            if (this.video && !this.video.paused) {
+              this.video.pause();
+            }
+          }
+
+          // Reset styles when outside the section
+          if (scrollY < heroTop - windowHeight || scrollY > heroBottom) {
+            this.videoContainer.style.transform = 'scale(1) ';
+            this.videoContainer.style.borderRadius = '0px';
+            if (this.video) {
+              this.video.style.transform = 'scale(1)';
+              this.video.style.width = '100% ';
+              this.video.style.height = '100% ';
+            }
+            if (this.overlay) {
+              this.overlay.style.opacity = '1';
+              this.overlay.style.transform = 'none ';
+              this.overlay.style.backgroundColor = 'transparent ';
+            }
+            if (this.content) {
+              this.content.style.opacity = '1';
+              this.content.style.transform = 'translate(-50%, -50%) translateY(0px)';
+            }
+          }
+
+          // Debug styles
+          console.log('Styles Applied:', {
+            videoContainerTransform: this.videoContainer.style.transform,
+            videoContainerComputed: window.getComputedStyle(this.videoContainer).transform,
+            videoTransform: this.video ? this.video.style.transform : 'N/A',
+            overlayTransform: this.overlay ? this.overlay.style.transform : 'N/A',
+            overlayOpacity: this.overlay ? this.overlay.style.opacity : 'N/A',
+            scrollProgress
+          });
+
+          ticking = false;
+        };
+
+        const requestScrollUpdate = () => {
+          if (!ticking) {
+            requestAnimationFrame(updateScrollEffects);
+            ticking = true;
+          }
+        };
+
+        window.addEventListener('scroll', requestScrollUpdate, { passive: true });
+
+        // Initialize styles
+        this.videoContainer.style.transform = 'scale(1) !important';
+        this.videoContainer.style.borderRadius = '0px !important';
+        if (this.video) {
+          this.video.style.transform = 'none !important';
+          this.video.style.width = '100% !important';
+          this.video.style.height = '100% !important';
+          this.video.style.objectFit = 'cover !important';
+        }
+        if (this.overlay) {
+          this.overlay.style.opacity = '1';
+          this.overlay.style.transform = 'none !important';
+          this.overlay.style.backgroundColor = 'transparent !important';
+        }
+        if (this.content) {
+          this.content.style.opacity = '1';
+          this.content.style.transform = 'translate(-50%, -50%) translateY(0px) !important';
+        }
+      }
+
+      initIntersectionObserver() {
+        const observerOptions = {
+          threshold: 0.2,
+          rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+          entries.forEach(entry => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add('visible');
+              if (this.video && entry.target === this.techSection) {
+                this.video.play().catch(() => console.log('Technologies video autoplay prevented'));
+              }
+            } else if (this.video && entry.target === this.techSection && !this.video.paused) {
+              this.video.pause();
+            }
+          });
+        }, observerOptions);
+
+        document.querySelectorAll('.techshowcase-fade-in').forEach(element => {
+          observer.observe(element);
+        });
+        if (this.techSection) {
+          observer.observe(this.techSection);
+        }
+      }
+
+      initVideoFallback() {
+        if (this.video) {
+          this.video.addEventListener('error', () => {
+            if (this.videoContainer) {
+              this.videoContainer.innerHTML = `
+            <div style="
+              width: 100%; 
+              height: 100%; 
+              background: linear-gradient(135deg, rgba(0, 20, 40, 0.4) 0%, rgba(0, 40, 80, 0.3) 50%, rgba(0, 20, 60, 0.4) 100%);
+              display: flex; 
+              align-items: center; 
+              justify-content: center;
+            ">
+              <div style="color: rgba(255, 255, 255, 0.8); text-align: center; font-size: 2rem;">Maritime Innovation</div>
+            </div>
+          `;
+            }
+          });
+
+          this.video.addEventListener('loadeddata', () => {
+            this.video.play().catch(() => console.log('Technologies video autoplay prevented'));
+          });
+        }
+      }
+
+      initSmoothScrolling() {
+        const scrollIndicator = document.querySelector('.techshowcase-scroll-indicator');
+        scrollIndicator?.addEventListener('click', () => {
+          const technologiesSection = document.querySelector('.techshowcase-technologies-section');
+          if (technologiesSection) {
+            window.scrollTo({
+              top: technologiesSection.offsetTop,
+              behavior: 'smooth'
+            });
+          }
+        });
+
+        document.querySelectorAll('.techshowcase-learn-more, .techshowcase-cta-button').forEach(anchor => {
+          anchor.addEventListener('click', function (e) {
+            e.preventDefault();
+            const target = document.querySelector(this.getAttribute('href'));
+            if (target) {
+              target.scrollIntoView({
+                behavior: 'smooth',
+                block: 'start'
+              });
+            }
+          });
+        });
+      }
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+      new ProfessionalTechShowcase();
+    });
+  </script>
+</body>
+
+</html>
