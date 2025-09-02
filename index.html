@@ -8,6 +8,8 @@
   <link rel="shortcut icon" href="images/favicon.png" type="image/x-icon">
   <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="./technologies/tech.css">
+  <link rel="stylesheet" href="./business/biz.css">
+  <link rel="stylesheet" href="./news/news.css">
   <style>
     :root {
       --bg-color: #000000;
@@ -1280,6 +1282,41 @@
     html {
       scroll-behavior: smooth;
     }
+
+    [data-theme="dark"] .logo img {
+  width: 120px;
+    height: 60px;
+}
+.news-section {
+  background: linear-gradient(135deg, #1d1d1d, #333);
+  color: white;
+  padding: 60px 20px;
+  text-align: center;
+  border-radius: 12px;
+  position: relative;
+  overflow: hidden;
+}
+
+.news-title {
+  font-size: 28px;
+  margin-bottom: 20px;
+}
+
+.news-container {
+  max-width: 600px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.news-item {
+  display: none;
+  opacity: 0;
+  transition: opacity 0.8s ease-in-out;
+}
+
+.news-item.active {
+  display: block;
+  opacity: 1;}
   </style>
 </head>
 
@@ -1346,7 +1383,7 @@
   </div>
 
   <nav class="navbar" id="navbar">
-    <a href="#" class="logo"><img src="./assets/company-logo.png" alt="Maritime Support Solutions Logo"></a>
+    <a href="#" class="logo"><img src="./assets/company-logo.png" alt="Maritime Support Solutions Logo" data-dark-src="./assets/logo.png" data-light-src="./assets/company-logo.png"></a>
     <button class="menu-toggle" id="menu-toggle">
       <span class="menu-text">Menu</span>
       <div class="hamburger">
@@ -1607,7 +1644,82 @@
             </div>
           </div>
         </section>
+        
     </div>
+
+    <!-- business values -->
+<section class="maritime-values-section">
+        <div class="harbor-container">
+            <!-- Header -->
+            <div class="values-header">
+                <span class="header-crest">Our Foundation</span>
+                <h2 class="values-title">Core Values</h2>
+                <p class="values-subtitle">Four guiding principles that navigate every decision and anchor our commitment to maritime excellence</p>
+            </div>
+
+            <!-- Values List -->
+            <div class="principles-list">
+                <div class="principle-entry" data-value="innovation">
+                    <div class="principle-header">
+                        <div class="principle-number">01</div>
+                    </div>
+                    <h3 class="principle-title">Transparency</h3>
+                    <p class="principle-description">Right from the onset of discussions, we as a team focus on being <span class="principle-highlight">transparent with our clients.</span> </p>
+                </div>
+
+                <div class="principle-entry" data-value="integrity">
+                    <div class="principle-header">
+                        <div class="principle-number">02</div>
+                    </div>
+                    <h3 class="principle-title">Respect</h3>
+                    <p class="principle-description"><span class="principle-highlight">Treating everyone with respect</span> is important, be it our client or our staff. </p>
+                </div>
+
+                <div class="principle-entry" data-value="excellence">
+                    <div class="principle-header">
+                        <div class="principle-number">03</div>
+                    </div>
+                    <h3 class="principle-title">Accountability</h3>
+                    <p class="principle-description">Every individual within the company is <span class="principle-highlight">accountable</span> for the tasks assigned.</p>
+                </div>
+
+                <div class="principle-entry" data-value="collaboration">
+                    <div class="principle-header">
+                        <div class="principle-number">04</div>
+                    </div>
+                    <h3 class="principle-title">Commitment to Excellence</h3>
+                    <p class="principle-description">Maritime Support Solutions relies on its <span class="principle-highlight">professional team</span>, who are specialists and have <span class="principle-highlight">in-depth knowledge of logistics processes</span>, to provide solutions that are in tandem with industry best practices. </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Detail Panel -->
+        <div class="navigator-panel" id="navigatorPanel">
+            <button class="panel-close" id="panelClose">×</button>
+            <h3 class="panel-title" id="panelTitle">Value Title</h3>
+            <div class="panel-description" id="panelDescription">
+                Click on any value to explore how it shapes our maritime operations.
+            </div>
+            <div class="panel-examples" id="panelExamples">
+                <h4 class="examples-heading">How We Apply This Value</h4>
+                <div id="examplesList">
+                    <!-- Examples will be dynamically inserted -->
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section class="news-section">
+    <h2 class="news-title">Latest News</h2>
+    <div class="news-rotator">
+      <a href="https://example.com/news1" target="_blank" class="fade active">Breaking: Tech Company Releases New AI Tool</a>
+      <a href="https://example.com/news2" target="_blank" class="fade">Global Markets Show Signs of Recovery</a>
+      <a href="https://example.com/news3" target="_blank" class="fade">Space Agency Confirms New Mission to Mars</a>
+      <a href="https://example.com/news4" target="_blank" class="fade">Breakthrough in Renewable Energy Announced</a>
+    </div>
+  </section>
+
+    
   </div>
 
   <script>
@@ -1620,45 +1732,53 @@
     body.setAttribute('data-theme', savedTheme);
 
     // Function to switch video sources based on theme
-    function switchVideoSources(theme) {
-      const videos = document.querySelectorAll('video[data-dark-src][data-light-src]');
-      videos.forEach(video => {
-        const darkSrc = video.getAttribute('data-dark-src');
-        const lightSrc = video.getAttribute('data-light-src');
-        const source = video.querySelector('source');
+  function switchThemeSources(theme) {
+    // Switch video sources
+    const videos = document.querySelectorAll('video[data-dark-src][data-light-src]');
+    videos.forEach(video => {
+      const darkSrc = video.getAttribute('data-dark-src');
+      const lightSrc = video.getAttribute('data-light-src');
+      const source = video.querySelector('source');
 
-        if (theme === 'light') {
-          video.src = lightSrc;
-          if (source) source.src = lightSrc;
-        } else {
-          video.src = darkSrc;
-          if (source) source.src = darkSrc;
-        }
+      if (theme === 'light') {
+        video.src = lightSrc;
+        if (source) source.src = lightSrc;
+      } else {
+        video.src = darkSrc;
+        if (source) source.src = darkSrc;
+      }
 
-        // Reload video to apply new source
-        video.load();
+      // Reload video to apply new source
+      video.load();
 
-        // Auto-play if it was playing before
-        if (video.classList.contains('active') || video.classList.contains('hero-video') || video.classList.contains('techshowcase-hero-video')) {
-          video.play().catch(e => console.log('Video autoplay failed:', e));
-        }
-      });
-    }
-
-    // Initialize videos with correct sources
-    switchVideoSources(savedTheme);
-
-    themeToggle.addEventListener('click', () => {
-      const currentTheme = body.getAttribute('data-theme');
-      const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-
-      body.setAttribute('data-theme', newTheme);
-      localStorage.setItem('theme', newTheme);
-
-      // Switch video sources
-      switchVideoSources(newTheme);
+      // Auto-play if it was playing before
+      if (video.classList.contains('active') || video.classList.contains('hero-video') || video.classList.contains('techshowcase-hero-video')) {
+        video.play().catch(e => console.log('Video autoplay failed:', e));
+      }
     });
 
+    // Switch logo source
+    const logoImg = document.querySelector('.logo img[data-dark-src][data-light-src]');
+    if (logoImg) {
+      const darkLogoSrc = logoImg.getAttribute('data-dark-src');
+      const lightLogoSrc = logoImg.getAttribute('data-light-src');
+      logoImg.src = theme === 'light' ? lightLogoSrc : darkLogoSrc;
+    }
+  }
+
+  // Initialize videos and logo with correct sources
+  switchThemeSources(savedTheme);
+
+  themeToggle.addEventListener('click', () => {
+    const currentTheme = body.getAttribute('data-theme');
+    const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+
+    body.setAttribute('data-theme', newTheme);
+    localStorage.setItem('theme', newTheme);
+
+    // Switch video and logo sources
+    switchThemeSources(newTheme);
+  });
     // Splash Screen Logic
     const splashScreen = document.getElementById('splash-screen');
 
@@ -1838,81 +1958,186 @@
       fixedButton.href = sectionData[id].link;
     }
 
-    // Floating Sidebar Logic
-    const navItems = document.querySelectorAll('.nav-item');
-    const navSections = document.querySelectorAll('section');
-    const canvas = document.querySelector('.nav-canvas');
-    const ctx = canvas.getContext('2d');
-    const navContainer = document.querySelector('.floating-nav');
+  // Floating Sidebar Logic
+const navItems = document.querySelectorAll('.nav-item');
+const navSections = document.querySelectorAll('section, #tech-container section');
+const canvas = document.querySelector('.nav-canvas');
+const ctx = canvas.getContext('2d');
+const navContainer = document.querySelector('.floating-nav');
 
-    const updateCanvasSize = () => {
-      const navRect = navContainer.getBoundingClientRect();
-      canvas.width = navRect.width;
-      canvas.height = navRect.height;
+const updateCanvasSize = () => {
+  if (!navContainer || !canvas) {
+    console.warn('Nav container or canvas not found');
+    return;
+  }
+  const navRect = navContainer.getBoundingClientRect();
+  canvas.width = navRect.width * window.devicePixelRatio;
+  canvas.height = navRect.height * window.devicePixelRatio;
+  canvas.style.width = `${navRect.width}px`;
+  canvas.style.height = `${navRect.height}px`;
+  ctx.scale(window.devicePixelRatio, window.devicePixelRatio);
+  console.log('Canvas resized:', { width: canvas.width, height: canvas.height });
+};
+
+const drawDottedLines = (progress) => {
+  if (!ctx || !canvas) {
+    console.warn('Canvas context or canvas not found');
+    return;
+  }
+  ctx.clearRect(0, 0, canvas.width, canvas.height);
+  const diamonds = document.querySelectorAll('.nav-diamond');
+  if (diamonds.length < 2) {
+    console.warn('Not enough diamonds to draw lines:', diamonds.length);
+    return;
+  }
+
+  const positions = Array.from(diamonds).map(d => {
+    const rect = d.getBoundingClientRect();
+    const navRect = navContainer.getBoundingClientRect();
+    return {
+      x: rect.left - navRect.left + rect.width / 2,
+      y: rect.top - navRect.top + rect.height / 2
     };
+  });
 
-    const drawDottedLines = (progress) => {
-      ctx.clearRect(0, 0, canvas.width, canvas.height);
-      const diamonds = document.querySelectorAll('.nav-diamond');
-      const positions = Array.from(diamonds).map(d => {
-        const rect = d.getBoundingClientRect();
-        const navRect = navContainer.getBoundingClientRect();
-        return {
-          x: rect.left - navRect.left + rect.width / 2,
-          y: rect.top - navRect.top + rect.height / 2
-        };
+  console.log('Diamond positions:', positions);
+
+  const currentTheme = document.body.getAttribute('data-theme');
+  ctx.fillStyle = currentTheme === 'light' ? 'rgba(0, 0, 0, 0.8)' : 'rgba(255, 255, 255, 0.8)';
+  ctx.lineWidth = 2;
+
+  for (let i = 0; i < positions.length - 1; i++) {
+    const start = positions[i];
+    const end = positions[i + 1];
+    // Calculate progress for this segment
+    const segmentProgress = Math.min(Math.max(progress * (positions.length - 1) - i, 0), 1);
+
+    // Skip drawing if progress is too low (before Home section is scrolled past)
+    if (progress < 0.01 && i === 0) continue;
+
+    const totalDistance = Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2);
+    const dotSpacing = 10;
+    const dotRadius = 2;
+    const totalDots = Math.floor(totalDistance / dotSpacing);
+    const visibleDots = Math.max(0, Math.floor(totalDots * segmentProgress));
+
+    console.log(`Segment ${i}: progress=${segmentProgress}, visibleDots=${visibleDots}`);
+
+    for (let j = 0; j < visibleDots; j++) {
+      const t = j / totalDots;
+      const x = start.x + (end.x - start.x) * t;
+      const y = start.y + (end.y - start.y) * t;
+      ctx.beginPath();
+      ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
+      ctx.fill();
+    }
+  }
+};
+const updateNav = () => {
+  if (!navSections.length || !navItems.length) {
+    console.warn('No nav sections or items found');
+    return;
+  }
+
+  let current = '';
+  let scrollProgress = 0;
+
+  const scrollY = window.scrollY || window.pageYOffset;
+  const windowHeight = window.innerHeight;
+
+  // Find the current section
+  let currentSectionIndex = 0;
+  let nextSectionTop = Number.MAX_SAFE_INTEGER;
+
+  navSections.forEach((section, index) => {
+    const sectionTop = section.offsetTop;
+    // Use stricter threshold to ensure Home is active at top
+    if (scrollY >= sectionTop - windowHeight / 3) {
+      current = section.getAttribute('id');
+      currentSectionIndex = index;
+    }
+    if (index === currentSectionIndex + 1) {
+      nextSectionTop = sectionTop;
+    }
+  });
+
+  // Calculate progress within the current section
+  const currentSection = navSections[currentSectionIndex];
+  const currentSectionTop = currentSection.offsetTop;
+  const sectionRange = nextSectionTop === Number.MAX_SAFE_INTEGER 
+    ? currentSection.clientHeight 
+    : nextSectionTop - currentSectionTop;
+
+  const sectionProgress = sectionRange > 0 
+    ? Math.min(Math.max((scrollY - currentSectionTop + windowHeight / 3) / sectionRange, 0), 1)
+    : 0;
+
+  // Overall progress across all sections
+  scrollProgress = Math.min(Math.max((currentSectionIndex + sectionProgress) / (navSections.length - 1), 0), 1);
+
+  // Ensure no progress at top of page
+  if (scrollY < windowHeight / 3) {
+    scrollProgress = 0;
+    current = 'home';
+    currentSectionIndex = 0;
+  }
+
+  console.log('Current section:', current, 'Section index:', currentSectionIndex, 
+              'Scroll progress:', scrollProgress, 'ScrollY:', scrollY, 
+              'Section progress:', sectionProgress);
+
+  navItems.forEach(item => {
+    item.classList.remove('active');
+    if (item.getAttribute('data-section') === current) {
+      item.classList.add('active');
+    }
+  });
+
+  updateCanvasSize();
+  drawDottedLines(scrollProgress);
+};
+
+// Initialize sidebar
+updateCanvasSize();
+updateNav();
+
+// Update on scroll and resize
+window.addEventListener('scroll', updateNav, { passive: true });
+window.addEventListener('resize', () => {
+  updateCanvasSize();
+  updateNav();
+});
+
+// Handle clicks/taps on nav items
+navItems.forEach(item => {
+  item.addEventListener('click', (e) => {
+    e.preventDefault();
+    const sectionId = item.getAttribute('data-section');
+    const target = document.getElementById(sectionId);
+    if (target) {
+      const offsetTop = target.offsetTop - 60;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
       });
+      updateNav();
+    }
+  });
 
-      // Use theme-aware colors for canvas
-      const currentTheme = body.getAttribute('data-theme');
-      ctx.fillStyle = currentTheme === 'light' ?
-        'rgba(0, 0, 0, 0.6)' : 'rgba(255, 255, 255, 0.6)';
-
-      for (let i = 0; i < positions.length - 1; i++) {
-        const start = positions[i];
-        const end = positions[i + 1];
-        const segmentProgress = Math.min(Math.max((progress * (positions.length - 1) - i), 0), 1);
-
-        const totalDistance = Math.sqrt((end.x - start.x) ** 2 + (end.y - start.y) ** 2);
-        const dotSpacing = 10;
-        const dotRadius = 2;
-        const totalDots = Math.floor(totalDistance / dotSpacing);
-        const visibleDots = Math.max(1, Math.floor(totalDots * segmentProgress));
-
-        for (let j = 0; j < visibleDots; j++) {
-          const t = j / totalDots;
-          const x = start.x + (end.x - start.x) * t;
-          const y = start.y + (end.y - start.y) * t;
-          ctx.beginPath();
-          ctx.arc(x, y, dotRadius, 0, Math.PI * 2);
-          ctx.fill();
-        }
-      }
-    };
-
-    const updateNav = () => {
-      let current = '';
-      let scrollProgress = 0;
-
-      navSections.forEach((section, index) => {
-        const sectionTop = section.offsetTop;
-        const sectionHeight = section.clientHeight;
-        const scrollY = window.scrollY || window.pageYOffset;
-        if (scrollY >= sectionTop - window.innerHeight / 3) {
-          current = section.getAttribute('id');
-          scrollProgress = index / (navSections.length - 1);
-        }
+  item.addEventListener('touchstart', (e) => {
+    e.preventDefault();
+    const sectionId = item.getAttribute('data-section');
+    const target = document.getElementById(sectionId);
+    if (target) {
+      const offsetTop = target.offsetTop - 60;
+      window.scrollTo({
+        top: offsetTop,
+        behavior: 'smooth'
       });
-
-      navItems.forEach(item => {
-        item.classList.remove('active');
-        if (item.getAttribute('data-section') === current) {
-          item.classList.add('active');
-        }
-      });
-
-      drawDottedLines(scrollProgress);
-    };
+      updateNav();
+    }
+  }, { passive: false });
+});
 
     window.addEventListener('scroll', () => {
       const heroRect = heroSection.getBoundingClientRect();
@@ -2248,12 +2473,165 @@
             }
           });
         });
+
       }
+      
     }
 
     document.addEventListener('DOMContentLoaded', () => {
       new ProfessionalTechShowcase();
     });
+
+
+    const maritimePrinciples = {
+            innovation: {
+                title: "Innovation",
+                description: "Innovation drives our quest to revolutionize maritime support solutions. We invest in cutting-edge technologies, foster creative problem-solving, and constantly explore new methodologies that push the boundaries of what's possible in maritime operations.",
+                examples: [
+                    "Developing AI-powered vessel monitoring systems that predict maintenance needs before failures occur",
+                    "Creating sustainable fuel alternatives that reduce environmental impact while maintaining performance",
+                    "Implementing blockchain technology for transparent and secure maritime logistics tracking",
+                    "Pioneering autonomous navigation systems that enhance safety in challenging maritime conditions"
+                ]
+            },
+            integrity: {
+                title: "Integrity",
+                description: "Integrity forms the bedrock of our organization. Every decision, from the smallest operational choice to major strategic direction, is guided by unwavering ethical principles that ensure transparency, honesty, and accountability in all our maritime endeavors.",
+                examples: [
+                    "Maintaining complete transparency in pricing and service delivery timelines",
+                    "Implementing rigorous ethical standards in all supplier and partner relationships",
+                    "Ensuring accurate reporting and documentation in all maritime operations and compliance matters",
+                    "Building long-term client relationships based on trust rather than short-term profits"
+                ]
+            },
+            excellence: {
+                title: "Excellence",
+                description: "Excellence is not just a goal—it's our standard operating procedure. We continuously refine our processes, exceed industry benchmarks, and deliver superior results that set new standards for maritime support services across the global shipping industry.",
+                examples: [
+                    "Achieving consistently superior performance ratings across all service categories",
+                    "Investing in continuous training and certification programs for our maritime specialists",
+                    "Implementing quality management systems that exceed international maritime standards",
+                    "Delivering projects ahead of schedule while maintaining the highest quality standards"
+                ]
+            },
+            collaboration: {
+                title: "Collaboration",
+                description: "Collaboration amplifies our capabilities and creates value that exceeds what any single organization can achieve. We build strategic partnerships, foster teamwork, and create synergies that benefit all stakeholders in the maritime ecosystem.",
+                examples: [
+                    "Forming strategic alliances with leading maritime technology companies worldwide",
+                    "Creating joint ventures that combine complementary expertise for complex maritime projects",
+                    "Facilitating knowledge sharing between clients to improve industry-wide best practices",
+                    "Building integrated service networks that provide seamless support across global shipping routes"
+                ]
+            },
+            sustainability: {
+                title: "Sustainability",
+                description: "Sustainability guides our approach to maritime operations, ensuring that our success today doesn't compromise the oceans and marine environment for future generations. We integrate environmental considerations into every aspect of our service delivery.",
+                examples: [
+                    "Implementing zero-waste policies across all maritime operations and shore facilities",
+                    "Developing eco-friendly alternative fuels and propulsion systems for client vessels",
+                    "Creating carbon offset programs that neutralize the environmental impact of maritime activities",
+                    "Promoting sustainable fishing and shipping practices that protect marine ecosystems"
+                ]
+            },
+            adaptability: {
+                title: "Adaptability",
+                description: "Adaptability enables us to thrive in the dynamic maritime environment. We maintain operational flexibility, embrace change as opportunity, and quickly adjust our strategies to meet evolving client needs and market conditions.",
+                examples: [
+                    "Rapidly adjusting service offerings to meet changing international maritime regulations",
+                    "Implementing flexible staffing models that scale with seasonal maritime activity fluctuations",
+                    "Developing modular service packages that can be customized for diverse client requirements",
+                    "Creating agile response teams that can be deployed quickly to address emergency maritime situations"
+                ]
+            }
+        };
+
+        // Theme switch functionality
+        function setupThemeNavigator() {
+            const themeNavigator = document.getElementById('themeNavigator');
+            const body = document.body;
+            const navigatorSlider = document.querySelector('.navigator-slider');
+            
+            themeNavigator.addEventListener('click', () => {
+                const currentTheme = body.getAttribute('data-theme');
+                const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
+                
+                body.setAttribute('data-theme', newTheme);
+                navigatorSlider.textContent = newTheme === 'dark' ? '🌙' : '☀️';
+                
+                // Store theme preference
+                localStorage.setItem('theme', newTheme);
+            });
+
+            // Load saved theme
+            const savedTheme = localStorage.getItem('theme') || 'dark';
+            body.setAttribute('data-theme', savedTheme);
+            navigatorSlider.textContent = savedTheme === 'dark' ? '🌙' : '☀️';
+        }
+
+        // Detail panel functionality
+        function setupNavigatorPanel() {
+            const principleEntries = document.querySelectorAll('.principle-entry');
+            const navigatorPanel = document.getElementById('navigatorPanel');
+            const panelClose = document.getElementById('panelClose');
+            const panelTitle = document.getElementById('panelTitle');
+            const panelDescription = document.getElementById('panelDescription');
+            const examplesList = document.getElementById('examplesList');
+
+            principleEntries.forEach(entry => {
+                entry.addEventListener('click', () => {
+                    const valueKey = entry.getAttribute('data-value');
+                    const data = maritimePrinciples[valueKey];
+                    
+                    if (data) {
+                        panelTitle.textContent = data.title;
+                        panelDescription.textContent = data.description;
+
+                        // Clear previous examples
+                        examplesList.innerHTML = '';
+
+                        // Populate examples
+                        data.examples.forEach(example => {
+                            const exampleEntry = document.createElement('div');
+                            exampleEntry.className = 'example-entry';
+                            exampleEntry.textContent = example;
+                            examplesList.appendChild(exampleEntry);
+                        });
+
+                        // Show detail panel
+                        navigatorPanel.classList.add('active');
+                    }
+                });
+            });
+
+            // Close detail panel
+            panelClose.addEventListener('click', () => {
+                navigatorPanel.classList.remove('active');
+            });
+
+            // Close panel when clicking outside
+            document.addEventListener('click', (e) => {
+                if (!navigatorPanel.contains(e.target) && !e.target.closest('.principle-entry') && navigatorPanel.classList.contains('active')) {
+                    navigatorPanel.classList.remove('active');
+                }
+            });
+        }
+
+        // Initialize all functionalities
+        document.addEventListener('DOMContentLoaded', () => {
+            setupThemeNavigator();
+            setupNavigatorPanel();
+        });
+
+    const newsItems = document.querySelectorAll('.news-rotator a');
+    let currentIndex = 0;
+
+    setInterval(() => {
+      newsItems[currentIndex].classList.remove('active');
+      currentIndex = (currentIndex + 1) % newsItems.length;
+      newsItems[currentIndex].classList.add('active');
+    }, 4000);
+
   </script>
 </body>
 

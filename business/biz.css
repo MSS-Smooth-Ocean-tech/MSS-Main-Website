@@ -1,0 +1,488 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    transition: all 0.4s cubic-bezier(0.23, 1, 0.32, 1);
+    overflow-x: hidden;
+}
+
+/* Dark Theme Variables */
+[data-theme="dark"] {
+    --bg-ocean: #0a0e16;
+    --bg-anchor: #1a1f2e;
+    --bg-vessel: transparent;
+    --bg-vessel-hover: rgba(26, 60, 94, 0.25);
+    --text-sail: #ffffff;
+    --text-wave: #a8c8ec;
+    --accent-horizon: #4a9fff;
+    --accent-lighthouse: #f39c12;
+    --border-shore: rgba(255, 255, 255, 0);
+    --border-shore-hover: rgba(74, 159, 255, 0);
+    --glass-sea: transparent;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+    --bg-ocean: #f8fafc;
+    --bg-anchor: #ffffff;
+    --bg-vessel: transparent;
+    --bg-vessel-hover: rgba(74, 159, 255, 0.05);
+    --text-sail: #1e293b;
+    --text-wave: #64748b;
+    --accent-horizon: #0ea5e9;
+    --accent-lighthouse: #f59e0b;
+    --border-shore: rgba(0, 0, 0, 0);
+    --border-shore-hover: rgba(14, 165, 233, 0);
+    --glass-sea: transparent;
+}
+
+body {
+    background: var(--bg-ocean);
+    color: var(--text-sail);
+}
+
+.maritime-values-section {
+    position: relative;
+    min-height: auto;
+    background: var(--bg-ocean);
+    padding: 2rem 0;
+    overflow: visible;
+}
+
+/* Theme Switch */
+.theme-navigator {
+    position: fixed;
+    top: 1rem;
+    right: 1rem;
+    z-index: 1000;
+    background: var(--glass-sea);
+    backdrop-filter: none;
+    border: 1px solid var(--border-shore);
+    padding: 0.3rem;
+    display: flex;
+    align-items: center;
+    gap: 0.3rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.theme-navigator:hover {
+    transform: scale(1.05);
+    border-color: var(--border-shore-hover);
+}
+
+.navigator-switch {
+    width: 40px;
+    height: 24px;
+    background: var(--accent-horizon);
+    position: relative;
+    transition: all 0.3s ease;
+}
+
+.navigator-slider {
+    width: 20px;
+    height: 20px;
+    background: var(--bg-anchor);
+    position: absolute;
+    top: 2px;
+    left: 2px;
+    transition: transform 0.3s cubic-bezier(0.23, 1, 0.32, 1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 0.7rem;
+}
+
+[data-theme="dark"] .navigator-slider {
+    transform: translateX(16px);
+}
+
+.harbor-container {
+    position: relative;
+    max-width: 1000px;
+    margin: 0 auto;
+    padding: 0 1rem;
+    z-index: 10;
+}
+
+/* Header with reveal animations */
+.values-header {
+    text-align: center;
+    margin-bottom: 2rem;
+    position: relative;
+    animation: revealFadeDown 1s ease 0.2s both;
+}
+
+.header-crest {
+    display: inline-block;
+    padding: 0.5rem 1rem;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    font-size: 0.9rem;
+    font-weight: 700;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+    margin-bottom: 1rem;
+    position: relative;
+    overflow: hidden;
+    animation: revealFadeDown 1s ease 0.2s both;
+}
+
+.header-crest::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, var(--accent-horizon), transparent);
+    opacity: 0.2;
+    transition: left 0.8s ease;
+}
+
+.header-crest:hover::before {
+    left: 100%;
+}
+
+.values-title {
+    font-size: 2.8rem;
+    font-weight: 900;
+    margin-bottom: 1rem;
+    color: var(--text-sail);
+    animation: revealFadeUp 1.2s ease 0.4s both;
+    position: relative;
+    text-shadow: none;
+}
+
+.values-title.visible {
+    animation: waveEffect 1.5s ease-in-out;
+}
+
+.values-subtitle {
+    font-size: 1.1rem;
+    color: var(--text-wave);
+    max-width: 600px;
+    margin: 0 auto;
+    line-height: 1.6;
+    animation: revealFadeUp 1s ease 0.8s both;
+}
+
+@keyframes revealFadeDown {
+    from {
+        opacity: 0;
+        transform: translateY(-20px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes revealFadeUp {
+    from {
+        opacity: 0;
+        transform: translateY(20px) scale(0.95);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+@keyframes revealLine {
+    from {
+        width: 0;
+    }
+    to {
+        width: 100px;
+    }
+}
+
+@keyframes waveEffect {
+    0%, 100% {
+        transform: translateY(0) translateX(0);
+    }
+    25% {
+        transform: translateY(-5px) translateX(5px) scale(1.02);
+    }
+    50% {
+        transform: translateY(0) translateX(-5px);
+    }
+    75% {
+        transform: translateY(-5px) translateX(5px) scale(1.02);
+    }
+}
+
+/* Values list */
+.principles-list {
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem;
+    position: relative;
+}
+
+.principle-entry {
+    position: relative;
+    background: transparent;
+    backdrop-filter: none;
+    border: none;
+    padding: 1.5rem 0;
+    transition: all 0.6s cubic-bezier(0.23, 1, 0.32, 1);
+    cursor: pointer;
+    animation: principleReveal 0.8s cubic-bezier(0.23, 1, 0.32, 1) both;
+    box-shadow: none;
+}
+
+.principle-entry:nth-child(1) { animation-delay: 1.0s; }
+.principle-entry:nth-child(2) { animation-delay: 1.2s; }
+.principle-entry:nth-child(3) { animation-delay: 1.4s; }
+.principle-entry:nth-child(4) { animation-delay: 1.6s; }
+.principle-entry:nth-child(5) { animation-delay: 1.8s; }
+.principle-entry:nth-child(6) { animation-delay: 2.0s; }
+
+@keyframes principleReveal {
+    0% {
+        opacity: 0;
+        transform: translateY(30px) scale(0.95);
+    }
+    50% {
+        opacity: 0.7;
+        transform: translateY(-5px) scale(1.02);
+    }
+    100% {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+.principle-entry:hover {
+    transform: translateY(-5px) scale(1.02);
+    background: transparent;
+    border-color: transparent;
+    box-shadow: none;
+}
+
+[data-theme="dark"] .principle-entry:hover {
+    box-shadow: none;
+}
+
+/* Principle content */
+.principle-header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.principle-number {
+    font-weight: 800;
+    font-size: 1.2rem;
+    margin-right: 1rem;
+    color: var(--accent-horizon);
+}
+
+.principle-title {
+    font-size: 1.8rem;
+    font-weight: 700;
+    color: var(--text-sail);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+    text-shadow: none;
+}
+
+.principle-entry:hover .principle-title {
+    color: var(--accent-horizon);
+    transform: translateX(5px);
+}
+
+.principle-description {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: var(--text-wave);
+    transition: color 0.3s ease;
+    animation: descriptionReveal 0.8s ease 0.5s both;
+}
+
+@keyframes descriptionReveal {
+    from {
+        opacity: 0;
+        transform: translateY(15px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.principle-entry:hover .principle-description {
+    color: var(--text-sail);
+}
+
+.principle-highlight {
+    color: var(--accent-lighthouse);
+    font-weight: 600;
+    position: relative;
+}
+
+.principle-highlight::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: var(--accent-lighthouse);
+    transition: width 0.3s ease;
+}
+
+.principle-entry:hover .principle-highlight::after {
+    width: 100%;
+}
+
+/* Interactive detail panel */
+.navigator-panel {
+    position: fixed;
+    top: 0;
+    right: -400px;
+    width: 350px;
+    height: 100vh;
+    background: var(--bg-ocean);
+    backdrop-filter: none;
+    border-left: 1px solid var(--border-shore);
+    padding: 2rem;
+    transition: right 0.6s cubic-bezier(0.4, 0, 0.2, 1);
+    z-index: 100;
+    overflow-y: auto;
+    box-shadow: none;
+}
+
+.navigator-panel.active {
+    right: 0;
+}
+
+.panel-close {
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+    background: transparent;
+    border: none;
+    width: 30px;
+    height: 30px;
+    color: var(--text-wave);
+    font-size: 1.2rem;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.panel-close:hover {
+    background: transparent;
+    color: var(--text-sail);
+    border-color: transparent;
+}
+
+.panel-title {
+    font-size: 2rem;
+    font-weight: 800;
+    color: var(--text-sail);
+    margin-bottom: 1.5rem;
+    animation: revealFadeUp 0.8s ease 0.2s both;
+    text-shadow: none;
+}
+
+.navigator-panel.active .panel-title {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.panel-description {
+    font-size: 1.1rem;
+    line-height: 1.6;
+    color: var(--text-wave);
+    margin-bottom: 2rem;
+    animation: revealFadeUp 0.8s ease 0.3s both;
+}
+
+.navigator-panel.active .panel-description {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.panel-examples {
+    animation: revealFadeUp 0.8s ease 0.4s both;
+}
+
+.navigator-panel.active .panel-examples {
+    opacity: 1;
+    transform: translateX(0);
+}
+
+.examples-heading {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: var(--accent-horizon);
+    margin-bottom: 0.8rem;
+}
+
+.example-entry {
+    padding: 1rem 0;
+    border-bottom: 1px solid var(--border-shore);
+    color: var(--text-wave);
+    line-height: 1.6;
+    font-size: 1rem;
+}
+
+.example-entry:last-child {
+    border-bottom: none;
+}
+
+/* Responsive design */
+@media (max-width: 1024px) {
+    .values-title {
+        font-size: 2.4rem;
+    }
+
+    .principles-list {
+        gap: 1rem;
+    }
+
+    .navigator-panel {
+        width: 100vw;
+        right: -100vw;
+    }
+}
+
+@media (max-width: 768px) {
+    .values-title {
+        font-size: 2rem;
+    }
+
+    .values-subtitle {
+        font-size: 1rem;
+    }
+
+    .principle-entry {
+        padding: 1rem 0;
+    }
+
+    .principle-title {
+        font-size: 1.6rem;
+    }
+
+    .principle-description {
+        font-size: 0.9rem;
+    }
+
+    .navigator-panel {
+        padding: 1.5rem;
+    }
+
+    .theme-navigator {
+        top: 0.8rem;
+        right: 0.8rem;
+        scale: 0.9;
+    }
+}
