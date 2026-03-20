@@ -1,34 +1,34 @@
 {% extends "base.html" %}
 
-{% block title %}Security — MSS Maritime{% endblock %}
+{% block title %}About Us — MSS Maritime{% endblock %}
 
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/security.css" />
+<link rel="stylesheet" href="/static/css/about.css" />
 {% endblock %}
 
 {% block content %}
 
-{% include "security/hero.html" %}
+{% include "sections/about/hero.html" %}
 
-{% include "security/trusted.html" %}
+{% include "sections/about/story.html" %}
 
-{% include "security/data_retention.html" %}
+{% include "sections/about/milestones.html" %}
 
-{% include "security/compliance.html" %}
+{% include "sections/about/purpose.html" %}
 
-{% include "security/workflow.html" %}
+{% include "sections/about/methodology.html" %}
 
-{% include "security/human.html" %}
+{% include "sections/about/global_operating.html" %}
 
-{% include "security/cta.html" %}
+{% include "sections/about/cta.html" %}
 
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
-  const els = document.querySelectorAll('.comp-card, .wf-feat, .zdr-point');
+  const els = document.querySelectorAll('.tl-item, .value-card, .del-step, .purpose-item');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
@@ -43,8 +43,8 @@
 
   els.forEach(el => {
     el.style.opacity = '0';
-    el.style.transform = 'translateY(20px)';
-    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     obs.observe(el);
   });
 </script>
