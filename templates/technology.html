@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+
+{% block title %}Technology & IT Consulting — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/technology.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "technology/hero.html" %}
+
+{% include "technology/digital_maturity.html" %}
+
+{% include "technology/ecosystem.html" %}
+
+{% include "technology/automation.html" %}
+
+{% include "technology/technical_solutions.html" %}
+
+{% include "technology/cta.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const reveals = document.querySelectorAll('.journey-step, .tech-card, .lifecycle-step, .eco-badge');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = entry.target.style.transform.replace('translateY(20px)', 'translateY(0)');
+        }, i * 60);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = (el.style.transform || '') + ' translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    observer.observe(el);
+  });
+</script>
+{% endblock %}

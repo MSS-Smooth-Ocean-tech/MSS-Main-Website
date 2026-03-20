@@ -1,0 +1,26 @@
+{% extends "base.html" %}
+
+{% block title %}BPO Services — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/bpo_services.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "bpo-services/hero.html" %}
+
+{% include "bpo-services/calculator.html" %}
+
+{% include "bpo-services/why_choose.html" %}
+
+{% include "bpo-services/mss_advantage.html" %}
+
+{% include "bpo-services/cta.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script src="/static/js/bpo_services.js"></script>
+{% endblock %}

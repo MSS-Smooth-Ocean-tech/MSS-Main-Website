@@ -1,0 +1,28 @@
+<!-- ══ FILTERS ══ -->
+<div class="cs-filters">
+  <div class="cs-filters-inner">
+    <div class="cs-filters-left">
+      <div class="cs-filters-label">Filter Case Studies</div>
+      <div class="cs-filter-row">
+        <button class="filter-dropdown">
+          Industry
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <button class="filter-dropdown">
+          Service
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <button class="filter-dropdown">
+          Region
+          <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="filter-divider"></div>
+        <button class="filter-tab active" onclick="filterByTab('all', this)">All Industries</button>
+        <button class="filter-tab" onclick="filterByTab('nvocc', this)">NVOCC</button>
+        <button class="filter-tab" onclick="filterByTab('liner', this)">Liner</button>
+        <button class="filter-tab" onclick="filterByTab('bpo', this)">BPO</button>
+      </div>
+    </div>
+    <div class="cs-results-count">Showing <strong id="results-count">6</strong> of <strong>42</strong> results</div>
+  </div>
+</div>

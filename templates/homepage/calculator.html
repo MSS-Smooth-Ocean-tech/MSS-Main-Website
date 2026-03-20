@@ -1,0 +1,68 @@
+<!-- ══ ROI CALCULATOR ══ -->
+<section id="calculator" class="reveal">
+  <div class="solutions-inner">
+
+    <div class="calc-card">
+
+      <!-- LEFT -->
+      <div class="calc-left">
+        <h3 class="calc-left-title">See how much you<br>can save</h3>
+        <p class="calc-left-sub">Compare your current in-house operational costs against MSS outsourcing models. Most clients see ROI within the first 6 months.</p>
+
+        <div class="calc-field">
+          <label class="calc-field-label">FLEET SIZE</label>
+          <select class="calc-select-dark" id="fleet-select-hp">
+            <option value="0.3" selected>1–10 Vessels</option>
+            <option value="0.6">11–50 Vessels</option>
+            <option value="1.0">50+ Vessels</option>
+          </select>
+        </div>
+
+        <div class="calc-field">
+          <label class="calc-field-label">CURRENT MONTHLY OPS SPEND</label>
+          <div class="calc-money-input">
+            <span class="calc-currency">$</span>
+            <input type="text" id="spend-input-hp" placeholder="e.g. 100,000" class="calc-money-field" />
+            <span class="calc-currency-right">USD</span>
+          </div>
+        </div>
+
+        <div class="calc-actions">
+          <button class="btn-analyze" onclick="analyzeSavingsHp()">Analyze Savings</button>
+          <button class="btn-download">Download Report</button>
+        </div>
+      </div>
+
+      <!-- RIGHT -->
+      <div class="calc-right">
+        <div class="calc-chart-wrap">
+          <div class="calc-bars">
+
+            <div class="calc-bar-col">
+              <div class="bar-amount" id="inhouse-amt-hp">—</div>
+              <div class="bar-track">
+                <div class="bar-fill bar-inhouse" id="bar-inhouse-hp"></div>
+              </div>
+              <div class="bar-label">IN-HOUSE</div>
+            </div>
+
+            <div class="calc-bar-col">
+              <div class="bar-top-badge">
+                <span class="savings-badge" id="savings-badge-hp" style="visibility:hidden;">0% Saved</span>
+                <div class="bar-amount blue" id="mss-amt-hp">—</div>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-mss" id="bar-mss-hp"></div>
+              </div>
+              <div class="bar-label">WITH MSS</div>
+            </div>
+
+          </div>
+          <p class="calc-chart-note">Based on industry averages for mid-sized shipping logistics.</p>
+        </div>
+      </div>
+
+    </div>
+
+  </div>
+</section>

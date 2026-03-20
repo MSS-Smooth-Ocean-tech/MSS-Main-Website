@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}NVOCC & Liner Agencies — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/industries.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "industries/hero.html" %}
+
+{% include "industries/trusted.html" %}
+
+{% include "industries/cvs.html" %}
+
+{% include "industries/services.html" %}
+
+{% include "industries/workflow.html" %}
+
+{% include "industries/case_study.html" %}
+
+{% include "industries/cta.html" %}
+
+
+  {% endblock %}
+
+{% block extra_js %}
+<script>
+  const cards = document.querySelectorAll('.cvs-card, .svc-card, .wf-step');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = entry.target.style.transform.replace('translateY(20px)', 'translateY(0)');
+        }, i * 60);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  cards.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = (el.style.transform || '') + ' translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s';
+    obs.observe(el);
+  });
+</script>
+{% endblock %}

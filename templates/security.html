@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}Security — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/security.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "security/hero.html" %}
+
+{% include "security/trusted.html" %}
+
+{% include "security/data_retention.html" %}
+
+{% include "security/compliance.html" %}
+
+{% include "security/workflow.html" %}
+
+{% include "security/human.html" %}
+
+{% include "security/cta.html" %}
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const els = document.querySelectorAll('.comp-card, .wf-feat, .zdr-point');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(20px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease, border-color 0.2s, box-shadow 0.2s';
+    obs.observe(el);
+  });
+</script>
+{% endblock %}

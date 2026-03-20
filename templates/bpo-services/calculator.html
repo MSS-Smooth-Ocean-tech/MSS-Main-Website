@@ -1,0 +1,62 @@
+<section id="calculator">
+  <div class="section-wrap">
+    <h2 class="section-title">Calculate Your ROI</h2>
+    <p class="section-sub">Adjust the sliders to see how much you could save annually with MSS.</p>
+
+    <div class="roi-card">
+
+      <!-- LEFT: Configuration -->
+      <div class="roi-left">
+        <div class="roi-left-title">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="4" y1="6" x2="20" y2="6"/><line x1="4" y1="12" x2="20" y2="12"/><line x1="4" y1="18" x2="20" y2="18"/></svg>
+          Configuration
+        </div>
+
+        <div class="roi-field">
+          <div class="roi-field-header">
+            <label class="roi-field-label">Current Team Size</label>
+            <span class="roi-field-val" id="team-val">15 FTEs</span>
+          </div>
+          <input type="range" id="team-slider" min="1" max="50" value="15" oninput="roiUpdate()">
+          <div class="roi-range-ends"><span>1</span><span>50</span></div>
+        </div>
+
+        <div class="roi-field">
+          <div class="roi-field-header">
+            <label class="roi-field-label">Monthly Shipment Volume</label>
+            <span class="roi-field-val" id="vol-val">2,500</span>
+          </div>
+          <input type="range" id="vol-slider" min="100" max="10000" step="100" value="2500" oninput="roiUpdate()">
+          <div class="roi-range-ends"><span>100</span><span>10k+</span></div>
+        </div>
+
+        <div class="roi-field">
+          <label class="roi-field-label" style="margin-bottom:8px; display:block;">Operational Region</label>
+          <select id="region-select" class="roi-select" onchange="roiUpdate()">
+            <option value="1.0">North America</option>
+            <option value="0.85">Europe</option>
+            <option value="0.70">Asia Pacific</option>
+            <option value="0.75">Middle East</option>
+          </select>
+        </div>
+
+        <p class="roi-note">* Estimates based on average industry labor rates and overheads for 2024.</p>
+      </div>
+
+      <!-- RIGHT: Results -->
+      <div class="roi-right">
+        <div class="roi-savings-label">ESTIMATED ANNUAL SAVINGS</div>
+        <div class="roi-savings-amt" id="roi-savings">$342,000</div>
+        <div class="roi-savings-pct" id="roi-pct"><span>+ 42%</span> reduction in costs</div>
+
+        <div class="roi-chart-title">3-Year Cost Projection</div>
+        <div class="roi-chart" id="roi-chart"></div>
+        <div class="roi-legend">
+          <div class="roi-leg-item"><div class="roi-leg-dot" style="background:#dde3ef"></div>In-House Cost</div>
+          <div class="roi-leg-item"><div class="roi-leg-dot" style="background:#2563eb"></div>MSS Managed Cost</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>

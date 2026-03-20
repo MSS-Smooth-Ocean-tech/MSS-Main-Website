@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+
+{% block title %}Case Studies — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/case_studies.css">
+{% endblock %}
+
+{% block content %}
+
+{% include "case-studies/hero.html" %}
+
+{% include "case-studies/filter.html" %}
+
+{% include "case-studies/case_grid.html" %}
+
+{% include "case-studies/cta.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function filterByTab(category, btn) {
+    document.querySelectorAll('.filter-tab').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+    applyFilters(category, document.getElementById('cs-search-input').value);
+  }
+
+  function filterCases() {
+    const activeTab = document.querySelector('.filter-tab.active');
+    const category = activeTab ? activeTab.textContent.trim().toLowerCase().replace(' industries', '') : 'all';
+    applyFilters(category === 'all industries' ? 'all' : category, document.getElementById('cs-search-input').value);
+  }
+
+  function applyFilters(category, searchText) {
+    const cards = document.querySelectorAll('.cs-card');
+    let visible = 0;
+    cards.forEach(card => {
+      const matchCat = category === 'all' || card.dataset.category === category;
+      const matchText = !searchText || card.dataset.text.includes(searchText.toLowerCase()) ||
+                        card.querySelector('.cs-card-title').textContent.toLowerCase().includes(searchText.toLowerCase());
+      if (matchCat && matchText) {
+        card.style.display = 'flex';
+        visible++;
+      } else {
+        card.style.display = 'none';
+      }
+    });
+    document.getElementById('results-count').textContent = visible;
+  }
+
+  // Pagination button active state
+  document.querySelectorAll('.page-btn').forEach(btn => {
+    if (btn.querySelector('svg')) return;
+    btn.addEventListener('click', function() {
+      document.querySelectorAll('.page-btn').forEach(b => b.classList.remove('active'));
+      this.classList.add('active');
+    });
+  });
+</script>
+{% endblock %}

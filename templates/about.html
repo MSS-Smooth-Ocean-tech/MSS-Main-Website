@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}About Us — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/about.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "about/hero.html" %}
+
+{% include "about/story.html" %}
+
+{% include "about/milestones.html" %}
+
+{% include "about/purpose.html" %}
+
+{% include "about/methodology.html" %}
+
+{% include "about/global_operating.html" %}
+
+{% include "about/cta.html" %}
+
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const els = document.querySelectorAll('.tl-item, .value-card, .del-step, .purpose-item');
+  const obs = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.style.opacity = '1';
+          entry.target.style.transform = 'translateY(0)';
+        }, i * 80);
+        obs.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  els.forEach(el => {
+    el.style.opacity = '0';
+    el.style.transform = 'translateY(24px)';
+    el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
+    obs.observe(el);
+  });
+</script>
+{% endblock %}

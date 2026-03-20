@@ -1,0 +1,28 @@
+{% extends "base.html" %}
+
+{% block title %}Get a Quote — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/get_quote.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "get-quote/hero.html" %}
+
+{% include "get-quote/body.html" %}
+
+{% include "get-quote/status_bar.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function toggleFaq(item) {
+    const isOpen = item.classList.contains('open');
+    document.querySelectorAll('.faq-item').forEach(i => i.classList.remove('open'));
+    if (!isOpen) item.classList.add('open');
+  }
+</script>
+{% endblock %}

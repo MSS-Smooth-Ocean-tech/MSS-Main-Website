@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+
+{% block title %}MSS — Global Maritime Outsourcing{% endblock %}
+
+{% block extra_css %}
+  <link rel="stylesheet" href="/static/css/homepage.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include "homepage/hero.html" %}
+
+{% include "homepage/stats.html" %}
+
+{% include "homepage/solutions.html" %}
+
+{% include "homepage/calculator.html" %}
+
+{% include "homepage/trust.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+  <script src="/static/js/homepage.js"></script>
+{% endblock %}

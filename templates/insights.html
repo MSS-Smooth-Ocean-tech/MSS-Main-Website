@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block title %}Insights — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/insights.css">
+{% endblock %}
+
+{% block content %}
+
+{% include "insights/hero.html" %}
+
+{% include "insights/featured_article.html" %}
+
+{% include "insights/filter.html" %}
+
+{% include "insights/article_grid.html" %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  function filterArticles(category, btn) {
+    // Update active button
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    btn.classList.add('active');
+
+    // Filter cards
+    const cards = document.querySelectorAll('.article-card');
+    cards.forEach(card => {
+      if (category === 'all' || card.dataset.category === category) {
+        card.style.display = 'flex';
+      } else {
+        card.style.display = 'none';
+      }
+    });
+  }
+</script>
+{% endblock %}
