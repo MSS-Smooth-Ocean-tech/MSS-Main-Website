@@ -4,7 +4,7 @@
 
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/about.css" />
+<link rel="stylesheet" href="/static/css/about.css?v=1" />
 {% endblock %}
 
 {% block content %}
@@ -28,7 +28,7 @@
 
 {% block extra_js %}
 <script>
-  const els = document.querySelectorAll('.tl-item, .value-card, .del-step, .purpose-item');
+  const els = document.querySelectorAll('.tl-item, .value-card, .del-step, .purpose-item, .ops-card, .cert-item');
   const obs = new IntersectionObserver((entries) => {
     entries.forEach((entry, i) => {
       if (entry.isIntersecting) {
