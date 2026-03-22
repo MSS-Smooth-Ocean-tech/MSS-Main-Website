@@ -12,40 +12,29 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 # ── Point to the folder where your HTML templates live ──
 templates = Jinja2Templates(directory="templates")
 
-
 # ── ROUTES ──
-
 @app.get("/")
-async def homepage(request: Request):
-    # Renders templates/homepage.html
+async def homepage(request: Request): # Renders templates/homepage.html
     return templates.TemplateResponse("pages/homepage.html", {"request": request})
-
 
 @app.get("/bpo-services")
 async def bpo_services(request: Request):
-    # Renders templates/bpo_services.html
-    return templates.TemplateResponse("pages/bpo_services.html", {"request": request})
-
-
+    return templates.TemplateResponse("pages/services/bpo_services.html", {"request": request})
 @app.get("/technology")
 async def technology(request: Request):
-    return templates.TemplateResponse("pages/technology.html", {"request": request})
-
+    return templates.TemplateResponse("pages/services/technology_services.html", {"request": request})
 
 @app.get("/case-studies")
 async def case_studies(request: Request):
     return templates.TemplateResponse("pages/case_studies.html", {"request": request})
 
-
 @app.get("/insights")
 async def insights(request: Request):
     return templates.TemplateResponse("pages/insights.html", {"request": request})
 
-
 @app.get("/industries")
 async def industries(request: Request):
     return templates.TemplateResponse("pages/industries.html", {"request": request})
-
 
 @app.get("/partners")
 async def partners(request: Request):
