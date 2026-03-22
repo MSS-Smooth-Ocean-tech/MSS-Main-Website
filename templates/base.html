@@ -7,7 +7,7 @@
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/base.css" />
+  <link rel="stylesheet" href="/static/css/base.css?v=2" />
   {% block extra_css %}{% endblock %}
 </head>
 <body>
@@ -22,8 +22,14 @@
     </a>
     <ul class="mss-nav-links">
       <li><a href="/">Home</a></li>
-      <li><a href="/bpo-services">BPO Services</a></li>
-      <li><a href="/technology">Technology</a></li>
+      <li class="mss-nav-dropdown">
+        <a href="/services" class="mss-nav-dropbtn">Services</a>
+        <div class="mss-nav-dropdown-content">
+          <!-- <a href="/services">Explore Our Services</a> -->
+          <a href="/bpo-services">BPO Services</a>
+          <a href="/technology">Technology & IT</a>
+        </div>
+      </li>
       <li><a href="/case-studies">Case Studies</a></li>
       <li><a href="/insights">Insights</a></li>
       <li><a href="/industries">Industries</a></li>

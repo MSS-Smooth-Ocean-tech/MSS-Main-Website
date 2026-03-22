@@ -1,0 +1,35 @@
+{% extends "base.html" %}
+
+{% block title %}Our Services — MSS Maritime{% endblock %}
+
+{% block extra_css %}
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="/static/css/services_home.css" />
+{% endblock %}
+
+{% block content %}
+
+{% include 'sections/services/home/hero.html' %}
+{% include 'sections/services/home/intro.html' %}
+{% include 'sections/services/home/services.html' %}
+{% include 'sections/services/home/conclusion.html' %}
+
+{% endblock %}
+
+{% block extra_js %}
+<script>
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver((entries) => {
+    entries.forEach((entry, i) => {
+      if (entry.isIntersecting) {
+        setTimeout(() => {
+          entry.target.classList.add('active');
+        }, i * 100);
+        observer.unobserve(entry.target);
+      }
+    });
+  }, { threshold: 0.1 });
+
+  reveals.forEach(el => observer.observe(el));
+</script>
+{% endblock %}

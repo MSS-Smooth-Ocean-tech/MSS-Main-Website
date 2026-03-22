@@ -17,6 +17,9 @@ templates = Jinja2Templates(directory="templates")
 async def homepage(request: Request): # Renders templates/homepage.html
     return templates.TemplateResponse("pages/homepage.html", {"request": request})
 
+@app.get("/services")
+async def services_home(request: Request):
+    return templates.TemplateResponse("pages/services/services_home.html", {"request": request})
 @app.get("/bpo-services")
 async def bpo_services(request: Request):
     return templates.TemplateResponse("pages/services/bpo_services.html", {"request": request})
