@@ -8,6 +8,7 @@ function runCounters() {
     const startValue = parseFloat(counter.dataset.start) || 0;
     const target = parseFloat(counter.dataset.target);
     const suffix = counter.dataset.suffix || "";
+    const prefix = counter.dataset.prefix || "";
 
     const duration = 1800;
     const startTime = performance.now();
@@ -18,15 +19,15 @@ function runCounters() {
       const value = startValue + (target - startValue) * progress;
 
       if (target % 1 !== 0) {
-        counter.innerText = value.toFixed(1) + suffix;
+        counter.innerText = prefix + value.toFixed(1) + suffix;
       } else {
-        counter.innerText = Math.floor(value) + suffix;
+        counter.innerText = prefix + Math.floor(value) + suffix;
       }
 
       if (progress < 1) {
         requestAnimationFrame(update);
       } else {
-        counter.innerText = target + suffix;
+        counter.innerText = prefix + target + suffix;
       }
 
     }
@@ -131,3 +132,6 @@ function parseMoneyHp(str) {
     resetChartHp();
   });
   document.getElementById('fleet-select-hp').addEventListener('change', resetChartHp);
+
+  // Run initial calculation with default values
+  analyzeSavingsHp();

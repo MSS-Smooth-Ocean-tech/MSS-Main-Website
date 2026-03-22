@@ -34,9 +34,53 @@ a { text-decoration: none; color: inherit; }
   margin-bottom: 20px; letter-spacing: -0.02em;
   line-height: 1.3;
 }
-.hero-subtitle {
-  font-size: 1.2rem; color: rgba(255,255,255,0.75);
-  max-width: 600px; line-height: 1.7; margin-bottom: 32px;
+.hero-description {
+  font-size: 1.05rem;
+  color: rgba(255,255,255,0.85);
+  max-width: 650px;
+  line-height: 1.6;
+  margin-bottom: 30px;
+}
+
+.hero-benefits {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 15px;
+  max-width: 750px;
+  margin-bottom: 35px;
+}
+
+.benefit-item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  background: rgba(255,255,255,0.04);
+  padding: 12px 16px;
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+  transition: background 0.3s ease;
+}
+
+.benefit-item:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+.benefit-item span {
+  font-size: 0.88rem;
+  color: #e2e8f0;
+  font-weight: 500;
+  line-height: 1.4;
+}
+
+.benefit-item svg {
+  flex-shrink: 0;
+  stroke: #60a5fa; /* light blue icon */
+}
+
+@media (max-width: 768px) {
+  .hero-benefits {
+    grid-template-columns: 1fr;
+  }
 }
 .hero-btns { display: flex; gap: 12px; flex-wrap: wrap; }
 
@@ -134,6 +178,30 @@ a { text-decoration: none; color: inherit; }
   text-transform: uppercase;
 }
 
+/* Response Styles for Stats */
+@media (max-width: 1100px) {
+  .stats-inner {
+    grid-template-columns: repeat(3, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .stats-inner {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 20px;
+  }
+  .stat-cell {
+    margin: 15px 0;
+    padding: 10px 20px;
+  }
+}
+
+@media (max-width: 480px) {
+  .stats-inner {
+    grid-template-columns: 1fr;
+  }
+}
+
 /* ── SOLUTIONS ── */
 .solutions {
   background: #f0f4f8;
@@ -214,6 +282,74 @@ a { text-decoration: none; color: inherit; }
   transform: translateX(6px);
 }
 
+/* ── PRIMARY EXPERTISE ── */
+.expertise-section {
+  background: #ffffff;
+  padding: 96px 32px;
+  border-top: 1px solid #e2e8f0;
+}
+.expertise-inner { max-width: 1280px; margin: 0 auto; }
+.expertise-header { margin-bottom: 56px; }
+
+.expertise-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.exp-card {
+  display: flex;
+  gap: 16px;
+  background: #f8fafc;
+  padding: 24px;
+  border-radius: 12px;
+  border: 1px solid #e2e8f0;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.exp-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.05);
+  border-color: #cbd5e1;
+}
+
+.exp-icon {
+  width: 40px;
+  height: 40px;
+  background: #e0f2fe;
+  border-radius: 8px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+
+.exp-icon svg {
+  width: 20px;
+  height: 20px;
+  stroke: #2563eb;
+}
+
+.exp-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: #0f172a;
+  margin-bottom: 8px;
+}
+
+.exp-desc {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.6;
+}
+
+@media (max-width: 1024px) {
+  .expertise-grid { grid-template-columns: repeat(2, 1fr); }
+}
+@media (max-width: 640px) {
+  .expertise-grid { grid-template-columns: 1fr; }
+}
+
 /* ── TRUST / LEGACY ── */
 .trust-section {
   background: #f0f4f8;
@@ -250,6 +386,49 @@ a { text-decoration: none; color: inherit; }
   color: #475569; text-align: center;
 }
 .b-item:hover .b-name { color: black; transition: color 0.3s ease; }
+
+/* ── FINAL CTA ── */
+.cta-section {
+  background: #0f172a;
+  padding: 80px 32px;
+  text-align: center;
+  color: #fff;
+}
+.cta-inner {
+  max-width: 650px;
+  margin: 0 auto;
+}
+
+.cta-title {
+  font-size: 2.22rem;
+  font-weight: 800;
+  margin-bottom: 16px;
+  letter-spacing: -0.02em;
+}
+
+.cta-desc {
+  font-size: 1.1rem;
+  color: rgba(255,255,255,0.8);
+  margin-bottom: 36px;
+  line-height: 1.6;
+}
+
+.btn-cta {
+  display: inline-block;
+  padding: 16px 36px;
+  background: #2563eb;
+  color: #fff;
+  font-weight: 700;
+  font-size: 1rem;
+  border-radius: 8px;
+  transition: background 0.2s, transform 0.2s;
+}
+
+.btn-cta:hover {
+  background: oklch(48.8% .243 264.376);
+  transform: translateY(-2px);
+}
+
 
 /* ── CALCULATOR ── */
 #calculator {
