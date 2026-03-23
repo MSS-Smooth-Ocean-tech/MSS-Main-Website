@@ -44,5 +44,36 @@
     el.style.transition = 'opacity 0.5s ease, transform 0.5s ease';
     observer.observe(el);
   });
+
+  (function() {
+  const scene   = document.querySelector('.orbit-scene');
+  if (!scene) return;
+
+  const cx = scene.offsetWidth  / 2;
+  const cy = scene.offsetHeight / 2;
+
+  const nodes = Array.from(scene.querySelectorAll('.o-pill-wrap')).map(el => ({
+    el,
+    radius: parseFloat(el.dataset.radius),
+    speed:  parseFloat(el.dataset.speed),   // degrees per frame
+    angle:  parseFloat(el.dataset.angle),   // current angle in degrees
+  }));
+
+  function tick() {
+    nodes.forEach(n => {
+      n.angle += n.speed;
+      const rad = n.angle * Math.PI / 180;
+      const x   = cx + n.radius * Math.cos(rad);
+      const y   = cy + n.radius * Math.sin(rad);
+      // position the wrapper
+      n.el.style.left = x + 'px';
+      n.el.style.top  = y + 'px';
+      // pill itself is always upright — no rotation applied
+    });
+    requestAnimationFrame(tick);
+  }
+
+  tick();
+})();
 </script>
 {% endblock %}

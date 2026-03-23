@@ -47,6 +47,7 @@ ul { list-style: none; }
   display: flex;
   gap: 2px;
   margin-right: 16px;
+  align-items: baseline;
 }
 
 .mss-nav-links a {
