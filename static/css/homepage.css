@@ -343,6 +343,25 @@ a { text-decoration: none; color: inherit; }
   line-height: 1.6;
 }
 
+.exp-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: #2563eb;
+  margin-top: 12px;
+}
+
+.exp-link span {
+  transition: transform 0.3s ease;
+  display: inline-block;
+}
+
+.exp-card:hover .exp-link span {
+  transform: translateX(6px);
+}
+
 @media (max-width: 1024px) {
   .expertise-grid { grid-template-columns: repeat(2, 1fr); }
 }
@@ -381,7 +400,7 @@ a { text-decoration: none; color: inherit; }
 .b-icon-wrap svg { width: 40px; height: 40px; stroke: #1e293b; fill: none; stroke-width: 1.5; stroke-linecap: round; stroke-linejoin: round; }
 .b-icon-wrap:hover svg  { stroke: #2563eb; transition: stroke 0.3s ease; transform: scale(1.1); transition: transform 0.5s ease; }
 .b-name {
-  font-size: 0.65rem; font-weight: 700;
+  font-size: 0.75rem; font-weight: 700;
   letter-spacing: 0.1em; text-transform: uppercase;
   color: #475569; text-align: center;
 }
