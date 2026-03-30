@@ -282,6 +282,13 @@ input[type=range] {
   line-height: 1.5;
   margin-top: 10px;
 }
+ .why-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+ }
+@media (max-width: 900px) { .why-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .why-grid { grid-template-columns: 1fr; } }
 
 .why-card {
   background: #fff;
