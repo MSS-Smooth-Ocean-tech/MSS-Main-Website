@@ -50,12 +50,14 @@ h1, h2, h3, h4, h5, h6 {
 .sh-hero-list {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 12px;
-  text-align: left;
   max-width: 600px;
+  width: 100%;          
   margin: 0 auto 40px;
   list-style: none;
   padding: 0;
+  margin-left: 250px;
 }
 
 .sh-hero-list li {
@@ -63,14 +65,17 @@ h1, h2, h3, h4, h5, h6 {
   display: flex;
   align-items: flex-start;
   gap: 12px;
+  width: 100%;          
+  text-align: left;
 }
 
 .sh-hero-list li::before {
   content: '✓';
   color: #60a5fa;
   font-weight: bold;
+  min-width: 20px;
+  display: inline-block;
 }
-
 .sh-intro {
   background: var(--bg-light);
   padding: 80px 24px;
