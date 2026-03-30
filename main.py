@@ -66,3 +66,7 @@ async def get_quote(request: Request):
 @app.get("/security")
 async def security(request: Request):
     return templates.TemplateResponse("pages/security.html", {"request": request})
+
+@app.get("/privacy")
+async def privacy(request: Request):
+    return templates.TemplateResponse("pages/privacy.html", {"request": request})
