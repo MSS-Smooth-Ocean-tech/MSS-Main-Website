@@ -40,23 +40,37 @@
           </select>
         </div>
 
-        <p class="roi-note">* Estimates based on average industry labor rates and overheads for 2024.</p>
+        <p class="roi-note">* Estimates based on average industry labor rates and overheads for 2025.</p>
       </div>
 
-      <!-- RIGHT: Results -->
-      <div class="roi-right">
-        <div class="roi-savings-label">ESTIMATED ANNUAL SAVINGS</div>
-        <div class="roi-savings-amt" id="roi-savings">$342,000</div>
-        <div class="roi-savings-pct" id="roi-pct"><span>+ 42%</span> reduction in costs</div>
+       <!-- RIGHT -->
+      <div class="calc-right">
+        <div class="calc-chart-wrap">
+          <div class="calc-bars">
 
-        <div class="roi-chart-title">3-Year Cost Projection</div>
-        <div class="roi-chart" id="roi-chart"></div>
-        <div class="roi-legend">
-          <div class="roi-leg-item"><div class="roi-leg-dot" style="background:#dde3ef"></div>In-House Cost</div>
-          <div class="roi-leg-item"><div class="roi-leg-dot" style="background:#2563eb"></div>MSS Managed Cost</div>
+            <div class="calc-bar-col">
+              <div class="bar-amount" id="inhouse-amt-hp">—</div>
+              <div class="bar-track">
+                <div class="bar-fill bar-inhouse" id="bar-inhouse-hp"></div>
+              </div>
+              <div class="bar-label">IN-HOUSE</div>
+            </div>
+
+            <div class="calc-bar-col">
+              <div class="bar-top-badge">
+                <span class="savings-badge" id="savings-badge-hp" style="visibility:hidden;">0% Saved</span>
+                <div class="bar-amount blue" id="mss-amt-hp">—</div>
+              </div>
+              <div class="bar-track">
+                <div class="bar-fill bar-mss" id="bar-mss-hp"></div>
+              </div>
+              <div class="bar-label">WITH MSS</div>
+            </div>
+
+          </div>
+          <p class="calc-chart-note">Based on industry averages for mid-sized shipping logistics.</p>
         </div>
       </div>
-
     </div>
   </div>
 </section>
