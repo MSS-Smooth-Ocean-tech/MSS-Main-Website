@@ -348,8 +348,8 @@
   }
 
   .pv-bottom-left {
-    flex: 0 0 200px;
-    padding: 32px;
+    flex: 0 0 140px;
+    padding: 24px;
     display: flex;
     align-items: center;
     background: var(--bg);
@@ -401,7 +401,7 @@
   .value-icon svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .value-name {
     font-family: 'Sora', sans-serif;
-    font-size: 0.92rem;
+    font-size: 0.89rem;
     font-weight: 700;
     color: var(--navy);
     margin-bottom: 6px;
