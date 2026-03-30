@@ -327,8 +327,8 @@
   .purpose-item-text {
     font-family: 'Sora', sans-serif;
     font-size: 1.15rem;
-    font-weight: 700;
-    color: var(--navy);
+    /* font-weight: 700; */
+    color: var(--muted);
     line-height: 1.4;
   }
   .purpose-divider {
