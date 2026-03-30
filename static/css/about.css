@@ -294,66 +294,103 @@
 
   /* ── PURPOSE & VALUES ── */
   .pv-section { background: #fff; }
-  .pv-grid {
+
+  .pv-layout-new {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+  }
+
+  .pv-top-row {
     display: grid;
     grid-template-columns: 1fr 1fr;
-    gap: 80px;
+    gap: 32px;
   }
-  @media (max-width: 800px) { .pv-grid { grid-template-columns: 1fr; gap: 56px; } }
+  @media (max-width: 800px) { .pv-top-row { grid-template-columns: 1fr; } }
 
-  .purpose-block { border-right: 1px solid var(--border); padding-right: 80px; }
-  @media (max-width: 800px) { .purpose-block { border-right: none; padding-right: 0; border-bottom: 1px solid var(--border); padding-bottom: 56px; } }
-
-  .purpose-sub {
-    font-size: 0.88rem;
-    color: var(--muted);
-    margin-bottom: 40px;
+  .pv-card {
+    background: var(--bg);
+    border-radius: 16px;
+    padding: 40px;
+    border: 1px solid var(--border);
   }
-  .purpose-item { margin-bottom: 36px; }
+
   .purpose-item-header {
     display: flex;
     align-items: center;
-    gap: 10px;
-    margin-bottom: 12px;
+    gap: 12px;
+    margin-bottom: 16px;
   }
-  .purpose-item-header svg { width: 18px; height: 18px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
-  .purpose-item-label {
+  .purpose-item-header svg { width: 22px; height: 22px; stroke: var(--blue); fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+  
+  .purpose-title {
     font-family: 'Sora', sans-serif;
-    font-size: 0.8rem;
+    font-size: 1.6rem;
     font-weight: 700;
-    color: var(--blue);
-    letter-spacing: 0.06em;
-  }
-  .purpose-item-text {
-    font-family: 'Sora', sans-serif;
-    font-size: 1.15rem;
-    /* font-weight: 700; */
-    color: var(--muted);
-    line-height: 1.4;
-  }
-  .purpose-divider {
-    height: 1px;
-    background: var(--border);
-    margin: 32px 0;
+    color: var(--navy);
   }
 
-  .values-sub {
-    font-size: 0.88rem;
+  .purpose-item-text {
+    font-family: 'Sora', sans-serif;
+    font-size: 1.05rem;
     color: var(--muted);
-    margin-bottom: 36px;
+    line-height: 1.6;
   }
-  .values-grid {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    gap: 24px;
+
+  .pv-bottom-row {
+    display: flex;
+    flex-direction: row;
+    align-items: stretch;
+    background: #fff;
+    border: 1px solid var(--border);
+    border-radius: 16px;
+    overflow: hidden;
   }
-  .value-card {
+
+  .pv-bottom-left {
+    flex: 0 0 200px;
+    padding: 32px;
+    display: flex;
+    align-items: center;
     background: var(--bg);
-    border-radius: 14px;
-    padding: 24px 20px;
-    transition: box-shadow 0.2s, transform 0.2s;
+    border-right: 1px solid var(--border);
   }
-  .value-card:hover { box-shadow: 0 6px 24px rgba(37,99,235,0.08); transform: translateY(-2px); }
+  @media (max-width: 1000px) {
+    .pv-bottom-row { flex-direction: column; }
+    .pv-bottom-left { flex: none; border-right: none; border-bottom: 1px solid var(--border); }
+  }
+
+  .pv-values-grid {
+    flex: 1;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+  }
+  @media (max-width: 1000px) {
+    .pv-values-grid { grid-template-columns: repeat(2, 1fr); }
+  }
+  @media (max-width: 600px) {
+    .pv-values-grid { grid-template-columns: 1fr; }
+  }
+
+  .value-card {
+    background: #fff;
+    padding: 32px 24px;
+    border-right: 1px solid var(--border);
+    transition: background 0.2s;
+  }
+  .value-card:nth-child(4n) { border-right: none; }
+  
+  @media (max-width: 1000px) {
+    .value-card { border-right: 1px solid var(--border); border-bottom: 1px solid var(--border); }
+    .value-card:nth-child(even) { border-right: none; }
+    .value-card:nth-last-child(-n+2) { border-bottom: none; }
+  }
+  @media (max-width: 600px) {
+    .value-card { border-right: none; border-bottom: 1px solid var(--border); }
+    .value-card:last-child { border-bottom: none; }
+  }
+
+  .value-card:hover { background: var(--bg); }
   .value-icon {
     width: 36px; height: 36px;
     background: rgba(37,99,235,0.08);
@@ -642,7 +679,7 @@
   /* ── CTA ── */
   .about-cta {
     background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #1e40af 100%);
-    padding: 100px 24px;
+    padding: 75px 24px;
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -657,9 +694,9 @@
     background-size: 40px 40px;
   }
   .about-cta-inner { position: relative; max-width: 600px; margin: 0 auto; }
-  .about-cta h2 {
+  .about-cta h1 {
     font-family: 'Sora', sans-serif;
-    font-size: clamp(2rem, 4vw, 3rem);
+    font-size: clamp(2rem, 4vw, 4rem);
     font-weight: 800;
     color: #fff;
     margin-bottom: 16px;
