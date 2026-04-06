@@ -36,7 +36,6 @@
   @media (max-width: 960px) { .quote-hero-inner { grid-template-columns: 1fr; gap: 40px; } }
 
   /* Left text */
-  .quote-hero-text {}
   .quote-hero-badge {
     display: inline-flex;
     align-items: center;
@@ -231,15 +230,34 @@
 
   /* ── BODY LAYOUT ── */
   .quote-body {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 80px 32px;
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 64px;
-    align-items: start;
-  }
-  @media (max-width: 900px) { .quote-body { grid-template-columns: 1fr; } }
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 80px 32px;
+  display: flex;
+  flex-direction: column;
+  gap: 48px;
+}
+
+.quote-form-wrap { width: 100%; }
+
+.quote-bottom-row {
+  display: grid;
+  grid-template-columns: 1.6fr 1fr;
+  gap: 48px;
+  align-items: start;
+}
+@media (max-width: 860px) { .quote-bottom-row { grid-template-columns: 1fr; } }
+
+.quote-bottom-left {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.quote-bottom-right {
+  position: sticky;
+  top: 100px;
+}
 
   /* ── WHY US ── */
   .why-title {
@@ -467,7 +485,7 @@
 
   /* ── STATUS BAR ── */
   .status-bar {
-    background: var(--navy);
+    background: #184172;
     padding: 16px 32px;
     display: flex;
     align-items: center;

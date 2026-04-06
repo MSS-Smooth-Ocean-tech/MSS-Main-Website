@@ -1,131 +1,200 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>{% block title %}MSS — Global Maritime Outsourcing{% endblock %}</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="/static/css/base.css?v=2" />
-  {% block extra_css %}{% endblock %}
-</head>
-<body>
-
-<!-- ══ NAVBAR ══ -->
-<nav class="mss-navbar">
-  <div class="mss-nav-inner">
-    <a href="/" class="mss-nav-brand">
-      <div class="mss-nav-brand-icon">
-        <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:120px; height:75px; margin-top:10px;"/>
-      </div>
-    </a>
-    <ul class="mss-nav-links">
-      <li><a href="/">Home</a></li>
-      <li class="mss-nav-dropdown">
-        <a href="/services" class="mss-nav-dropbtn">Services</a>
-        <div class="mss-nav-dropdown-content">
-          <!-- <a href="/services">Explore Our Services</a> -->
-          <a href="/bpo-services">BPO Services</a>
-          <a href="/technology">IT Solutions</a>
-        </div>
-      </li>
-      <!-- <li><a href="/case-studies">Case Studies</a></li> DELETE THIS   -->
-      <li><a href="/insights">Resources</a></li>
-      <!-- <li><a href="/industries">Industries</a></li> DELETE THIS -->
-      <li><a href="/partners">Partners</a></li>
-      <li><a href="/about">About Us</a></li>
-    </ul>
-    <button class="mss-nav-cta" onclick="window.location.href='/get-quote'">Get a Quote</button>
-  </div>
-</nav>
-
-<!-- ══ PAGE CONTENT ══ -->
-{% block content %}{% endblock %}
-
-<!-- ══ FOOTER ══ -->
-<footer>
-  <div class="footer-inner">
-    <div class="footer-top">
-
-      <div class="foot-brand">
-        <a href="/" class="nav-brand">
-          <div class="nav-brand-icon">
-            <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:150px; height:85px;"/>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>
+      {% block title %}
+        MSS — Global Maritime Outsourcing
+      {% endblock %}
+    </title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="/static/css/base.css?v=2" />
+    {% block extra_css %}
+    {% endblock %}
+  </head>
+  <body>
+    <!-- ══ NAVBAR ══ -->
+    <nav class="mss-navbar">
+      <div class="mss-nav-inner">
+        <a href="/" class="mss-nav-brand">
+          <div class="mss-nav-brand-icon">
+            <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:120px; height:75px; margin-top:10px;" />
           </div>
         </a>
-        <p class="foot-brand-desc">Empowering the maritime industry with scalable, secure, and efficient outsourcing solutions since 2022.</p>
-      </div>
-
-      <div class="f-col">
-        <div class="f-col-title">Solutions</div>
-        <ul>
-          <li><a href="/bpo-services">Maritime BPO</a></li>
-          <li><a href="/technology">IT Consulting</a></li>
-          <li><a href="#">Workflow Automation</a></li>
-          <li><a href="#">NVOCC Solutions</a></li>
+        <ul class="mss-nav-links">
+          <li>
+            <a href="/">Home</a>
+          </li>
+          <li class="mss-nav-dropdown">
+            <a href="/services" class="mss-nav-dropbtn">Services</a>
+            <div class="mss-nav-dropdown-content">
+              <!-- <a href="/services">Explore Our Services</a> -->
+              <a href="/bpo-services">BPO Services</a>
+              <a href="/technology">IT Solutions</a>
+            </div>
+          </li>
+          <!-- <li><a href="/case-studies">Case Studies</a></li> DELETE THIS -->
+          <li>
+            <a href="/insights">Resources</a>
+          </li>
+          <!-- <li><a href="/industries">Industries</a></li> DELETE THIS -->
+          <li>
+            <a href="/partners">Partners</a>
+          </li>
+          <li>
+            <a href="/about">About Us</a>
+          </li>
         </ul>
+        <button class="mss-nav-cta" onclick="window.location.href='/get-quote'">Get a Quote</button>
       </div>
+    </nav>
 
-      <div class="f-col">
-        <div class="f-col-title">Support</div>
-        <ul>
-          <li><a href="/case-studies">Case Studies</a></li>
-          <li><a href="/insights">Insights</a></li>
-          <li><a href="#">Documentation</a></li>
-          <li><a href="#">Guides</a></li>
-          <li><a href="#">API Status</a></li>
-        </ul>
-      </div>
+    <!-- ══ PAGE CONTENT ══ -->
+    {% block content %}
+    {% endblock %}
 
-      <div class="f-col">
-        <div class="f-col-title">Company</div>
-        <ul>
-          <li><a href="/about">About</a></li>
-          <li><a href="/security">Security</a></li>
-          <li><a href="/partners">Partners</a></li>
-          <li><a href="#">Jobs</a></li>
-          <li><a href="#">Press</a></li>
-        </ul>
-      </div>
+    <!-- ══ FOOTER ══ -->
+    <footer>
+      <div class="footer-inner">
+        <div class="footer-top">
+          <div class="foot-brand">
+            <a href="/" class="nav-brand">
+              <div class="nav-brand-icon">
+                <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:150px; height:85px;" />
+              </div>
+            </a>
+            <p class="foot-brand-desc">Empowering the maritime industry with scalable, secure, and efficient outsourcing solutions since 2022.</p>
+          </div>
 
-      <div class="f-col">
-        <div class="f-col-title">Legal</div>
-        <ul>
-          <li><a href="/privacy">Privacy</a></li>
-          <li><a href="#">Terms</a></li>
-        </ul>
-      </div>
+          <div class="f-col">
+            <div class="f-col-title">Solutions</div>
+            <ul>
+              <li>
+                <a href="/bpo-services">Maritime BPO</a>
+              </li>
+              <li>
+                <a href="/technology">IT Consulting</a>
+              </li>
+              <li>
+                <a href="#">Workflow Automation</a>
+              </li>
+              <li>
+                <a href="#">NVOCC Solutions</a>
+              </li>
+            </ul>
+          </div>
 
-    </div>
-    <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
-      <!-- Dynamic Year to be Added -->
-      <div>© 2026 | All Rights Reserved | Maritime Support Solutions</div>
-      <!--
+          <div class="f-col">
+            <div class="f-col-title">Support</div>
+            <ul>
+              <li>
+                <a href="/case-studies">Case Studies</a>
+              </li>
+              <li>
+                <a href="/insights">Insights</a>
+              </li>
+              <li>
+                <a href="#">Documentation</a>
+              </li>
+              <li>
+                <a href="#">Guides</a>
+              </li>
+              <li>
+                <a href="#">API Status</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <div class="f-col-title">Company</div>
+            <ul>
+              <li>
+                <a href="/about">About</a>
+              </li>
+              <li>
+                <a href="/security">Security</a>
+              </li>
+              <li>
+                <a href="/partners">Partners</a>
+              </li>
+              <li>
+                <a href="#">Jobs</a>
+              </li>
+              <li>
+                <a href="#">Press</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <div class="f-col-title">Legal</div>
+            <ul>
+              <li>
+                <a href="/privacy">Privacy</a>
+              </li>
+              <li>
+                <a href="#">Terms</a>
+              </li>
+            </ul>
+          </div>
+
+          <div class="f-col">
+            <div class="f-col-title">Contact</div>
+            <ul>
+              <li>
+                <a href="tel:+15550123456" style="display:flex; align-items:center; gap:8px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z" />
+                  </svg>+1 (555) 012-3456
+                </a>
+              </li>
+              <li>
+                <a href="mailto:quotes@maritime-b2b.com" style="display:flex; align-items:center; gap:8px;">
+                  <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z" />
+                    <polyline points="22,6 12,13 2,6" />
+                  </svg>quotes@maritime-b2b.com
+                </a>
+              </li>
+              <li>
+                <a href="/get-quote" style="display:flex; align-items:center; gap:8px;">
+                  <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
+                  </svg>Get a Quote
+                </a>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="footer-bottom" style="display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 16px;">
+          <!-- Dynamic Year to be Added -->
+          <div>© 2026 | All Rights Reserved | Maritime Support Solutions</div>
+          <!-- 
       <div class="foot-cert-logo">
         <img src="/static/img/dpiit_certificate_logo.png" alt="DPIIT Recognized Startup" style="width: 140px; height: auto; object-fit: contain;"/>
       </div>
-      -->
-    </div>
-  </div>
-</footer>
+       -->
+        </div>
+      </div>
+    </footer>
 
-<!-- ══ BASE SCRIPTS ══ -->
-<script>
-  const currentPath = window.location.pathname;
-  const navLinks = document.querySelectorAll('.mss-nav-links a');
+    <!-- ══ BASE SCRIPTS ══ -->
+    <script>
+      const currentPath = window.location.pathname
+      const navLinks = document.querySelectorAll('.mss-nav-links a')
+      
+      navLinks.forEach((link) => {
+        const href = link.getAttribute('href')
+        if ((href === '/' && currentPath === '/') || (href !== '/' && currentPath.startsWith(href))) {
+          link.classList.add('active')
+        }
+      })
+    </script>
 
-  navLinks.forEach(link => {
-    const href = link.getAttribute('href');
-    if (
-      (href === '/' && currentPath === '/') ||
-      (href !== '/' && currentPath.startsWith(href))
-    ) {
-      link.classList.add('active');
-    }
-  });
-</script>
-
-{% block extra_js %}{% endblock %}
-</body>
+    {% block extra_js %}
+    {% endblock %}
+  </body>
 </html>

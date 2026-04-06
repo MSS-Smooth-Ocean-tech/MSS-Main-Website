@@ -294,7 +294,7 @@
 
   /* ── CTA ── */
   .cs-cta {
-    background: var(--blue);
+    background: #184172;
     margin: 0 32px 80px;
     border-radius: 24px;
     padding: 80px 32px;

@@ -404,7 +404,7 @@ input[type=range] {
 
   /* ── CTA STRIP ── */
   .cta-strip {
-    background: var(--navy);
+    background: #184172;
     padding: 100px 24px;
     text-align: center;
   }

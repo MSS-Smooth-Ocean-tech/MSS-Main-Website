@@ -678,7 +678,7 @@
 
   /* ── CTA ── */
   .about-cta {
-    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 60%, #1e40af 100%);
+    background: #184172;
     padding: 75px 24px;
     text-align: center;
     position: relative;

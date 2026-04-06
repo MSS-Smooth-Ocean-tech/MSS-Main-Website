@@ -460,7 +460,7 @@
 }
 
   /* ── TECHNICAL SOLUTIONS ── */
-  .solutions-section { background: var(--navy); }
+  .solutions-section { background: var(--bg); }
   .solutions-header {
     display: flex;
     justify-content: space-between;
@@ -469,7 +469,7 @@
     flex-wrap: wrap;
     gap: 16px;
   }
-  .solutions-header .sec-title { color: #fff; margin-bottom: 6px; }
+  .solutions-header .sec-title { color: black; margin-bottom: 6px; }
   .solutions-header .sec-sub { color: rgba(255,255,255,0.5); margin-bottom: 0; }
   .view-all-link {
     display: inline-flex;
@@ -493,8 +493,8 @@
   @media (max-width: 560px) { .tech-grid { grid-template-columns: 1fr; } }
 
   .tech-card {
-    background: rgba(255,255,255,0.04);
-    border: 1px solid rgba(255,255,255,0.08);
+    background: #fff;
+    border: 1.5px solid var(--border);
     border-radius: var(--radius);
     padding: 32px 28px;
     transition: background 0.2s, border-color 0.2s, transform 0.2s;
@@ -512,18 +512,19 @@
     border-radius: 12px;
     display: flex; align-items: center; justify-content: center;
     margin-bottom: 20px;
+    transition: background 0.3s ease;
   }
   .tech-card-icon svg { width: 24px; height: 24px; stroke: #93c5fd; fill: none; stroke-width: 1.8; stroke-linecap: round; stroke-linejoin: round; }
   .tech-card-title {
     font-family: 'Sora', sans-serif;
     font-size: 1rem;
     font-weight: 700;
-    color: #fff;
+    color: black;
     margin-bottom: 10px;
   }
   .tech-card-desc {
     font-size: 0.88rem;
-    color: rgba(255,255,255,0.5);
+    color: var(--muted);
     line-height: 1.65;
     margin-bottom: 20px;
     flex: 1;
@@ -540,24 +541,18 @@
     transition: gap 0.2s;
   }
   .tech-card-link:hover { gap: 10px; }
+  .tech-card:hover .tech-card-icon { background: var(--blue); }
+.tech-card:hover .tech-card-icon svg { stroke: #ffffff; transform: scale(1.1); }
 
   /* ── CTA ── */
   .tech-cta {
-    background: linear-gradient(135deg, #1d4ed8 0%, #2563eb 50%, #1e40af 100%);
+    background: #184172;
     padding: 100px 24px;
     text-align: center;
     position: relative;
     overflow: hidden;
   }
-  .tech-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
+
   .tech-cta-inner { position: relative; max-width: 600px; margin: 0 auto; }
   .tech-cta h2 {
     font-family: 'Sora', sans-serif;

@@ -1,121 +1,151 @@
 <!-- ══ BODY ══ -->
 <div class="quote-body">
 
-  <!-- ── MAIN ── -->
-  <div>
-    <h2 class="why-title">Why Global Leaders Choose Us?</h2>
-    <p class="why-body">Navigating complex international waters requires more than just ships; it requires a partner who understands the intricacies of maritime law, efficient route planning, and timely delivery. We optimize your supply chain from port to port.</p>
+  <!-- ── TOP: Request a Quote form full width ── -->
+  <div class="quote-form-wrap">
+    <div class="quote-form-card">
+      <div class="qf-title">Request a Quote</div>
 
-    <div class="why-cards">
-      <div class="why-card">
-        <div class="why-card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+      <div class="qf-row">
+        <div>
+          <label class="qf-label">Full Name</label>
+          <input type="text" class="qf-input" placeholder="John Doe" />
         </div>
         <div>
-          <div class="why-card-title">On-Time Guarantee</div>
-          <p class="why-card-desc">99.5% on-time arrival rate for all major routes.</p>
+          <label class="qf-label">Work Email</label>
+          <input type="email" class="qf-input" placeholder="john@company.com" />
         </div>
       </div>
-      <div class="why-card">
-        <div class="why-card-icon">
-          <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+
+      <div class="qf-field">
+        <label class="qf-label">Company Name</label>
+        <input type="text" class="qf-input" placeholder="Acme Logistics Ltd." />
+      </div>
+
+      <div class="qf-field">
+        <label class="qf-label">Phone Number</label>
+        <input type="tel" class="qf-input" placeholder="+1 (555) 123-4567" />
+      </div>
+
+      <div class="qf-field">
+        <label class="qf-label">Service Interest</label>
+        <div class="qf-checkboxes">
+          <label class="qf-check-item"><input type="checkbox" /> Freight Fwd</label>
+          <label class="qf-check-item"><input type="checkbox" /> Customs</label>
+          <label class="qf-check-item"><input type="checkbox" /> Warehousing</label>
+          <label class="qf-check-item"><input type="checkbox" /> Consulting</label>
         </div>
-        <div>
-          <div class="why-card-title">Global Network</div>
-          <p class="why-card-desc">Access to 200+ ports across 6 continents.</p>
+      </div>
+
+      <div class="qf-field">
+        <label class="qf-label">Message</label>
+        <textarea class="qf-textarea" placeholder="Tell us about your cargo..."></textarea>
+      </div>
+
+      <button class="btn-submit">
+        Get Custom Quote
+        <svg viewBox="0 0 24 24"><line x1="5" y1="12" x2="19" y2="12"/><polyline points="12 5 19 12 12 19"/></svg>
+      </button>
+
+      <div class="qf-security">
+        <div class="qf-security-item">
+          <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Your data is encrypted and secure.
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- FAQ -->
-    <div class="faq-title">Frequently Asked Questions</div>
+  <!-- ── BOTTOM: Why Global + Prefer to talk side by side ── -->
+  <div class="quote-bottom-row">
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        What information do I need for a quote?
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <!-- Left: Why Global Leaders + FAQ -->
+    <div class="quote-bottom-left">
+
+      <div class="why-block">
+        <h2 class="why-title">Why Global Leaders Choose Us?</h2>
+        <p class="why-body">Navigating complex international waters requires more than just ships; it requires a partner who understands the intricacies of maritime law, efficient route planning, and timely delivery.</p>
+        <div class="why-cards">
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+            </div>
+            <div>
+              <div class="why-card-title">On-Time Guarantee</div>
+              <p class="why-card-desc">99.5% on-time arrival rate for all major routes.</p>
+            </div>
+          </div>
+          <div class="why-card">
+            <div class="why-card-icon">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><line x1="2" y1="12" x2="22" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+            </div>
+            <div>
+              <div class="why-card-title">Global Network</div>
+              <p class="why-card-desc">Access to 200+ ports across 6 continents.</p>
+            </div>
+          </div>
+        </div>
       </div>
-      <div class="faq-a">You'll need your company name, origin and destination ports, estimated monthly container volume, and the type of cargo. The more detail you provide, the more accurate your quote will be.</div>
+
+      <!--<div class="faq-block">
+        <div class="faq-title">Frequently Asked Questions</div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">What information do I need for a quote?
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">You'll need your company name, origin and destination ports, estimated monthly container volume, and the type of cargo.</div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Do you handle customs documentation?
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">Yes. Our customs team manages all documentation including bills of lading, manifests, and import/export declarations across 50+ countries.</div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">How quickly will I receive my quote?
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">Our average response time is under 4 hours during business hours. For urgent requests, call our support line directly.</div>
+        </div>
+
+        <div class="faq-item" onclick="toggleFaq(this)">
+          <div class="faq-q">Do you offer long-term contracts?
+            <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+          </div>
+          <div class="faq-a">Yes. We offer flexible contract terms from spot shipments to multi-year agreements with volume discounts and dedicated account managers.</div>
+        </div>
+      </div> -->
+
     </div>
 
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        Do you handle customs documentation?
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
+    <!-- Right: Prefer to talk -->
+    <div class="quote-bottom-right">
+      <div class="contact-card">
+        <div class="contact-card-title">Prefer to talk?</div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Support Line</div>
+            <div class="contact-val">+1 (555) 012-3456</div>
+          </div>
+        </div>
+        <div class="contact-row">
+          <div class="contact-icon">
+            <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
+          </div>
+          <div>
+            <div class="contact-label">Direct Email</div>
+            <div class="contact-val">quotes@maritime-b2b.com</div>
+          </div>
+        </div>
       </div>
-      <div class="faq-a">Yes. Our customs team manages all documentation including bills of lading, manifests, and import/export declarations across 50+ countries, ensuring full regulatory compliance.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        How quickly will I receive my quote?
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="faq-a">Our average response time is under 4 hours during business hours. For urgent requests, you can call our support line directly and we will prioritize your query.</div>
-    </div>
-
-    <div class="faq-item" onclick="toggleFaq(this)">
-      <div class="faq-q">
-        Do you offer long-term contracts?
-        <svg viewBox="0 0 24 24"><polyline points="6 9 12 15 18 9"/></svg>
-      </div>
-      <div class="faq-a">Yes. We offer flexible contract terms from spot shipments to multi-year agreements. Long-term partners benefit from volume discounts, dedicated account managers, and priority scheduling.</div>
     </div>
 
   </div>
-
-  <!-- ── SIDEBAR ── -->
-  <aside class="quote-sidebar">
-
-    <div class="fast-card">
-      <div class="fast-tag">
-        <svg viewBox="0 0 24 24" width="12" height="12"><polyline points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-        Fast Response
-      </div>
-      <div class="fast-title">Average Reply Time:<br>&lt; 4 Hours</div>
-      <p class="fast-desc">Our sales engineers are standing by 24/7.</p>
-    </div>
-
-    <div class="contact-card">
-      <div class="contact-card-title">Prefer to talk?</div>
-      <div class="contact-row">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07A19.5 19.5 0 0 1 4.69 12 19.79 19.79 0 0 1 1.61 3.4 2 2 0 0 1 3.6 1.22h3a2 2 0 0 1 2 1.72c.127.96.361 1.903.7 2.81a2 2 0 0 1-.45 2.11L7.91 8.86a16 16 0 0 0 6 6l.92-.92a2 2 0 0 1 2.11-.45c.907.339 1.85.573 2.81.7A2 2 0 0 1 22 16.92z"/></svg>
-        </div>
-        <div>
-          <div class="contact-label">Support Line</div>
-          <div class="contact-val">+1 (555) 012-3456</div>
-        </div>
-      </div>
-      <div class="contact-row">
-        <div class="contact-icon">
-          <svg viewBox="0 0 24 24"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"/><polyline points="22,6 12,13 2,6"/></svg>
-        </div>
-        <div>
-          <div class="contact-label">Direct Email</div>
-          <div class="contact-val">quotes@maritime-b2b.com</div>
-        </div>
-      </div>
-    </div>
-
-    <div class="offices-card">
-      <div class="offices-card-title">Our Offices</div>
-      <div class="office-img-card">
-        <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=400&q=80" alt="Rotterdam HQ" />
-        <div class="office-label">
-          <div class="office-label-title">Rotterdam HQ</div>
-          <div class="office-label-sub">Netherlands</div>
-        </div>
-      </div>
-      <div class="office-img-card">
-        <img src="https://images.unsplash.com/photo-1525625293386-3f8f99389edd?w=400&q=80" alt="Singapore Office" />
-        <div class="office-label">
-          <div class="office-label-title">Singapore Office</div>
-          <div class="office-label-sub">APAC Region</div>
-        </div>
-      </div>
-    </div>
-
-  </aside>
 
 </div>
