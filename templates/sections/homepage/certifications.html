@@ -1,0 +1,156 @@
+<style>
+.partners-strip {
+  background: #fff;
+  border-top: 1px solid #e2e8f0;
+  border-bottom: 1px solid #e2e8f0;
+  padding: 40px 0;
+}
+
+.partners-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  overflow: hidden;
+}
+
+.partners-track {
+  display: flex;
+  width: max-content;
+  animation: scroll-left 20s linear infinite;
+}
+
+.partners-track:hover {
+  animation-play-state: paused;
+}
+
+@keyframes scroll-left {
+  0%   { transform: translateX(0); }
+  100% { transform: translateX(-50%); }
+}
+
+.partners-inner {
+  display: flex;
+  align-items: center;
+  gap: 90px;
+  padding: 0 55px;
+}
+
+/* Logo container (NEW) */
+.partner-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 70px;   /* consistent height */
+}
+
+/* Logo image */
+.partner-item img {
+  max-height: 75px;   /* fits inside box */
+  max-width: 200px;   /* prevents super wide logos */
+  object-fit: contain;
+  transition: all 0.3s ease;
+}
+
+.partner-item:hover {
+  color: #2563eb;
+  transform: translateY(-2px);
+}
+
+
+/* Hover effect */
+.partner-item:hover img {
+  filter: grayscale(0%);
+}
+
+/* Text */
+.partner-item span {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.05rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+</style>
+
+<section class="partners-strip">
+  <div class="partners-container">
+
+    <div class="partners-track">
+
+      <!-- FIRST SET -->
+      <div class="partners-inner">
+
+        <div class="partner-item">
+          <img src="/static/img/iso2013.png" alt="ISO 27001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iso2015.png" alt="ISO 9001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/dpiit_certificate_logo.png" alt="DPIIT Recognized Startup">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iaf.png">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/anab.png">
+        </div>
+
+      </div>
+
+      <!-- DUPLICATE -->
+      <div class="partners-inner" aria-hidden="true">
+
+        <div class="partner-item">
+          <img src="/static/img/iso2013.png" alt="ISO 27001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iso2015.png" alt="ISO 9001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/dpiit_certificate_logo.png" alt="DPIIT Recognized Startup">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iaf.png">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/anab.png">
+        </div>
+
+      </div>
+
+      <div class="partners-inner" aria-hidden="true">
+
+        <div class="partner-item">
+          <img src="/static/img/iso2013.png" alt="ISO 27001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iso2015.png" alt="ISO 9001">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/dpiit_certificate_logo.png" alt="DPIIT Recognized Startup">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/iaf.png">
+        </div>
+
+        <div class="partner-item">
+          <img src="/static/img/anab.png">
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+</section>

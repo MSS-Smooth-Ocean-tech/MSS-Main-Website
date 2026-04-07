@@ -17,9 +17,17 @@
 
   /* ── HERO ── */
   .bpo-hero {
-    background: linear-gradient(160deg, #eef3fb 0%, #f8faff 60%, #eef3fb 100%);
+    background: linear-gradient(135deg, #0a1628 0%, #0f2a4a 50%, #0f172a 100%);;
     padding: 200px 24px 120px;
     text-align: center;
+  }
+  .bpo-hero-grid {
+    position: absolute;
+    inset: 0;
+    background-image:
+      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
+      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
+    background-size: 60px 60px;
   }
   .bpo-hero-badge {
     display: inline-flex;
@@ -40,7 +48,7 @@
     font-size: clamp(3rem, 6vw, 3.5rem);
     font-weight: 800;
     line-height: 1.1;
-    color: var(--navy);
+    color: #fff;
     margin: 0 auto 28px;
   }
   .bpo-hero h1 span { color: var(--blue); }

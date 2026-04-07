@@ -24,7 +24,7 @@
     align-items: center;
     justify-content: center;
     padding: 160px 24px 100px;
-    text-align: center;
+    text-align: left;
   }
   .about-hero-inner { max-width: 1000px; }
   .about-hero h1 {
@@ -42,7 +42,7 @@
     margin: 0 auto 36px;
     line-height: 1.75;
   }
-  .about-hero-btns { display: flex; gap: 12px; justify-content: center; flex-wrap: wrap; }
+  .about-hero-btns { display: flex; gap: 12px; justify-content: flex-start; flex-wrap: wrap; }
   .btn-hero-blue {
     background: var(--blue);
     color: #fff;
@@ -684,19 +684,11 @@
     position: relative;
     overflow: hidden;
   }
-  .about-cta::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
-    background-size: 40px 40px;
-  }
+
   .about-cta-inner { position: relative; max-width: 600px; margin: 0 auto; }
   .about-cta h1 {
     font-family: 'Sora', sans-serif;
-    font-size: clamp(2rem, 4vw, 4rem);
+    font-size: clamp(2rem, 4vw, 3.25rem);
     font-weight: 800;
     color: #fff;
     margin-bottom: 16px;

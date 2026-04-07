@@ -443,47 +443,112 @@
     color: var(--navy);
   }
 
-  /* Offices card */
-  .offices-card {
-    background: #fff;
-    border: 1.5px solid var(--border);
-    border-radius: 16px;
-    padding: 24px;
-  }
-  .offices-card-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 0.95rem;
-    font-weight: 700;
-    color: var(--navy);
-    margin-bottom: 14px;
-  }
-  .office-img-card {
-    border-radius: 10px;
-    overflow: hidden;
-    position: relative;
-    height: 90px;
-    margin-bottom: 10px;
-  }
-  .office-img-card:last-child { margin-bottom: 0; }
-  .office-img-card img {
-    width: 100%; height: 100%;
-    object-fit: cover;
-    filter: brightness(0.6);
-  }
-  .office-label {
-    position: absolute;
-    bottom: 10px; left: 12px;
-  }
-  .office-label-title {
-    font-family: 'Sora', sans-serif;
-    font-size: 0.82rem;
-    font-weight: 700;
-    color: #fff;
-    margin-bottom: 1px;
-  }
-  .office-label-sub { font-size: 0.7rem; color: rgba(255,255,255,0.65); }
 
-  /* ── STATUS BAR ── */
+/* Heading */
+.office-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.75rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* Grid */
+.office-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+/* Card */
+.office-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 20px;
+  transition: all 0.25s ease;
+}
+
+/* Hover */
+.office-card:hover {
+  transform: translateY(-4px);
+  box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+}
+
+/* Icon */
+.office-icon svg {
+  width: 22px;
+  height: 22px;
+  stroke: #2563eb;
+  stroke-width: 1.8;
+  fill: none;
+  margin-bottom: 10px;
+}
+
+/* Title */
+.office-title {
+  font-weight: 700;
+  font-size: 1rem;
+  margin-bottom: 6px;
+}
+
+/* Address */
+.office-address {
+  font-size: 0.9rem;
+  color: #64748b;
+  line-height: 1.5;
+  margin-bottom: 10px;
+}
+
+/* Link */
+.office-link {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #2563eb;
+  text-decoration: none;
+}
+
+.office-link:hover {
+  text-decoration: underline;
+}
+
+/* Mobile */
+@media (max-width: 768px) {
+  .office-grid {
+    grid-template-columns: 1fr;
+  }
+}
+/* Section width like your layout */
+.map-section {
+  max-width: 1200px;   /* increased width */
+  padding: 0 20px;     /* small side padding */
+}
+
+/* Heading */
+.map-heading {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 20px;
+  color: #0f172a;
+}
+
+/* Map box */
+.map-container {
+  width: 100%;
+  height: 380px;       /* slightly bigger */
+  border-radius: 18px;
+  overflow: hidden;
+  border: 1px solid #e5e7eb;
+  box-shadow: 0 12px 35px rgba(0,0,0,0.06);
+}
+
+/* iframe */
+.map-container iframe {
+  width: 100%;
+  height: 100%;
+  border: 0;
+}  /* ── STATUS BAR ── */
   .status-bar {
     background: #184172;
     padding: 16px 32px;

@@ -222,8 +222,8 @@
 
   .orbit-scene {
   position: relative;
-  width: 520px;
-  height: 520px;
+  width: 640px;
+  height: 640px;
   margin: 0 auto;
 }
 
@@ -235,14 +235,14 @@
   transform: translate(-50%, -50%);
   pointer-events: none;
 }
-.o-ring-1 { width: 280px; height: 280px; }
-.o-ring-2 { width: 440px; height: 440px; }
+.o-ring-1 { width: 340px; height: 340px; }
+.o-ring-2 { width: 560px; height: 560px; }
 
 .o-center {
   position: absolute;
   top: 50%; left: 50%;
   transform: translate(-50%, -50%);
-  width: 110px; height: 110px;
+  width: 130px; height: 130px;
   background: #3b5bdb;
   border-radius: 50%;
   display: flex;

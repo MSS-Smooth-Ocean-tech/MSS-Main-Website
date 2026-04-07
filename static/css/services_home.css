@@ -83,7 +83,7 @@ h1, h2, h3, h4, h5, h6 {
 }
 
 .sh-intro-inner {
-  max-width: 800px;
+  max-width: 1065px;
   margin: 0 auto;
 }
 
@@ -91,6 +91,7 @@ h1, h2, h3, h4, h5, h6 {
   font-size: 1.15rem;
   color: var(--text-muted);
   line-height: 1.8;
+  text-align: left;
 }
 
 /* Services Section */
@@ -195,7 +196,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Conclusion */
 .sh-conclusion {
-  background: var(--primary);
+  background: #184172;
   color: #fff;
   padding: 80px 24px;
   text-align: center;

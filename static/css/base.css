@@ -234,8 +234,49 @@ footer {
   background: #f3f4f6;
   color: #111827;
 }
+/* Base link */
+.mss-nav-links a {
+  position: relative;
+  padding: 6px 12px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  color: #111827;
+  transition: color 0.3s ease;
+}
 
+/* Remove old hover background */
+.mss-nav-links a:hover {
+  background: transparent;
+  color: #2563eb;
+}
 
+/* Underline (hidden by default) */
+.mss-nav-links a::after {
+  content: '';
+  position: absolute;
+  left: 12px;
+  bottom: 2px;
+  width: 0%;
+  height: 2px;
+  background: #2563eb;
+  border-radius: 2px;
+  transition: width 0.65s ease; /* slower animation */
+}
+
+/* Show underline on hover */
+.mss-nav-links a:hover::after {
+  width: calc(100% - 24px);
+}
+
+/* Active link (NO underline) */
+.mss-nav-links a.active {
+  color: #2563eb;
+  font-weight: 600;
+}
+
+.mss-nav-links a.active::after {
+  width: 0 !important;
+}
 /* ── FOOTER ── */
 footer {
   background: #fff;

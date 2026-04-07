@@ -1,0 +1,252 @@
+<style>
+    .latest-insights {
+  background: #fff;
+  padding: 100px 32px;
+}
+.li-inner { max-width: 1200px; margin: 0 auto; }
+
+.li-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 56px;
+  flex-wrap: wrap;
+  gap: 20px;
+}
+.li-eyebrow {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: #94a3b8;
+  display: block;
+  margin-bottom: 10px;
+}
+.li-title {
+  font-family: 'Sora', sans-serif;
+  font-size: clamp(1.8rem, 3vw, 2.6rem);
+  font-weight: 800;
+  color: #0f172a;
+  line-height: 1.2;
+  margin-bottom: 14px;
+}
+.li-underline {
+  width: 48px;
+  height: 3px;
+  background: #184172;
+  border-radius: 2px;
+}
+.li-view-all {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.88rem;
+  font-weight: 700;
+  color: #2563eb;
+  transition: gap 0.2s;
+  white-space: nowrap;
+}
+.li-view-all:hover { text-decoration: underline; }
+
+.li-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 28px;
+  margin-bottom: 48px;
+}
+@media (max-width: 900px) { .li-grid { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 560px) { .li-grid { grid-template-columns: 1fr; } }
+
+.li-card {
+  background: #fff;
+  border-radius: 16px;
+  box-shadow: 0 2px 20px rgba(0,0,0,0.07);
+  overflow: hidden;
+  display: flex;
+  flex-direction: column;
+  transition: transform 0.2s, box-shadow 0.2s;
+  cursor: pointer;
+  color: inherit;
+}
+.li-card:hover { transform: translateY(-4px); box-shadow: 0 12px 40px rgba(0,0,0,0.12); }
+
+.li-card-img {
+  position: relative;
+  height: 200px;
+  overflow: hidden;
+}
+.li-card-img img {
+  width: 100%; height: 100%;
+  object-fit: cover;
+  transition: transform 0.4s ease;
+}
+.li-card:hover .li-card-img img { transform: scale(1.05); }
+
+.li-card-date {
+  position: absolute;
+  bottom: 0; right: 0;
+  background: #0f172a;
+  color: #fff;
+  text-align: center;
+  padding: 8px 14px;
+  min-width: 64px;
+}
+.li-date-num {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.3rem;
+  font-weight: 800;
+  line-height: 1;
+}
+.li-date-month {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.65rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  background: ##184172;
+  margin: 4px -14px -8px;
+  padding: 3px 0;
+  text-transform: uppercase;
+}
+
+.li-card-tag {
+  position: absolute;
+  top: 12px; left: 12px;
+  background: rgba(15,23,42,0.75);
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.62rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 4px 10px;
+  border-radius: 6px;
+  backdrop-filter: blur(4px);
+}
+
+.li-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
+.li-card-author {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 0.78rem;
+  color: #64748b;
+  margin-bottom: 12px;
+}
+.li-card-author svg { stroke: #64748b; }
+.li-card-title {
+  font-family: 'Sora', sans-serif;
+  font-size: 1rem;
+  font-weight: 700;
+  color: #0f172a;
+  line-height: 1.4;
+  margin-bottom: 12px;
+}
+.li-card-divider {
+  width: 36px;
+  height: 3px;
+  background: #184172;
+  border-radius: 2px;
+  margin-bottom: 12px;
+}
+.li-card-desc {
+  font-size: 0.85rem;
+  color: #64748b;
+  line-height: 1.65;
+  flex: 1;
+}
+
+.li-more-wrap { text-align: center; }
+.li-more-btn {
+  display: inline-block;
+  background: #184172;
+  color: #fff;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.92rem;
+  font-weight: 700;
+  padding: 14px 40px;
+  border-radius: 100px;
+  transition: background 0.2s, transform 0.2s;
+}
+.li-more-btn:hover { background: #225899; transform: translateY(-2px); }
+</style>
+<!-- ══ LATEST INSIGHTS ══ -->
+<section class="latest-insights">
+  <div class="li-inner">
+    <div class="li-header">
+      <div>
+        <span class="li-eyebrow">News & Updates</span>
+        <h2 class="li-title">Latest news directly<br>from the blog</h2>
+        <div class="li-underline"></div>
+      </div>
+      <a href="/insights" class="li-view-all">More Posts →</a>
+    </div>
+
+    <div class="li-grid">
+
+      <a href="/insights/logistics-bpo-3pl" class="li-card">
+        <div class="li-card-img">
+          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="Logistics BPO" />
+          <div class="li-card-date">
+            <div class="li-date-num">17</div>
+            <div class="li-date-month">March</div>
+          </div>
+          <div class="li-card-tag">BPO</div>
+        </div>
+        <div class="li-card-body">
+          <div class="li-card-author">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            MSS Editorial
+          </div>
+          <div class="li-card-title">How Maritime BPO Helps Shipping Companies Scale Operations Globally</div>
+          <div class="li-card-divider"></div>
+          <p class="li-card-desc">As companies expand across borders, global supply chains have become more complex. Third-party logistics providers now handle a large amoun...</p>
+        </div>
+      </a>
+
+      <a href="/insights/cloud-data-integration" class="li-card">
+        <div class="li-card-img">
+          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="Cloud Integration" />
+          <div class="li-card-date">
+            <div class="li-date-num">27</div>
+            <div class="li-date-month">February</div>
+          </div>
+          <div class="li-card-tag">Technology</div>
+        </div>
+        <div class="li-card-body">
+          <div class="li-card-author">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            MSS Editorial
+          </div>
+          <div class="li-card-title">How Cloud And Real-Time Data Integration Makes Maritime BPO More Efficient</div>
+          <div class="li-card-divider"></div>
+          <p class="li-card-desc">Logistics depends on speed, accuracy, and being able to see what's going on. Still, a lot of logistics companies still have trouble with brok...</p>
+        </div>
+      </a>
+
+      <a href="/insights/nlp-shipping-documents" class="li-card">
+        <div class="li-card-img">
+          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="NLP Digitization" />
+          <div class="li-card-date">
+            <div class="li-date-num">27</div>
+            <div class="li-date-month">January</div>
+          </div>
+          <div class="li-card-tag">AI & Tech</div>
+        </div>
+        <div class="li-card-body">
+          <div class="li-card-author">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            MSS Editorial
+          </div>
+          <div class="li-card-title">NLP-Powered Digitization of Shipping Documents in Maritime BPO</div>
+          <div class="li-card-divider"></div>
+          <p class="li-card-desc">Logistics BPO sits right at the intersection of the three Vs — vulnerability, velocity, and volume. Commercial invoices, Bills of Lading, packing li...</p>
+        </div>
+      </a>
+
+    </div>
+
+    <div class="li-more-wrap">
+      <a href="/insights" class="li-more-btn">More Posts</a>
+    </div>
+
+  </div>
+</section>
