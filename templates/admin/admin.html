@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSS Admin Dashboard</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
+    
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base.css') }}?v=1.1" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/admin.css') }}?v=1.1" />
+    <style>
+      /* Override core admin.css settings to accommodate the new navigation UI */
+      body {
+          display: block !important;
+          background-color: #f8fafc; 
+          height: 100% !important;
+          overflow: auto !important;
+      }
+      .main-content {
+          padding-top: 100px !important; /* Space for the absolute fixed navbar */
+          background: transparent !important;
+          max-width: 1000px;
+          margin: 0 auto;
+      }
+      .admin-user-info {
+          display: flex;
+          align-items: center;
+          gap: 12px;
+          margin-left:auto; 
+          color: #111827;     
+      }
+      .admin-user-details {
+          display: flex;
+          flex-direction: column;
+          align-items: flex-end;
+          line-height: 1.2;
+      }
+      .user-name-text {
+          font-weight: 600;
+          font-size: 14px;
+          color: #111827;
+      }
+      .user-email-text {
+          font-size: 12px;
+          color: #6b7280;
+      }
+      .admin-avatar {
+          width: 36px;
+          height: 36px;
+          border-radius: 50%;
+          object-fit: cover;
+          border: 2px solid #e5e7eb;
+      }
+      .admin-logout-btn {
+          background-color: transparent;
+          color: #ef4444;
+          padding: 8px 0px;
+          border-radius: 4px;
+          font-weight: 600;
+          font-size: 14px;
+          border: none;
+          cursor: pointer;
+          transition: color 0.3s ease;
+          margin-left: 10px;
+      }
+      .admin-logout-btn:hover {
+          color: #dc2626;
+      }
+      
+      /* Make sure Navbar overrides the dark theme natively so it's readable */
+      .mss-navbar {
+          background-color: rgba(255, 255, 255, 0.95); /* Keep it light */
+      }
+      .mss-nav-links a {
+          color: var(--mss-black);
+      }
+      .mss-nav-links a:hover,
+      .mss-nav-links a.active {
+          color: var(--mss-primary);
+      }
+    </style>
+  </head>
+  <body>
+    <!-- ══ NAVBAR ══ -->
+    <nav class="mss-navbar">
+      <div class="mss-nav-inner">
+        <a href="/" class="mss-nav-brand">
+          <div class="mss-nav-brand-icon">
+            <img src="{{ url_for('static', path='/img/mss_logo.png') }}" alt="MSS Logo" style="width:120px; height:75px; margin-top:10px;" />
+          </div>
+        </a>
+        <ul class="mss-nav-links">
+          <li>
+            <a href="#">MANAGE BLOGS</a>
+          </li>
+          <li>
+            <a href="#" class="active">MANAGE USERS</a>
+          </li>
+        </ul>
+        
+        <!-- LOGGED IN USER INFO -->
+        <div class="admin-user-info">
+          <div class="admin-user-details">
+            <span class="user-name-text" id="navName">Loading...</span>
+            <span class="user-email-text" id="navEmail">...</span>
+          </div>
+          <img src="https://via.placeholder.com/32" alt="Profile" class="admin-avatar" id="navAvatar" />
+          <button class="admin-logout-btn" onclick="window.location.href = '/logout'">Logout</button>
+        </div>
+      </div>
+    </nav>
+
+    <div class="main-content">
+      <div class="section active" id="users-section">
+        <div class="section-header">Manage Admin Users</div>
+        <div class="providers-grid" id="providersGrid">
+          <div class="loading">Loading users...</div>
+        </div>
+      </div>
+
+      <!-- Configuration Modal -->
+      <div id="configModal" class="modal-overlay hidden">
+        <div class="modal-content">
+          <div class="modal-header">
+            <div class="header-text">
+              <h2 id="configModalTitle">Configuration</h2>
+              <div id="configModalEmail" class="modal-subtitle"></div>
+            </div>
+            <button class="close-modal" onclick="closeConfigModal()">×</button>
+          </div>
+
+          <div class="modal-toggles" style="display:flex; gap:1.5rem; margin-bottom:1.5rem;">
+            <div class="toggle-item" style="display:flex; align-items:center;">
+              <span class="toggle-label" style="margin-right:10px;">Admin Access</span>
+              <label class="switch">
+                <input type="checkbox" id="modalAdminToggle" />
+                <span class="slider round"></span>
+              </label>
+            </div>
+          </div>
+
+          <div class="modal-actions">
+            <button class="save-btn" onclick="saveUserConfig()">Save Changes</button>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script type="module" src="{{ url_for('static', path='/js/admin.js') }}?v=1.1"></script>
+  </body>
+</html>

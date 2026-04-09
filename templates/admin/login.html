@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MSS Admin Login</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+      tailwind.config = {
+        darkMode: "class",
+        theme: {
+          extend: {
+            colors: {
+              primary: "#3b82f6",
+            },
+          },
+        },
+      };
+    </script>
+    <style>
+      :root {
+          --admin-bg-primary: #f8fafc;
+          --admin-bg-secondary: #ffffff;
+          --admin-text-primary: #111827;
+          --admin-text-secondary: #6b7280;
+          --admin-border-primary: #e5e7eb;
+          --admin-input-bg: #ffffff;
+          --admin-input-border: #d1d5db;
+          --admin-focus-ring: #2563eb;
+          --admin-btn-primary-bg: #2563eb;
+          --admin-btn-primary-hover: #1d4ed8;
+          --admin-bg-hover: #f3f4f6;
+          --admin-error-text: #ef4444;
+          --admin-error-bg: rgba(239, 68, 68, 0.1);
+          --admin-error-border: rgba(239, 68, 68, 0.2);
+      }
+    </style>
+  </head>
+  <body class="bg-[var(--admin-bg-primary)] text-[var(--admin-text-primary)] min-h-screen">
+    <div class="container mx-auto px-4 py-8">
+      <div class="min-h-screen flex items-center justify-center bg-[var(--admin-bg-primary)] px-4 -mt-8">
+        <div class="max-w-md w-full bg-[var(--admin-bg-secondary)] rounded-lg shadow-2xl p-8 border border-[var(--admin-border-primary)]">
+          <div style="display:flex; justify-content:center; align-items:center; margin-bottom:1rem;">
+             <img src="{{ url_for('static', path='/img/mss_logo.png') }}" alt="MSS Logo" style="width:120px; height:75px;" />
+          </div>
+          <h1 class="text-3xl font-bold mb-8 text-center text-[var(--admin-text-primary)]">
+            Admin Auth Panel
+          </h1>
+
+          <div class="flex flex-col items-center space-y-6">
+            <button
+              id="google-login"
+              class="flex items-center justify-center w-full bg-[var(--admin-input-bg)] hover:bg-[var(--admin-bg-hover)] text-[var(--admin-text-primary)] p-4 rounded-lg transition-colors border border-[var(--admin-input-border)] shadow-sm"
+              title="Sign in with Google"
+            >
+              <img src="https://www.gstatic.com/firebasejs/ui/2.0.0/images/auth/google.svg" class="w-6 h-6 mr-3" alt="Google" />
+              <span class="font-medium text-lg">Continue with Google Account</span>
+            </button>
+
+            <button
+              id="microsoft-login"
+              data-tenant-id="{{ tenant_id }}"
+              class="flex items-center justify-center w-full bg-[var(--admin-input-bg)] hover:bg-[var(--admin-bg-hover)] text-[var(--admin-text-primary)] p-4 rounded-lg transition-colors border border-[var(--admin-input-border)] shadow-sm"
+              title="Sign in with Microsoft"
+            >
+              <svg class="w-6 h-6 mr-3" viewBox="0 0 23 23" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M0 0H10.8696V10.8696H0V0Z" fill="#F25022" />
+                <path d="M12.1304 0H23V10.8696H12.1304V0Z" fill="#7FBA00" />
+                <path d="M0 12.1304H10.8696V23H0V12.1304Z" fill="#00A4EF" />
+                <path d="M12.1304 12.1304H23V23H12.1304V12.1304Z" fill="#FFB900" />
+              </svg>
+              <span class="font-medium text-lg">Continue with your MSS Account</span>
+            </button>
+          </div>
+
+          <div
+            id="error-message"
+            class="mt-6 text-[var(--admin-error-text)] text-sm text-center hidden bg-[var(--admin-error-bg)] p-3 rounded border border-[var(--admin-error-border)]"
+          ></div>
+        </div>
+      </div>
+    </div>
+    
+    <script type="module" src="/static/js/login.js"></script>
+    <script>
+      let idleTime = 0;
+      const idleInterval = setInterval(timerIncrement, 60000); 
+
+      document.onmousemove = resetTimer;
+      document.onkeypress = resetTimer;
+      document.onclick = resetTimer;
+      document.onscroll = resetTimer;
+
+      function resetTimer() {
+        idleTime = 0;
+      }
+
+      function timerIncrement() {
+        idleTime++;
+        if (idleTime >= 30) {
+          fetch("/logout", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }).then(() => {
+            window.location.href = "/login?timeout=true";
+          });
+        }
+      }
+    </script>
+  </body>
+</html>

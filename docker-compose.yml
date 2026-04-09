@@ -1,0 +1,21 @@
+services:
+  jcp-vision-app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: jcp_vision_app
+    volumes:
+      - .:/srv
+    ports:
+      - "8003:8000"
+    restart: always
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+
+networks:
+  default:
+    name: jcp_vision_net
+    driver: bridge

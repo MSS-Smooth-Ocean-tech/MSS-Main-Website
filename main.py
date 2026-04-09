@@ -1,6 +1,7 @@
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi import FastAPI, Request
+from fastapi import FastAPI, Request, HTTPException
+from fastapi.responses import JSONResponse, RedirectResponse
 
 # ── Create the FastAPI app ──
 app = FastAPI()
@@ -20,6 +21,12 @@ templates.env.globals["certificate_images"] = get_certificate_images()
 from routes.services import router as services_router
 from routes.blog import router as blog_router
 from routes.standard import router as standard_router
+
+@app.exception_handler(401)
+async def unauthorized_handler(request: Request, exc: HTTPException):
+    if "application/json" in request.headers.get("accept", ""):
+        return JSONResponse(status_code=401, content={"error": "Unauthorized"})
+    return RedirectResponse(url="/login")
 
 @app.get("/", name="homepage")
 async def homepage(request: Request): # Renders templates/homepage.html
