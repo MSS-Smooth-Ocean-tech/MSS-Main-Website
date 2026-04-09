@@ -11,7 +11,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap" rel="stylesheet" />
-    <link rel="stylesheet" href="/static/css/base.css?v=2" />
+    <link rel="stylesheet" href="{{ url_for('static', path='/css/base.css') }}" />
     {% block extra_css %}
     {% endblock %}
   </head>
@@ -21,7 +21,7 @@
       <div class="mss-nav-inner">
         <a href="/" class="mss-nav-brand">
           <div class="mss-nav-brand-icon">
-            <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:120px; height:75px; margin-top:10px;" />
+            <img src="{{ url_for('static', path='/img/mss_logo.png') }}" alt="MSS Logo" style="width:120px; height:75px; margin-top:10px;" />
           </div>
         </a>
         <ul class="mss-nav-links">
@@ -61,7 +61,7 @@
           <div class="foot-brand">
             <a href="/" class="nav-brand">
               <div class="nav-brand-icon">
-                <img src="/static/img/mss_logo.png" alt="MSS Logo" style="width:150px; height:85px;" />
+                <img src="{{ url_for('static', path='/img/mss_logo.png') }}" alt="MSS Logo" style="width:150px; height:85px;" />
               </div>
             </a>
             <p class="foot-brand-desc">Empowering the maritime industry with scalable, secure, and efficient outsourcing solutions since 2022.</p>
@@ -171,9 +171,9 @@
           <!-- Dynamic Year to be Added -->
           <div>© 2026 | All Rights Reserved | Maritime Support Solutions</div>
           {% if not certificate_status() %}
-          <div class="foot-cert-logo">
-            <img src="/static/img/certificates/dpiit.png" alt="DPIIT Recognized Startup" style="width: 140px; height: auto; object-fit: contain;"/>
-          </div>
+            <div class="foot-cert-logo">
+              <img src="{{ url_for('static', path='/img/certificates/dpiit.png') }}" alt="DPIIT Recognized Startup" style="width: 140px; height: auto; object-fit: contain;"/>
+            </div>
           {% endif %}
         </div>
       </div>

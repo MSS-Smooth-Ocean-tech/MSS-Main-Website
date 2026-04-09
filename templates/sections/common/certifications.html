@@ -67,7 +67,7 @@
           <div class="partners-inner" {% if i!=0 %} aria-hidden="true" {% endif %}>
             {% for cert in certificate_images %}
               <div class="partner-item">
-                <img src="/static/img/certificates/{{ cert['image'] }}" alt="{{ cert['name'] }}">
+                <img src="{{ url_for('static', path='/img/certificates/' + cert['image']) }}" alt="{{ cert['name'] }}">
               </div>
             {% endfor %}
           </div>

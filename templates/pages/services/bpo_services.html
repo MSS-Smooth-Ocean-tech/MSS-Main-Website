@@ -4,7 +4,7 @@
 
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/bpo_services.css" />
+<link rel="stylesheet" href="{{ url_for('static', path='/css/bpo_services.css') }}" />
 {% endblock %}
 
 {% block content %}
@@ -20,5 +20,5 @@
 {% endblock %}
 
 {% block extra_js %}
-<script src="/static/js/bpo_services.js"></script>
+<script src="{{ url_for('static', path='/js/bpo_services.js') }}"></script>
 {% endblock %}

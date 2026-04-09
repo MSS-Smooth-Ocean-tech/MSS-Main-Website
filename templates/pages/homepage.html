@@ -3,7 +3,7 @@
 {% block title %}MSS — Global Maritime Outsourcing{% endblock %}
 
 {% block extra_css %}
-  <link rel="stylesheet" href="/static/css/homepage.css" />
+  <link rel="stylesheet" href="{{ url_for('static', path='/css/homepage.css') }}" />
 {% endblock %}
 
 {% block content %}
@@ -27,5 +27,5 @@
 {% endblock %}
 
 {% block extra_js %}
-  <script src="/static/js/homepage.js"></script>
+  <script src="{{ url_for('static', path='/js/homepage.js') }}"></script>
 {% endblock %}
