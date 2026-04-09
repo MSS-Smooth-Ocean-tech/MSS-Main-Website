@@ -3,22 +3,22 @@ from main import templates
 
 router = APIRouter()
 
-@router.get("/")
+@router.get("/", name="homepage")
 async def homepage(request: Request): # Renders templates/homepage.html
     return templates.TemplateResponse("pages/homepage.html", {"request": request})
 
-@router.get("/partners")
+@router.get("/partners", name="partners")
 async def partners(request: Request):
     return templates.TemplateResponse("pages/partners.html", {"request": request})
 
-@router.get("/about")
+@router.get("/about", name="about")
 async def about(request: Request):
     return templates.TemplateResponse("pages/about.html", {"request": request})
 
-@router.get("/get-quote")
+@router.get("/get-quote", name="get_quote")
 async def get_quote(request: Request):
     return templates.TemplateResponse("pages/get_quote.html", {"request": request})
 
-@router.get("/privacy")
+@router.get("/privacy", name="privacy")
 async def privacy(request: Request):
     return templates.TemplateResponse("pages/privacy.html", {"request": request})

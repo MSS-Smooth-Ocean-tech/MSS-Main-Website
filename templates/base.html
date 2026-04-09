@@ -29,24 +29,25 @@
             <a href="/">Home</a>
           </li>
           <li class="mss-nav-dropdown">
-            <a href="/services" class="mss-nav-dropbtn">Services</a>
+            <!-- ADD URL NAME INSTEAD OF PATH -->
+            <a href="{{ url_for('services_home') }}" class="mss-nav-dropbtn">Services</a>
             <div class="mss-nav-dropdown-content">
               <!-- <a href="/services">Explore Our Services</a> -->
-              <a href="/bpo-services">BPO Services</a>
-              <a href="/technology-services">IT Solutions</a>
+              <a href="{{ url_for('bpo_services') }}">BPO Services</a>
+              <a href="{{ url_for('technology_services') }}">IT Solutions</a>
             </div>
           </li>
           <li>
-            <a href="/resources">Resources</a>
+            <a href="{{ url_for('blogs') }}">Resources</a>
           </li>
           <li>
-            <a href="/partners">Partners</a>
+            <a href="{{ url_for('partners') }}">Partners</a>
           </li>
           <li>
-            <a href="/about">About Us</a>
+            <a href="{{ url_for('about') }}">About Us</a>
           </li>
         </ul>
-        <button class="mss-nav-cta" onclick="window.location.href='/get-quote'">Get a Quote</button>
+        <button class="mss-nav-cta" onclick="window.location.href='{{ url_for('get_quote') }}'">Get a Quote</button>
       </div>
     </nav>
 
@@ -59,7 +60,7 @@
       <div class="footer-inner">
         <div class="footer-top">
           <div class="foot-brand">
-            <a href="/" class="nav-brand">
+            <a href="{{ url_for('homepage') }}" class="nav-brand">
               <div class="nav-brand-icon">
                 <img src="{{ url_for('static', path='/img/mss_logo.png') }}" alt="MSS Logo" style="width:150px; height:85px;" />
               </div>
@@ -71,10 +72,10 @@
             <div class="f-col-title">Solutions</div>
             <ul>
               <li>
-                <a href="/bpo-services">Maritime BPO</a>
+                <a href="{{ url_for('bpo_services') }}">Maritime BPO</a>
               </li>
               <li>
-                <a href="/technology-services">IT Consulting</a>
+                <a href="{{ url_for('technology_services') }}">IT Consulting</a>
               </li>
               <li>
                 <a href="#">Workflow Automation</a>
@@ -89,10 +90,10 @@
             <div class="f-col-title">Support</div>
             <ul>
               <li>
-                <a href="/case-studies">Case Studies</a>
+                <a href="{{ url_for('case_studies') }}">Case Studies</a>
               </li>
               <li>
-                <a href="/insights">Insights</a>
+                <a href="{{ url_for('insights') }}">Insights</a>
               </li>
               <li>
                 <a href="#">Documentation</a>
@@ -110,13 +111,13 @@
             <div class="f-col-title">Company</div>
             <ul>
               <li>
-                <a href="/about">About</a>
+                <a href="{{ url_for('about') }}">About</a>
               </li>
               <li>
-                <a href="/security">Security</a>
+                <a href="{{ url_for('security') }}">Security</a>
               </li>
               <li>
-                <a href="/partners">Partners</a>
+                <a href="{{ url_for('partners') }}">Partners</a>
               </li>
               <li>
                 <a href="#">Jobs</a>
@@ -131,7 +132,7 @@
             <div class="f-col-title">Legal</div>
             <ul>
               <li>
-                <a href="/privacy">Privacy</a>
+                <a href="{{ url_for('privacy') }}">Privacy</a>
               </li>
               <li>
                 <a href="#">Terms</a>
@@ -158,7 +159,7 @@
                 </a>
               </li>
               <li>
-                <a href="/get-quote" style="display:flex; align-items:center; gap:8px;">
+                <a href="{{ url_for('get_quote') }}" style="display:flex; align-items:center; gap:8px;">
                   <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                     <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z" />
                   </svg>Get a Quote
