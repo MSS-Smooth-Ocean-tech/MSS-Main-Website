@@ -1,21 +1,21 @@
 {% extends "base.html" %}
 
-{% block title %}Insights — MSS Maritime{% endblock %}
+{% block title %}Resources — MSS Maritime{% endblock %}
 
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
-<link rel="stylesheet" href="/static/css/insights.css">
+<link rel="stylesheet" href="/static/css/blogs.css">
 {% endblock %}
 
 {% block content %}
 
-{% include "sections/insights/hero.html" %}
+{% include "sections/resources/blogs/hero.html" %}
 
-{% include "sections/insights/featured_article.html" %}
+{% include "sections/resources/blogs/featured_article.html" %}
 
-{% include "sections/insights/filter.html" %}
+{% include "sections/resources/blogs/filter.html" %}
 
-{% include "sections/insights/article_grid.html" %}
+{% include "sections/resources/blogs/article_grid.html" %}
 
 {% endblock %}
 
