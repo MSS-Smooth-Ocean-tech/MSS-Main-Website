@@ -1,1 +1,10 @@
-__pycache__/
+**/*__pycache__*/
+**/.env
+**/*.log
+**/*.logs
+**/*ignore*/
+/venv-linux
+/venv-windows
+**/client_secret.json
+**/service-account.json
+**/firebase.json

@@ -3,10 +3,6 @@ from main import templates
 
 router = APIRouter()
 
-@router.get("/", name="homepage")
-async def homepage(request: Request): # Renders templates/homepage.html
-    return templates.TemplateResponse("pages/homepage.html", {"request": request})
-
 @router.get("/partners", name="partners")
 async def partners(request: Request):
     return templates.TemplateResponse("pages/partners.html", {"request": request})
@@ -16,6 +12,7 @@ async def about(request: Request):
     return templates.TemplateResponse("pages/about.html", {"request": request})
 
 @router.get("/get-quote", name="get_quote")
+@router.get("/contact", name="contact")
 async def get_quote(request: Request):
     return templates.TemplateResponse("pages/get_quote.html", {"request": request})
 

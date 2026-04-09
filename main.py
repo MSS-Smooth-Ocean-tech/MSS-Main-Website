@@ -1,13 +1,12 @@
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi import FastAPI
+from fastapi import FastAPI, Request
 
 # ── Create the FastAPI app ──
 app = FastAPI()
 
 # ── Serve everything in /static folder as static files ──
-# Access them in HTML as /static/css/..., /static/js/..., etc.
-app.mount("/static", StaticFiles(directory="static"), name="static")
+app.mount("/static", StaticFiles(directory="static"), name="static") # Access them in HTML as /static/css/..., /static/js/..., etc.
 
 # ── Point to the folder where your HTML templates live ──
 templates = Jinja2Templates(directory="templates")
@@ -22,6 +21,14 @@ from routes.services import router as services_router
 from routes.blog import router as blog_router
 from routes.standard import router as standard_router
 
+@app.get("/", name="homepage")
+async def homepage(request: Request): # Renders templates/homepage.html
+    return templates.TemplateResponse("pages/homepage.html", {"request": request})
+
+app.include_router(standard_router)
 app.include_router(services_router)
 app.include_router(blog_router)
-app.include_router(standard_router)
+
+@app.get("/health", name="health")
+async def health(request: Request):
+    return {"status": "ok"}
