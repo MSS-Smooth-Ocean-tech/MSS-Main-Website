@@ -2,6 +2,7 @@ from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
 from fastapi import FastAPI, Request
 from datetime import datetime
+import os
 
 # ── Create the FastAPI app ──
 app = FastAPI()
@@ -18,6 +19,22 @@ def get_certificate_status(): # This is a template tag to check if the certifica
     return datetime.now() < datetime(2026, 11, 1)
 
 templates.env.globals["certificate_status"] = get_certificate_status # Note: we dont use '()' here because we want to use it as a function in the template, otherwise it will be called immediately and return the value which wont change if we add '()' to the function call in the template.
+
+def get_certificate_images():
+    order = [
+        {"image": "iso2013.png", "name": "ISO 27001"},
+        {"image": "iso2015.png", "name": "ISO 9001"},
+        {"image": "dpiit.png", "name": "DPIIT Recognized Startup"},
+        {"image": "iaf.png", "name": "IAF"},
+        {"image": "anab.png", "name": "ANAB"}
+    ]
+    # if the image in static/img/certificates/ does not exist, remove it from the list
+    final_order = [
+        i for i in order if os.path.exists(f"./static/img/certificates/{i['image']}")
+    ]
+    return final_order
+
+templates.env.globals["certificate_images"] = get_certificate_images
 
 # ── ROUTES ──
 @app.get("/")
@@ -37,7 +54,6 @@ async def technology(request: Request):
 @app.get("/resources")
 async def blogs(request: Request):
     return templates.TemplateResponse("pages/resources/blogs.html", {"request": request})
-
 @app.get("/resources/{slug}")
 async def blog_detailed(request: Request, slug: str):
     return templates.TemplateResponse("pages/resources/blog_detailed.html", {"request": request, "slug": slug})

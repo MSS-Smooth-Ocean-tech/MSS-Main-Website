@@ -65,21 +65,11 @@
       <div class="partners-track">
         {% for i in range(5) %}
           <div class="partners-inner" {% if i!=0 %} aria-hidden="true" {% endif %}>
-            <div class="partner-item">
-              <img src="/static/img/iso2013.png" alt="ISO 27001">
-            </div>
-            <div class="partner-item">
-              <img src="/static/img/iso2015.png" alt="ISO 9001">
-            </div>
-            <div class="partner-item">
-              <img src="/static/img/dpiit_certificate_logo.png" alt="DPIIT Recognized Startup">
-            </div>
-            <div class="partner-item">
-              <img src="/static/img/iaf.png">
-            </div>
-            <div class="partner-item">
-              <img src="/static/img/anab.png">
-            </div>
+            {% for cert in certificate_images() %}
+              <div class="partner-item">
+                <img src="/static/img/certificates/{{ cert['image'] }}" alt="{{ cert['name'] }}">
+              </div>
+            {% endfor %}
           </div>
         {% endfor %}
       </div>
