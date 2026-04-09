@@ -1,6 +1,7 @@
-from fastapi import FastAPI, Request
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
+from fastapi import FastAPI, Request
+from datetime import datetime
 
 # ── Create the FastAPI app ──
 app = FastAPI()
@@ -11,6 +12,12 @@ app.mount("/static", StaticFiles(directory="static"), name="static")
 
 # ── Point to the folder where your HTML templates live ──
 templates = Jinja2Templates(directory="templates")
+
+# ── Template tags ──
+def get_certificate_status(): # This is a template tag to check if the certificate is valid
+    return datetime.now() < datetime(2026, 11, 1)
+
+templates.env.globals["certificate_status"] = get_certificate_status # Note: we dont use '()' here because we want to use it as a function in the template, otherwise it will be called immediately and return the value which wont change if we add '()' to the function call in the template.
 
 # ── ROUTES ──
 @app.get("/")
