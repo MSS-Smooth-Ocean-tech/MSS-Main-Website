@@ -177,12 +177,12 @@
         <h2 class="li-title">Latest news directly<br>from the blog</h2>
         <div class="li-underline"></div>
       </div>
-      <a href="{{ url_for('insights') }}" class="li-view-all">More Posts →</a>
+      <a href="{{ url_for('blogs') }}" class="li-view-all">More Posts →</a>
     </div>
 
     <div class="li-grid">
 
-      <a href="{{ url_for('insights', slug='logistics-bpo-3pl') }}" class="li-card">
+      <a href="{{ url_for('blog_detailed', slug='logistics-bpo-3pl') }}" class="li-card">
         <div class="li-card-img">
           <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="Logistics BPO" />
           <div class="li-card-date">
@@ -202,7 +202,7 @@
         </div>
       </a>
 
-      <a href="{{ url_for('insights', slug='cloud-data-integration') }}" class="li-card">
+      <a href="{{ url_for('blog_detailed', slug='cloud-data-integration') }}" class="li-card">
         <div class="li-card-img">
           <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="Cloud Integration" />
           <div class="li-card-date">
@@ -222,7 +222,7 @@
         </div>
       </a>
 
-      <a href="{{ url_for('insights', slug='nlp-shipping-documents') }}" class="li-card">
+      <a href="{{ url_for('blog_detailed', slug='nlp-shipping-documents') }}" class="li-card">
         <div class="li-card-img">
           <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="NLP Digitization" />
           <div class="li-card-date">
@@ -245,7 +245,7 @@
     </div>
 
     <div class="li-more-wrap">
-      <a href="{{ url_for('insights') }}" class="li-more-btn">More Posts</a>
+      <a href="{{ url_for('blogs') }}" class="li-more-btn">More Posts</a>
     </div>
 
   </div>
