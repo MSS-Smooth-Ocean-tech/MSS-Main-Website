@@ -1,6 +1,6 @@
 {% extends "base.html" %}
 
-{% block title %}Optimizing Maritime Logistics through BPO Integration — MSS Insights{% endblock %}
+{% block title %}{{ blog.title }} — MSS Insights{% endblock %}
 
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
@@ -42,12 +42,9 @@
     max-width: 1200px;
     margin: 0 auto;
     padding: 0 32px 100px;
-    display: grid;
-    grid-template-columns: 1fr 340px;
-    gap: 64px;
-    align-items: start;
+    display: block;
   }
-  @media (max-width: 960px) { .article-layout { grid-template-columns: 1fr; } }
+  @media (max-width: 960px) { .article-layout { max-width: 100%; } }
 
   /* ── ARTICLE MAIN ── */
   .article-main {}
@@ -110,6 +107,7 @@
     font-size: 0.9rem;
     font-weight: 700;
     color: var(--navy);
+    text-transform: capitalize;
   }
   .author-role {
     font-size: 0.78rem;
@@ -529,10 +527,9 @@
 
 {% include "sections/resources/blog-detailed/article_layout.html" %}
 
-{% include "sections/resources/blog-detailed/recommended.html" %}
+{% include "sections/common/articles.html" %}
 
-{% include "sections/resources/blog-detailed/cta.html" %}
-
+{# {% include "sections/resources/blog-detailed/cta.html" %} #}
 
 {% endblock %}
 

@@ -80,12 +80,10 @@
           align-items: center;
       }
       .mss-nav-links {
-          position: absolute;
-          left: 50%;
-          transform: translateX(-50%);
           display: flex;
+          align-items: center;
           gap: 2rem;
-          margin: 0;
+          margin: 0 0 0 2rem;
           padding: 0;
           list-style: none;
       }
@@ -111,8 +109,13 @@
           <li>
             <a href="{{ url_for('manage_blogs_page') }}">MANAGE BLOGS</a>
           </li>
+          {% if request.state.is_admin %}
           <li>
             <a href="{{ url_for('admin_users') }}">MANAGE USERS</a>
+          </li>
+          {% endif %}
+          <li>
+            <a href="{{ url_for('admin_public_profile') }}">PUBLIC PROFILE</a>
           </li>
         </ul>
         

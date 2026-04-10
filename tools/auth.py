@@ -89,6 +89,9 @@ def require_login(request: Request):
             detail="Access Denied"
         )
 
+    # Attach global admin status directly into FastAPIs request context for templates
+    request.state.is_admin = is_superuser(email, provider_id)
+
     return user  # Authenticated and allowed
 
 

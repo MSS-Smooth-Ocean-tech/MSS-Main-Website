@@ -5,6 +5,28 @@
 {% block extra_css %}
 <link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600;700;800&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <link rel="stylesheet" href="{{ url_for('static', path='/css/blogs.css') }}">
+<style>
+  .pagination-btn {
+    padding: 8px 14px;
+    border: 1px solid var(--border);
+    background: #fff;
+    border-radius: 6px;
+    font-family: 'Sora', sans-serif;
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--navy);
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+  .pagination-btn.active {
+    background: var(--blue);
+    color: #fff;
+    border-color: var(--blue);
+  }
+  .pagination-btn:hover:not(.active) {
+    background: #f1f5f9;
+  }
+</style>
 {% endblock %}
 
 {% block content %}
@@ -13,28 +35,148 @@
 
 {% include "sections/resources/blogs/featured_article.html" %}
 
-{% include "sections/resources/blogs/filter.html" %}
-
 {% include "sections/resources/blogs/article_grid.html" %}
 
 {% endblock %}
 
 {% block extra_js %}
 <script>
-  function filterArticles(category, btn) {
-    // Update active button
-    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
-    btn.classList.add('active');
+  const ALL_BLOGS = {{ blogs | tojson | safe }};
+  const ITEMS_PER_PAGE = 8;
+  let currentPage = 1;
+  let currentSearchQuery = "";
 
-    // Filter cards
-    const cards = document.querySelectorAll('.article-card');
-    cards.forEach(card => {
-      if (category === 'all' || card.dataset.category === category) {
-        card.style.display = 'flex';
-      } else {
-        card.style.display = 'none';
-      }
+  const featuredContainer = document.getElementById('featured-article-container');
+  const featuredInner = document.getElementById('featured-inner');
+  const gridContainer = document.getElementById('articles-grid');
+  const paginationControls = document.getElementById('pagination-controls');
+  const noResultsMsg = document.getElementById('no-results-message');
+  
+  const searchInput = document.getElementById('blogSearchInput');
+  const searchBtn = document.getElementById('blogSearchBtn');
+
+  function renderBlogs() {
+    let filtered_blogs = ALL_BLOGS;
+    if (currentSearchQuery) {
+        const q = currentSearchQuery.toLowerCase();
+        filtered_blogs = ALL_BLOGS.filter(b => 
+            (b.title && b.title.toLowerCase().includes(q)) || 
+            (b.summary && b.summary.toLowerCase().includes(q)) ||
+            (b.body && b.body.toLowerCase().includes(q))
+        );
+    }
+
+    if (filtered_blogs.length > 0 && currentPage === 1 && !currentSearchQuery) {
+        const featured = filtered_blogs[0];
+        featuredInner.innerHTML = '<div class="featured-card">' +
+          '<div class="featured-img" style="background:#0f172a; display:flex; align-items:center; justify-content:center;">' +
+            (featured.cover_image ? '<img src="' + featured.cover_image + '" alt="Featured" style="width:100%; height:100%; object-fit:cover;" />' : '<div style="color:white; font-family:\'Sora\'; font-weight:700; font-size:2rem;">MSS</div>') +
+          '</div>' +
+          '<div class="featured-content">' +
+            '<div class="featured-tags">' +
+              '<span class="tag tag-blue">Featured Insight</span>' +
+              '<span class="read-time">' +
+                '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
+                (featured.added_on ? featured.added_on.substring(0, 10) : '') +
+              '</span>' +
+              '<span class="read-time" style="margin-left: 15px;">' +
+                '<i class="fas fa-user-edit" style="margin-right: 5px;"></i>' +
+                'By ' + (featured.author_name ? featured.author_name : (featured.added_by ? featured.added_by.split('@')[0].replace('.', ' ') : '')) +
+              '</span>' +
+            '</div>' +
+            '<h2>' + featured.title + '</h2>' +
+            '<p>' + featured.summary + '</p>' +
+            '<a href="/resources/' + featured.slug + '" class="btn-read">Read Full Article →</a>' +
+          '</div>' +
+        '</div>';
+        featuredContainer.style.display = 'block';
+    } else {
+        featuredContainer.style.display = 'none';
+        featuredInner.innerHTML = '';
+    }
+
+    let grid_blogs = filtered_blogs;
+    if (!currentSearchQuery && filtered_blogs.length > 0) {
+        grid_blogs = filtered_blogs.slice(1);
+    }
+    
+    const totalItems = grid_blogs.length;
+    let totalPages = Math.ceil(totalItems / ITEMS_PER_PAGE);
+    if (totalPages === 0) totalPages = 1;
+    
+    if (currentPage > totalPages) currentPage = totalPages;
+    
+    const startIndex = (currentPage - 1) * ITEMS_PER_PAGE;
+    const endIndex = startIndex + ITEMS_PER_PAGE;
+    const itemsToDisplay = grid_blogs.slice(startIndex, endIndex);
+
+    Array.from(gridContainer.children).forEach(child => {
+        if (child.id !== 'no-results-message') {
+            child.remove();
+        }
     });
+
+    if (filtered_blogs.length === 0) {
+        noResultsMsg.style.display = 'block';
+        paginationControls.innerHTML = '';
+        return;
+    } else {
+        noResultsMsg.style.display = 'none';
+    }
+
+    itemsToDisplay.forEach(blog => {
+        const card = document.createElement('div');
+        card.className = 'article-card';
+        card.innerHTML = '<div class="article-img" style="background:#0f172a; display:flex; align-items:center; justify-content:center;">' +
+              (blog.cover_image ? '<img src="' + blog.cover_image + '" alt="Cover" style="width:100%; height:100%; height:200px; object-fit:cover;" />' : '<div style="color:white; font-family:\'Sora\'; font-weight:700; font-size:1.5rem;">MSS</div>') +
+              '<span class="article-img-tag">Insight</span>' +
+            '</div>' +
+            '<div class="article-body">' +
+              '<div class="article-meta">' +
+                '<span>' + (blog.added_on ? blog.added_on.substring(0, 10) : '') + '</span>' +
+                '<div class="article-meta-dot"></div>' +
+                '<span style="text-transform: capitalize;">By ' + (blog.author_name ? blog.author_name : (blog.added_by ? blog.added_by.split('@')[0].replace('.', ' ') : '')) + '</span>' +
+              '</div>' +
+              '<div class="article-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">' + blog.title + '</div>' +
+              '<p class="article-desc" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + blog.summary + '</p>' +
+              '<a href="/resources/' + blog.slug + '" class="article-link">Read Article →</a>' +
+            '</div>';
+        gridContainer.appendChild(card);
+    });
+
+    paginationControls.innerHTML = '';
+    if (totalPages > 1) {
+        for (let i = 1; i <= totalPages; i++) {
+            const btn = document.createElement('button');
+            btn.className = 'pagination-btn ' + (i === currentPage ? 'active' : '');
+            btn.textContent = i;
+            btn.onclick = () => {
+                currentPage = i;
+                renderBlogs();
+                document.getElementById('articles-grid').scrollIntoView({behavior: 'smooth', block: 'start'});
+            };
+            paginationControls.appendChild(btn);
+        }
+    }
   }
+
+  if (searchInput) {
+      searchInput.addEventListener('input', (e) => {
+          currentSearchQuery = e.target.value;
+          currentPage = 1;
+          renderBlogs();
+      });
+  }
+  if (searchBtn) {
+      searchBtn.addEventListener('click', () => {
+          currentSearchQuery = searchInput.value;
+          currentPage = 1;
+          renderBlogs();
+      });
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+      renderBlogs();
+  });
 </script>
 {% endblock %}

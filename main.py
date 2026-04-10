@@ -21,6 +21,7 @@ templates.env.globals["certificate_images"] = get_certificate_images()
 from routes.services import router as services_router
 from routes.blog import router as blog_router
 from routes.standard import router as standard_router
+from routes.admin import admin_router
 
 @app.exception_handler(401)
 async def unauthorized_handler(request: Request, exc: HTTPException):
@@ -35,6 +36,7 @@ async def homepage(request: Request): # Renders templates/homepage.html
 app.include_router(standard_router)
 app.include_router(services_router)
 app.include_router(blog_router)
+app.include_router(admin_router)
 
 @app.get("/health", name="health")
 async def health(request: Request):

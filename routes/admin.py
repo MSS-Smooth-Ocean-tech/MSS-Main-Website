@@ -4,6 +4,10 @@ from pydantic import BaseModel
 from typing import List
 import json
 import os
+import urllib.parse
+import uuid
+from fastapi import UploadFile, File, Form
+from firebase_admin import storage
 
 from tools.auth import require_login, is_superuser, clear_auth_cache, create_session_cookie
 from tools.firebase_utils import get_firestore_data, update_firestore_data, firestore
@@ -87,7 +91,46 @@ class UserConfigUpdate(BaseModel):
 @admin_router.get("/admin", name="admin_users")
 def admin_panel(request: Request, user: dict = Depends(require_admin)):
     """Render the admin panel page"""
-    return templates.TemplateResponse("admin/admin.html", {"request": request})
+    return templates.TemplateResponse("admin/profile/admin.html", {"request": request})
+
+@admin_router.get("/admin/public_profile", name="admin_public_profile")
+def public_profile_page(request: Request, user: dict = Depends(require_login)):
+    email = user.get("email")
+    doc = get_firestore_data(f"USERS/maritimesupports.com/PUBLIC_PROFILE/{email}") or {}
+    return templates.TemplateResponse("admin/profile/public_profile.html", {"request": request, "profile": doc})
+
+@admin_router.post("/admin/public_profile", name="admin_public_profile_submit")
+def public_profile_submit(
+    request: Request,
+    name: str = Form(...),
+    pfp: UploadFile = File(None),
+    user: dict = Depends(require_login)
+):
+    email = user.get("email")
+    if not email:
+        raise HTTPException(status_code=400, detail="User email missing")
+        
+    doc = get_firestore_data(f"USERS/maritimesupports.com/PUBLIC_PROFILE/{email}") or {}
+    doc["name"] = name
+    
+    if pfp and pfp.filename:
+        bucket = storage.bucket("smooth-ocean.firebasestorage.app")
+        extension = pfp.filename.split('.')[-1]
+        unique_name = f"pfps/{uuid.uuid4().hex}.{extension}"
+        blob = bucket.blob(unique_name)
+        
+        new_token = uuid.uuid4().hex
+        blob.metadata = {"firebaseStorageDownloadTokens": new_token}
+        
+        pfp.file.seek(0)
+        blob.upload_from_file(pfp.file, content_type=pfp.content_type)
+        
+        image_url = f"https://firebasestorage.googleapis.com/v0/b/smooth-ocean.firebasestorage.app/o/{urllib.parse.quote(unique_name, safe='')}?alt=media&token={new_token}"
+        doc["pfp_url"] = image_url
+        
+    update_firestore_data(f"USERS/maritimesupports.com/PUBLIC_PROFILE/{email}", doc)
+    
+    return RedirectResponse(url="/admin/public_profile", status_code=302)
 
 @admin_router.get("/admin/users")
 def get_admin_users(user: dict = Depends(require_admin)):

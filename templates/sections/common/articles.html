@@ -1,5 +1,5 @@
 <style>
-    .latest-insights {
+.latest-insights {
   background: #fff;
   padding: 100px 32px;
 }
@@ -169,7 +169,7 @@
 .li-more-btn:hover { background: #225899; transform: translateY(-2px); }
 </style>
 <!-- ══ LATEST INSIGHTS ══ -->
-<section class="latest-insights">
+<section class="latest-insights" id="latest-insights-section" style="display: none;">
   <div class="li-inner">
     <div class="li-header">
       <div>
@@ -180,68 +180,8 @@
       <a href="{{ url_for('blogs') }}" class="li-view-all">More Posts →</a>
     </div>
 
-    <div class="li-grid">
-
-      <a href="{{ url_for('blog_detailed', slug='logistics-bpo-3pl') }}" class="li-card">
-        <div class="li-card-img">
-          <img src="https://images.unsplash.com/photo-1586528116311-ad8dd3c8310d?w=600&q=80" alt="Logistics BPO" />
-          <div class="li-card-date">
-            <div class="li-date-num">17</div>
-            <div class="li-date-month">March</div>
-          </div>
-          <div class="li-card-tag">BPO</div>
-        </div>
-        <div class="li-card-body">
-          <div class="li-card-author">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            MSS Editorial
-          </div>
-          <div class="li-card-title">How Maritime BPO Helps Shipping Companies Scale Operations Globally</div>
-          <div class="li-card-divider"></div>
-          <p class="li-card-desc">As companies expand across borders, global supply chains have become more complex. Third-party logistics providers now handle a large amoun...</p>
-        </div>
-      </a>
-
-      <a href="{{ url_for('blog_detailed', slug='cloud-data-integration') }}" class="li-card">
-        <div class="li-card-img">
-          <img src="https://images.unsplash.com/photo-1451187580459-43490279c0fa?w=600&q=80" alt="Cloud Integration" />
-          <div class="li-card-date">
-            <div class="li-date-num">27</div>
-            <div class="li-date-month">February</div>
-          </div>
-          <div class="li-card-tag">Technology</div>
-        </div>
-        <div class="li-card-body">
-          <div class="li-card-author">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            MSS Editorial
-          </div>
-          <div class="li-card-title">How Cloud And Real-Time Data Integration Makes Maritime BPO More Efficient</div>
-          <div class="li-card-divider"></div>
-          <p class="li-card-desc">Logistics depends on speed, accuracy, and being able to see what's going on. Still, a lot of logistics companies still have trouble with brok...</p>
-        </div>
-      </a>
-
-      <a href="{{ url_for('blog_detailed', slug='nlp-shipping-documents') }}" class="li-card">
-        <div class="li-card-img">
-          <img src="https://images.unsplash.com/photo-1558618666-fcd25c85cd64?w=600&q=80" alt="NLP Digitization" />
-          <div class="li-card-date">
-            <div class="li-date-num">27</div>
-            <div class="li-date-month">January</div>
-          </div>
-          <div class="li-card-tag">AI & Tech</div>
-        </div>
-        <div class="li-card-body">
-          <div class="li-card-author">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-            MSS Editorial
-          </div>
-          <div class="li-card-title">NLP-Powered Digitization of Shipping Documents in Maritime BPO</div>
-          <div class="li-card-divider"></div>
-          <p class="li-card-desc">Logistics BPO sits right at the intersection of the three Vs — vulnerability, velocity, and volume. Commercial invoices, Bills of Lading, packing li...</p>
-        </div>
-      </a>
-
+    <div class="li-grid" id="latest-insights-grid">
+      <!-- Injected via JS -->
     </div>
 
     <div class="li-more-wrap">
@@ -250,3 +190,59 @@
 
   </div>
 </section>
+
+<script>
+document.addEventListener('DOMContentLoaded', async () => {
+    // If blog object is available (on blog_detailed page), extract slug to exclude
+    let excludeSlug = "";
+    {% if blog and blog.slug %}
+        excludeSlug = "{{ blog.slug }}";
+    {% endif %}
+
+    const url = excludeSlug ? `/api/latest_blogs?exclude_slug=${excludeSlug}` : `/api/latest_blogs`;
+    
+    try {
+        const res = await fetch(url);
+        const data = await res.json();
+        
+        if (data.status === 'success' && data.data && data.data.length >= 3) {
+            const grid = document.getElementById('latest-insights-grid');
+            grid.innerHTML = '';
+            
+            data.data.forEach(item => {
+                const day = item.added_on ? item.added_on.substring(8, 10) : '';
+                const monthNum = item.added_on ? item.added_on.substring(5, 7) : '';
+                const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+                const month = monthNum ? months[parseInt(monthNum)-1] : '';
+                
+                const authorStr = item.author_name ? item.author_name : (item.added_by ? item.added_by.split('@')[0].replace('.', ' ') : '');
+                
+                grid.innerHTML += `
+                <a href="/resources/${item.slug}" class="li-card">
+                  <div class="li-card-img" style="background:#0f172a; display:flex; align-items:center; justify-content:center;">
+                    ${item.cover_image ? `<img src="${item.cover_image}" alt="Cover" />` : `<div style="color:white; font-family:'Sora'; font-weight:700; font-size:1.5rem;">MSS</div>`}
+                    <div class="li-card-date">
+                      <div class="li-date-num">${day}</div>
+                      <div class="li-date-month">${month}</div>
+                    </div>
+                    <div class="li-card-tag">Insight</div>
+                  </div>
+                  <div class="li-card-body">
+                    <div class="li-card-author" style="text-transform: capitalize;">
+                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+                      ${authorStr}
+                    </div>
+                    <div class="li-card-title">${item.title}</div>
+                    <div class="li-card-divider"></div>
+                    <p class="li-card-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.summary}</p>
+                  </div>
+                </a>`;
+            });
+            
+            document.getElementById('latest-insights-section').style.display = 'block';
+        }
+    } catch (e) {
+        console.error("Latest Blogs Error: " + e);
+    }
+});
+</script>
