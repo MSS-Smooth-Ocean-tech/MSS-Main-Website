@@ -1,0 +1,356 @@
+{% extends 'admin/navbar.html' %}
+{% block content %}
+
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+<!-- TinyMCE -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tinymce/6.8.2/tinymce.min.js"></script>
+
+<style>
+    :root {
+        --bg: #f9fafb;
+        --card-bg: #ffffff;
+        --text: #111827;
+        --text-muted: #6b7280;
+        --border: #e5e7eb;
+        --primary: #42ace0;
+        --primary-hover: #3a9bd1;
+        --danger: #ef4444;
+        --radius: 8px;
+    }
+
+    .blog-container {
+        font-family: 'Inter', sans-serif;
+        color: var(--text);
+        padding: 2rem;
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    /* Header */
+    .page-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        margin-bottom: 2rem;
+    }
+
+    .header-title h1 {
+        font-size: 1.875rem;
+        font-weight: 700;
+        margin-bottom: 0.5rem;
+    }
+
+    .header-title p {
+        color: var(--text-muted);
+        font-size: 0.875rem;
+    }
+
+    .header-actions {
+        display: flex;
+        gap: 1rem;
+    }
+
+    /* Buttons */
+    .btn {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.625rem 1.25rem;
+        border-radius: 6px;
+        font-weight: 500;
+        font-size: 0.875rem;
+        cursor: pointer;
+        transition: all 0.2s;
+        text-decoration: none;
+        border: 1px solid transparent;
+    }
+
+    .btn-secondary {
+        background: white;
+        border-color: var(--border);
+        color: var(--text);
+    }
+
+    .btn-secondary:hover {
+        background: #f3f4f6;
+    }
+
+    .btn-primary {
+        background: var(--primary);
+        color: white;
+    }
+
+    .btn-primary:hover {
+        background: var(--primary-hover);
+    }
+
+    /* Form Card */
+    .card {
+        background: var(--card-bg);
+        border-radius: var(--radius);
+        box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        border: 1px solid var(--border);
+        overflow: hidden;
+    }
+
+    .card-header {
+        padding: 1.25rem 1.5rem;
+        border-bottom: 1px solid var(--border);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+
+    .card-header h2 {
+        font-size: 1rem;
+        font-weight: 600;
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        margin: 0;
+    }
+    
+    .card-header .required-note {
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    .card-body {
+        padding: 1.5rem;
+    }
+
+    /* Form Groups */
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    .form-label {
+        display: block;
+        margin-bottom: 0.5rem;
+        font-weight: 500;
+        font-size: 0.875rem;
+        color: var(--text);
+    }
+
+    .form-input {
+        width: 100%;
+        padding: 0.75rem;
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        font-size: 0.875rem;
+        transition: border-color 0.2s;
+        font-family: inherit;
+        box-sizing: border-box;
+    }
+
+    .form-input:focus {
+        outline: none;
+        border-color: var(--primary);
+        box-shadow: 0 0 0 3px rgba(66, 172, 224, 0.1);
+    }
+
+    textarea.form-input {
+        resize: vertical;
+        min-height: 100px;
+    }
+
+    .help-text {
+        margin-top: 0.5rem;
+        font-size: 0.75rem;
+        color: var(--text-muted);
+    }
+
+    /* Editor Container */
+    .editor-container {
+        border: 1px solid var(--border);
+        border-radius: 6px;
+        overflow: hidden;
+        background: #fafafa;
+    }
+    
+    .editor-toolbar-placeholder {
+        border-bottom: 1px solid var(--border);
+        background: white;
+        min-height: 40px;
+    }
+
+    .editor-content-area {
+        min-height: 500px;
+        padding: 1rem;
+        background: white;
+        overflow-y: auto;
+    }
+
+    /* Messages */
+    .alert {
+        padding: 1rem;
+        border-radius: 6px;
+        margin-bottom: 1rem;
+        font-size: 0.875rem;
+    }
+    .alert-error { background: #fee2e2; color: #991b1b; }
+    .alert-success { background: #dcfce7; color: #166534; }
+    .form-group label .required {
+        color: var(--danger) !important;
+    }
+
+</style>
+
+<div class="blog-container">
+    {% if error %}
+        <div class="alert alert-error">{{ error }}</div>
+    {% endif %}
+    {% if success %}
+        <div class="alert alert-success">{{ success }}</div>
+    {% endif %}
+
+    <form method="POST" id="blogForm" action="{% if edit_mode %}{{ url_for('edit_blog_submit', slug=blog.slug) }}{% else %}{{ url_for('add_blog_submit') }}{% endif %}">
+        <div class="page-header">
+            <div class="header-title">
+                <h1>{% if edit_mode %}Edit Blog Post{% else %}Add New Blog Post{% endif %}</h1>
+                <p>{% if edit_mode %}Update the contents of an existing blog post.{% else %}Create a new rich-text blog post for the main website{% endif %}</p>
+            </div>
+            <div class="header-actions">
+                <a href="{{ url_for('manage_blogs_page') }}" class="btn btn-secondary">Cancel</a>
+                <button type="submit" class="btn btn-primary">
+                    <i class="fas fa-save" style="margin-right: 0.5rem;"></i> {% if edit_mode %}Update Blog{% else %}Publish Blog{% endif %}
+                </button>
+            </div>
+        </div>
+
+        <div class="card">
+            <div class="card-header">
+                <h2><i class="fas fa-file-alt" style="color: var(--primary);"></i> Blog Details</h2>
+                <span class="required-note">All fields are required</span>
+            </div>
+            
+            <div class="card-body">
+                <div class="form-group">
+                    <label class="form-label">Blog Title <span class="required">*</span></label>
+                    <input type="text" name="title" class="form-input" placeholder="e.g. Navigating the Future of Maritime Logistics" value="{{ blog.title if edit_mode else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Blog Summary / Excerpt <span class="required">*</span></label>
+                    <textarea name="summary" class="form-input" placeholder="A brief 1-2 sentence summary of the blog post..." required>{{ blog.summary if edit_mode else '' }}</textarea>
+                    <div class="help-text">This will be shown on the blog preview cards.</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">
+                        Blog Content <span class="required">*</span>
+                    </label>
+                    
+                    <div class="editor-container">
+                        <!-- Toolbar Target -->
+                        <div id="inlineCanvasToolbar" class="editor-toolbar-placeholder"></div>
+                        
+                        <!-- Editor Target -->
+                        <div id="inlineCanvasEditor" class="editor-content-area" style="outline: none;">
+                            {% if edit_mode %}
+                                {{ blog.body | safe }}
+                            {% else %}
+                                <p>Start writing your blog post here...</p>
+                            {% endif %}
+                        </div>
+                        
+                        <!-- Hidden Input to Store Content on Submit -->
+                        <input type="hidden" name="canvas_data" id="templateContent">
+                    </div>
+                </div>
+
+            </div>
+            
+            <div class="card-footer" style="padding: 1.5rem; border-top: 1px solid var(--border); display: flex; justify-content: flex-end; background: #f9fafb;">
+                 <button type="submit" class="btn btn-primary" style="width: auto;">
+                    {% if edit_mode %}Update Blog{% else %}Publish Blog{% endif %}
+                </button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    // Initialize TinyMCE
+    document.addEventListener('DOMContentLoaded', function() {
+        tinymce.init({
+            selector: '#inlineCanvasEditor',
+            inline: true,
+            fixed_toolbar_container: '#inlineCanvasToolbar',
+            menubar: false,
+            statusbar: false,
+            plugins: [
+                'advlist', 'autolink', 'lists', 'link',
+                'charmap', 'anchor', 'searchreplace',
+                'visualblocks', 'code', 'fullscreen',
+                'table', 'help', 'wordcount', 'autoresize'
+            ],
+            toolbar: [
+                'undo redo | blocks',
+                'bold italic underline strikethrough',
+                'forecolor backcolor | alignleft aligncenter alignright alignjustify',
+                'bullist numlist outdent indent',
+                'blockquote hr | table link',
+                'removeformat | code fullscreen'
+            ].join(' | '),
+            toolbar_mode: 'wrap',
+            autoresize_bottom_margin: 30,
+            content_style: `
+                body {
+                  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
+                  font-size: 15px;
+                  line-height: 1.65;
+                  padding: 12px;
+                }
+                h1 { font-size: 1.8em; }
+                h2 { font-size: 1.5em; }
+                h3 { font-size: 1.3em; }
+                blockquote {
+                  border-left: 4px solid #dfe1e6;
+                  padding-left: 12px;
+                  color: #6b778c;
+                }
+            `,
+            init_instance_callback: function (editor) {
+                editor.focus();
+            }
+        });
+
+        // Form Submission Handler
+        const form = document.getElementById('blogForm');
+        form.addEventListener('submit', function(e) {
+            e.preventDefault(); // Prevent default submission
+            
+            // Get content from TinyMCE
+            const editor = tinymce.get('inlineCanvasEditor');
+            const content = editor.getContent();
+            
+            // Get plain text without HTML tags for validation
+            const plainText = editor.getContent({format: 'text'}).trim();
+            
+            // Validate if content is empty
+            if (!plainText || plainText.length === 0) {
+                alert('Blog Content is required. Please add content.');
+                
+                const editorContainer = document.querySelector('.editor-container');
+                editorContainer.style.borderColor = '#42ace0';
+                editorContainer.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+                
+                editor.focus();
+                
+                setTimeout(() => {
+                    editorContainer.style.borderColor = '';
+                    editorContainer.style.boxShadow = '';
+                }, 3000);
+                
+                return false;
+            }
+            
+            // Set the hidden input and submit
+            document.getElementById('templateContent').value = content;
+            form.submit();
+        });
+    });
+</script>
+
+{% endblock %}

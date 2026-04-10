@@ -84,7 +84,7 @@ class UserConfigUpdate(BaseModel):
     admin: bool
 
 
-@admin_router.get("/admin")
+@admin_router.get("/admin", name="admin_users")
 def admin_panel(request: Request, user: dict = Depends(require_admin)):
     """Render the admin panel page"""
     return templates.TemplateResponse("admin/admin.html", {"request": request})
