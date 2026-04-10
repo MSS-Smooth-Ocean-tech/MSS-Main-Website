@@ -1,9 +1,9 @@
 services:
-  jcp-vision-app:
+  maritime-website-app:
     build:
       context: .
       dockerfile: Dockerfile
-    container_name: jcp_vision_app
+    container_name: maritime_website_app
     volumes:
       - .:/srv
     ports:
@@ -17,5 +17,5 @@ services:
 
 networks:
   default:
-    name: jcp_vision_net
+    name: maritime_website_net
     driver: bridge
