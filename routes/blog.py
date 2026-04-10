@@ -38,7 +38,7 @@ async def blogs(request: Request):
     doc = get_firestore_data("WEBSITE_CONTENTS/BLOGS")
     blogs_list = doc.get("data", []) if doc else []
     blogs_list = enrich_blogs_with_profiles(blogs_list)
-    return templates.TemplateResponse("pages/resources/blogs.html", {"request": request, "blogs": blogs_list})
+    return templates.TemplateResponse(request, "pages/resources/blogs.html", {"request": request, "blogs": blogs_list})
 
 @router.get("/resources/{slug}", name="blog_detailed")
 async def blog_detailed(request: Request, slug: str):
@@ -51,7 +51,7 @@ async def blog_detailed(request: Request, slug: str):
         
     current_blog = enrich_blogs_with_profiles([current_blog])[0]
         
-    return templates.TemplateResponse("pages/resources/blog_detailed.html", {"request": request, "blog": current_blog})
+    return templates.TemplateResponse(request, "pages/resources/blog_detailed.html", {"request": request, "blog": current_blog})
 
 ### Admin Blog Routes (REQUIRE LOGIN - TO BE IMPLEMENTED)
 ## Manage Blog Routes
@@ -60,7 +60,7 @@ async def manage_blogs_page(request: Request, user: dict = Depends(require_login
     doc = get_firestore_data("WEBSITE_CONTENTS/BLOGS")
     blogs_list = doc.get("data", []) if doc else []
     blogs_list = enrich_blogs_with_profiles(blogs_list)
-    return templates.TemplateResponse("admin/blog/manage.html", {"request": request, "blogs": blogs_list})
+    return templates.TemplateResponse(request, "admin/blog/manage.html", {"request": request, "blogs": blogs_list})
 
 @router.post("/api/reorder_blogs")
 async def reorder_blogs(request: Request, data: ReorderRequest, user: dict = Depends(require_login)):
@@ -100,7 +100,7 @@ async def latest_blogs(exclude_slug: str = None):
 ## Add/Edit Blog Routes
 @router.get("/add_blog", name="add_blog_page")
 async def add_blog_page(request: Request, user: dict = Depends(require_login)):
-    return templates.TemplateResponse("admin/blog/add.html", {"request": request})
+    return templates.TemplateResponse(request, "admin/blog/add.html", {"request": request})
 
 @router.post("/add_blog", name="add_blog_submit")
 async def add_blog_submit(
@@ -149,14 +149,14 @@ async def add_blog_submit(
 
         success = update_firestore_data("WEBSITE_CONTENTS/BLOGS", {"data": blogs_list})
         if not success:
-            return templates.TemplateResponse("admin/blog/add.html", {
+            return templates.TemplateResponse(request, "admin/blog/add.html", {
                 "request": request, 
                 "error": "Failed to save blog to database."
             })
 
         return RedirectResponse(url="/manage_blogs", status_code=302)
     except Exception as e:
-        return templates.TemplateResponse("admin/blog/add.html", {
+        return templates.TemplateResponse(request, "admin/blog/add.html", {
             "request": request, 
             "error": f"An error occurred: {str(e)}"
         })
@@ -171,7 +171,7 @@ async def edit_blog_page(request: Request, slug: str, user: dict = Depends(requi
     if not blog_to_edit:
         return RedirectResponse(url="/manage_blogs", status_code=302)
         
-    return templates.TemplateResponse("admin/blog/add.html", {"request": request, "blog": blog_to_edit, "edit_mode": True})
+    return templates.TemplateResponse(request, "admin/blog/add.html", {"request": request, "blog": blog_to_edit, "edit_mode": True})
 
 @router.post("/edit_blog/{slug}", name="edit_blog_submit")
 async def edit_blog_submit(
@@ -194,7 +194,7 @@ async def edit_blog_submit(
                 break
                 
         if idx == -1:
-            return templates.TemplateResponse("admin/blog/add.html", {
+            return templates.TemplateResponse(request, "admin/blog/add.html", {
                 "request": request, 
                 "error": "Blog not found.",
                 "edit_mode": True
@@ -222,7 +222,7 @@ async def edit_blog_submit(
         
         success = update_firestore_data("WEBSITE_CONTENTS/BLOGS", {"data": blogs_list})
         if not success:
-            return templates.TemplateResponse("admin/blog/add.html", {
+            return templates.TemplateResponse(request, "admin/blog/add.html", {
                 "request": request, 
                 "error": "Failed to update blog.",
                 "edit_mode": True,
@@ -231,7 +231,7 @@ async def edit_blog_submit(
 
         return RedirectResponse(url="/manage_blogs", status_code=302)
     except Exception as e:
-        return templates.TemplateResponse("admin/blog/add.html", {
+        return templates.TemplateResponse(request, "admin/blog/add.html", {
             "request": request, 
             "error": f"An error occurred: {str(e)}",
             "edit_mode": True

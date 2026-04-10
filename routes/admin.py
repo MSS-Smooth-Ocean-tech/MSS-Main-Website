@@ -30,7 +30,7 @@ def login_page(request: Request):
         pass  # Not logged in
         
     tenant_id = os.getenv("TENANT_ID", '3b890fcd-f838-4aab-83d7-25fb8bc60c9d')
-    return templates.TemplateResponse("admin/login.html", {"request": request, "tenant_id": tenant_id})
+    return templates.TemplateResponse(request, "admin/login.html", {"request": request, "tenant_id": tenant_id})
 
 @admin_router.post("/login")
 def login(data: LoginRequest):
@@ -91,13 +91,13 @@ class UserConfigUpdate(BaseModel):
 @admin_router.get("/admin", name="admin_users")
 def admin_panel(request: Request, user: dict = Depends(require_admin)):
     """Render the admin panel page"""
-    return templates.TemplateResponse("admin/profile/admin.html", {"request": request})
+    return templates.TemplateResponse(request, "admin/profile/admin.html", {"request": request})
 
 @admin_router.get("/admin/public_profile", name="admin_public_profile")
 def public_profile_page(request: Request, user: dict = Depends(require_login)):
     email = user.get("email")
     doc = get_firestore_data(f"USERS/maritimesupports.com/PUBLIC_PROFILE/{email}") or {}
-    return templates.TemplateResponse("admin/profile/public_profile.html", {"request": request, "profile": doc})
+    return templates.TemplateResponse(request, "admin/profile/public_profile.html", {"request": request, "profile": doc})
 
 @admin_router.post("/admin/public_profile", name="admin_public_profile_submit")
 def public_profile_submit(

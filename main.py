@@ -1,7 +1,7 @@
+from fastapi.responses import JSONResponse, RedirectResponse
+from fastapi import FastAPI, Request, Response, HTTPException
 from fastapi.templating import Jinja2Templates
 from fastapi.staticfiles import StaticFiles
-from fastapi import FastAPI, Request, HTTPException
-from fastapi.responses import JSONResponse, RedirectResponse
 
 # ── Create the FastAPI app ──
 app = FastAPI()
@@ -31,7 +31,7 @@ async def unauthorized_handler(request: Request, exc: HTTPException):
 
 @app.get("/", name="homepage")
 async def homepage(request: Request): # Renders templates/homepage.html
-    return templates.TemplateResponse("pages/homepage.html", {"request": request})
+    return templates.TemplateResponse(request, "pages/homepage.html", {"request": request})
 
 app.include_router(standard_router)
 app.include_router(services_router)
@@ -39,5 +39,13 @@ app.include_router(blog_router)
 app.include_router(admin_router)
 
 @app.get("/health", name="health")
-async def health(request: Request):
-    return {"status": "ok"}
+@app.get("/health/", name="health")
+async def health(response: Response):
+    # Check Firebase initialization status
+    try:
+        import firebase_admin
+        firebase_initialized = bool(firebase_admin._apps)
+    except Exception:
+        firebase_initialized = False
+    response.headers["Access-Control-Allow-Origin"] = "*"
+    return {"status": "healthy", "firebase_initialized": firebase_initialized}
