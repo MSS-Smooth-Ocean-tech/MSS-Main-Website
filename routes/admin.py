@@ -9,6 +9,7 @@ import uuid
 from fastapi import UploadFile, File, Form
 from firebase_admin import storage
 
+
 from tools.auth import require_login, is_superuser, clear_auth_cache, create_session_cookie
 from tools.firebase_utils import get_firestore_data, update_firestore_data, firestore
 from fastapi.templating import Jinja2Templates
@@ -25,7 +26,7 @@ class LoginRequest(BaseModel):
 def login_page(request: Request):
     try:
         require_login(request)
-        return RedirectResponse(url="/admin")
+        return RedirectResponse(url=str(request.url_for('manage_blogs_page')))
     except HTTPException:
         pass  # Not logged in
         

@@ -77,12 +77,6 @@
               <li>
                 <a href="{{ url_for('technology_services') }}">IT Consulting</a>
               </li>
-              <li>
-                <a href="#">Workflow Automation</a>
-              </li>
-              <li>
-                <a href="#">NVOCC Solutions</a>
-              </li>
             </ul>
           </div>
 
@@ -90,19 +84,10 @@
             <div class="f-col-title">Support</div>
             <ul>
               <li>
-                <a href="#">Case Studies</a>
+                <a href="{{ url_for('blogs') }}">Resources</a>
               </li>
               <li>
-                <a href="{{ url_for('blogs') }}">Insights</a>
-              </li>
-              <li>
-                <a href="#">Documentation</a>
-              </li>
-              <li>
-                <a href="#">Guides</a>
-              </li>
-              <li>
-                <a href="#">API Status</a>
+                <a href="{{ url_for('get_quote') }}">Contact Us</a>
               </li>
             </ul>
           </div>
@@ -114,16 +99,18 @@
                 <a href="{{ url_for('about') }}">About</a>
               </li>
               <li>
-                <a href="#">Security</a>
-              </li>
-              <li>
                 <a href="{{ url_for('partners') }}">Partners</a>
               </li>
               <li>
-                <a href="#">Jobs</a>
+                <a href="https://www.linkedin.com/company/maritime-support-solutions/jobs/">Careers</a>
               </li>
+              <!--
               <li>
-                <a href="#">Press</a>
+                <a href="https://www.linkedin.com/company/maritime-support-solutions/">Press</a>
+              </li>
+              -->
+              <li>
+                <a href="{{ url_for('manage_blogs_page') }}">Login</a>
               </li>
             </ul>
           </div>
@@ -133,9 +120,6 @@
             <ul>
               <li>
                 <a href="{{ url_for('privacy') }}">Privacy</a>
-              </li>
-              <li>
-                <a href="#">Terms</a>
               </li>
             </ul>
           </div>
