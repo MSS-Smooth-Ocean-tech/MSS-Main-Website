@@ -17,6 +17,8 @@ onAuthStateChanged(auth, function (user) {
         
         if(nameEl) nameEl.textContent = user.displayName || "Admin";
         if(emailEl) emailEl.textContent = user.email || "";
+        
+        window.loadAdminUsers();
     } else {
         window.location.href = "/login";
     }
@@ -33,7 +35,31 @@ window.loadAdminUsers = async function() {
         const providersGrid = document.getElementById("providersGrid");
         if (!providersGrid) return;
 
-        const providers = ["google.com", "microsoft.com"];
+        let isGoogleUser = false;
+        if (auth.currentUser && auth.currentUser.providerData) {
+            isGoogleUser = auth.currentUser.providerData.some(p => p.providerId === 'google.com');
+        }
+
+        const usersSection = document.getElementById("users-section");
+        
+        let providers = ["microsoft.com"];
+        if (isGoogleUser) {
+            providers = ["google.com", "microsoft.com"];
+            providersGrid.style.gridTemplateColumns = "repeat(auto-fit, minmax(300px, 1fr))";
+            providersGrid.style.justifyContent = "normal";
+            if (usersSection) {
+                usersSection.style.maxWidth = "none";
+                usersSection.style.margin = "0";
+            }
+        } else {
+            providersGrid.style.gridTemplateColumns = "1fr";
+            providersGrid.style.justifyContent = "normal";
+            if (usersSection) {
+                usersSection.style.maxWidth = "700px";
+                usersSection.style.margin = "0 auto";
+            }
+        }
+
         const providerNames = {
             "google.com": "Google",
             "microsoft.com": "Microsoft",
@@ -210,5 +236,5 @@ window.saveUserConfig = async function() {
 };
 
 document.addEventListener('DOMContentLoaded', () => {
-    window.loadAdminUsers();
+    // window.loadAdminUsers(); is handled in onAuthStateChanged
 });

@@ -28,7 +28,7 @@ async function handleAuthResult(user) {
         });
 
         if (response.ok) {
-            window.location.href = '/admin';
+            window.location.href = '/manage_blogs';
         } else {
             const errorText = await response.text();
             if (response.status === 403 || response.status === 401) {

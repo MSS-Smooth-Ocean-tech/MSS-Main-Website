@@ -81,7 +81,7 @@
       </div>
     </div>
     
-    <script type="module" src="/static/js/login.js"></script>
+    <script type="module" src="{{ url_for('static', path='/js/login.js') }}"></script>
     <script>
       let idleTime = 0;
       const idleInterval = setInterval(timerIncrement, 60000); 
