@@ -23,7 +23,7 @@
         font-family: 'Inter', sans-serif;
         color: var(--text);
         padding: 2rem;
-        max-width: 1000px;
+        max-width: 1300px;
         margin: 0 auto;
     }
 
@@ -204,7 +204,7 @@
         <div class="alert alert-success">{{ success }}</div>
     {% endif %}
 
-    <form method="POST" id="blogForm" action="{% if edit_mode %}{{ url_for('edit_blog_submit', slug=blog.slug) }}{% else %}{{ url_for('add_blog_submit') }}{% endif %}">
+    <form method="POST" id="blogForm" action="{% if edit_mode %}{{ url_for('edit_blog_submit', slug=blog.slug) }}{% else %}{{ url_for('add_blog_submit') }}{% endif %}" enctype="multipart/form-data">
         <div class="page-header">
             <div class="header-title">
                 <h1>{% if edit_mode %}Edit Blog Post{% else %}Add New Blog Post{% endif %}</h1>
@@ -228,6 +228,18 @@
                 <div class="form-group">
                     <label class="form-label">Blog Title <span class="required">*</span></label>
                     <input type="text" name="title" class="form-input" placeholder="e.g. Navigating the Future of Maritime Logistics" value="{{ blog.title if edit_mode else '' }}" required>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Cover Image <span class="required">*</span></label>
+                    <input type="file" name="cover_image" id="coverImageInput" class="form-input" accept="image/*" {% if not edit_mode or not blog.cover_image %}required{% endif %}>
+                    <div class="help-text">Recommended size: 1200x630. This is the main banner image for your post.</div>
+                    
+                    <!-- Real-time Preview -->
+                    <div id="previewContainer" style="margin-top: 15px; {% if not edit_mode or not blog.cover_image %}display: none;{% endif %}">
+                        <label class="form-label" style="font-size: 0.75rem; color: var(--text-muted);">Preview:</label>
+                        <img id="coverImagePreview" src="{% if edit_mode %}{{ blog.cover_image }}{% endif %}" alt="Cover Preview" style="max-width: 100%; max-height: 250px; border-radius: var(--radius); border: 1px solid var(--border); object-fit: cover;">
+                    </div>
                 </div>
 
                 <div class="form-group">
@@ -346,10 +358,29 @@
                 return false;
             }
             
-            // Set the hidden input and submit
             document.getElementById('templateContent').value = content;
             form.submit();
         });
+
+        // Image Preview Handler
+        const coverInput = document.getElementById('coverImageInput');
+        const previewContainer = document.getElementById('previewContainer');
+        const previewImage = document.getElementById('coverImagePreview');
+
+        if (coverInput) {
+            coverInput.addEventListener('change', function(e) {
+                const file = e.target.files[0];
+                if (file) {
+                    const objectUrl = URL.createObjectURL(file);
+                    previewImage.src = objectUrl;
+                    previewContainer.style.display = 'block';
+                } else {
+                    if (!previewImage.src || previewImage.src.includes('None')) {
+                        previewContainer.style.display = 'none';
+                    }
+                }
+            });
+        }
     });
 </script>
 
