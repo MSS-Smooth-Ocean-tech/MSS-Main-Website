@@ -21,23 +21,28 @@
           <div class="roi-range-ends"><span>1</span><span>50</span></div>
         </div>
 
-        <div class="roi-field">
-          <div class="roi-field-header">
-            <label class="roi-field-label">Monthly Shipment Volume</label>
-            <span class="roi-field-val" id="vol-val">2,500</span>
-          </div>
-          <input type="range" id="vol-slider" min="100" max="10000" step="100" value="2500" oninput="roiUpdate()">
-          <div class="roi-range-ends"><span>100</span><span>10k+</span></div>
-        </div>
 
         <div class="roi-field">
           <label class="roi-field-label" style="margin-bottom:8px; display:block;">Operational Region</label>
           <select id="region-select" class="roi-select" onchange="roiUpdate()">
-            <option value="1.0">North America</option>
-            <option value="0.85">Europe</option>
-            <option value="0.70">Asia Pacific</option>
-            <option value="0.75">Middle East</option>
-          </select>
+            <option value="North America">North America</option>
+            <option value="South America">South America</option>
+            <option value="Europe">Europe</option>
+            <option value="North Africa">North Africa</option>
+            <option value="West Africa">West Africa</option>
+            <option value="East africa">East africa</option>
+            <option value="Southern Africa">Southern Africa</option>
+            <option value="Middle East">Middle East</option>
+            <option value="Singapore">Singapore</option>
+            <option value="Malaysia">Malaysia</option>
+            <option value="Thailand">Thailand</option>
+            <option value="Vietnam">Vietnam</option>
+            <option value="Indonesia">Indonesia</option>
+            <option value="Philippines">Philippines</option>
+            <option value="Russia">Russia</option>
+            <option value="Asian Sub continent">Asian Sub continent</option>
+            <option value="Australia">Australia</option>
+          </select> 
         </div>
 
         <p class="roi-note">* Estimates based on average industry labor rates and overheads for 2025.</p>
@@ -49,7 +54,6 @@
           <div class="calc-bars">
 
             <div class="calc-bar-col">
-              <div class="bar-amount" id="inhouse-amt-hp">—</div>
               <div class="bar-track">
                 <div class="bar-fill bar-inhouse" id="bar-inhouse-hp"></div>
               </div>
@@ -59,7 +63,6 @@
             <div class="calc-bar-col">
               <div class="bar-top-badge">
                 <span class="savings-badge" id="savings-badge-hp" style="visibility:hidden;">0% Saved</span>
-                <div class="bar-amount blue" id="mss-amt-hp">—</div>
               </div>
               <div class="bar-track">
                 <div class="bar-fill bar-mss" id="bar-mss-hp"></div>
@@ -74,3 +77,7 @@
     </div>
   </div>
 </section>
+
+<script id="roi-data" type="application/json">
+  {{ costs | tojson }}
+</script>

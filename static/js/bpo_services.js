@@ -1,76 +1,40 @@
-/* ---------------------- ROI + RIGHT CHART ---------------------- */
+const scriptTag = document.getElementById('roi-data');
+const roiData = scriptTag ? JSON.parse(scriptTag.textContent) : {};
 
 function roiUpdate() {
   const team   = parseInt(document.getElementById('team-slider').value);
-  const vol    = parseInt(document.getElementById('vol-slider').value);
-  const region = parseFloat(document.getElementById('region-select').value);
+  const region = document.getElementById('region-select').value;
+  const data   = roiData[region];
 
-  // Update labels
+  if (!data) return;
+  
   document.getElementById('team-val').textContent = team + ' FTEs';
-  document.getElementById('vol-val').textContent  = vol.toLocaleString('en-US');
-
-  // Base calculation
-  const baseCost = team * 28000 * region;
-  const mssCost  = baseCost * 0.58;
-  const savings  = baseCost - mssCost;
-  const pct      = Math.round((savings / baseCost) * 100);
-
-  // Update ROI text (if used elsewhere)
-  const savingsEl = document.getElementById('roi-savings');
-  const pctEl     = document.getElementById('roi-pct');
-
-  if (savingsEl) {
-    savingsEl.textContent =
-      '$' + Math.round(savings).toLocaleString('en-US');
-  }
-
-  if (pctEl) {
-    pctEl.innerHTML = `<span>+ ${pct}%</span> reduction in costs`;
-  }
-
-  // 👉 Update RIGHT chart
-  updateRightChart(baseCost, mssCost);
+  const mssFTEs = 2 + (team - 1) * 0.75;
+  const inHouseCost = data.actual_cost * team * 12;
+  const mssCost     = data.updated_cost * mssFTEs * 12;
+  const pct = Math.round(((inHouseCost - mssCost) / inHouseCost) * 100);
+  updateRightChart(pct, mssCost, inHouseCost);
 }
 
-/* ---------------------- RIGHT CHART ---------------------- */
-
-function updateRightChart(baseCost, mssCost) {
-  const ihAmt  = document.getElementById('inhouse-amt-hp');
-  const mssAmt = document.getElementById('mss-amt-hp');
+function updateRightChart(pct, mssCost, inHouseCost) {
   const badge  = document.getElementById('savings-badge-hp');
   const barIH  = document.getElementById('bar-inhouse-hp');
   const barMSS = document.getElementById('bar-mss-hp');
 
-  if (!ihAmt || !mssAmt || !badge || !barIH || !barMSS) return;
+  if (!badge || !barIH || !barMSS) return;
 
-  const savingsRate = 1 - (mssCost / baseCost);
-  const pct = Math.round(savingsRate * 100);
-
-  // Update values
-  ihAmt.textContent  = shortFmt(baseCost);
-  mssAmt.textContent = shortFmt(mssCost);
-
-  badge.textContent      = pct + '% Saved';
+  badge.textContent = Math.max(0, pct) + '% Saved';
   badge.style.visibility = 'visible';
 
-  // Reset heights
   barIH.style.height  = '0px';
   barMSS.style.height = '0px';
 
-  // Animate
   setTimeout(() => {
-    barIH.style.height  = '200px';
-    barMSS.style.height = Math.round(200 * (mssCost / baseCost)) + 'px';
+    barIH.style.height  = '200px'; 
+    barMSS.style.height = Math.min(200, Math.round(200 * (mssCost / inHouseCost))) + 'px';
   }, 50);
 }
 
-/* ---------------------- HELPERS ---------------------- */
-
-function shortFmt(num) {
-  if (num >= 1e6) return '$' + (num / 1e6).toFixed(1) + 'M';
-  if (num >= 1e3) return '$' + (num / 1e3).toFixed(1) + 'K';
-  return '$' + Math.round(num);
-}
 
 /* ---------------------- INIT ---------------------- */
 
