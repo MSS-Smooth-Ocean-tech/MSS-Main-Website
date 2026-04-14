@@ -36,7 +36,7 @@
       <div class="qf-field">
         <label class="qf-label">Service Interest</label>
         <div class="qf-checkboxes">
-          <label><input type="checkbox"> Freight Forwarding</label>
+          <label><input type="checkbox"> <span> Freight Forwarding </span></label>
           <label><input type="checkbox"> Customs Clearance</label>
           <label><input type="checkbox"> Documentation</label>
           <label><input type="checkbox"> Warehousing</label>
@@ -196,36 +196,30 @@ Maharastra-400614, India
     tabs[1].classList.add('active');
   }
 }
+
 </script>
+<script>
+function switchForm(type) {
+  const bpo = document.getElementById('bpo-form');
+  const it  = document.getElementById('it-form');
 
-<style>
-  /* Tabs */
-.qf-tabs {
-  display: flex;
-  gap: 10px;
-  margin-bottom: 24px;
+  const tabs = document.querySelectorAll('.qf-tab');
+
+  tabs.forEach(tab => tab.classList.remove('active'));
+
+  if (type === 'bpo') {
+    bpo.classList.add('active');
+    it.classList.remove('active');
+    tabs[0].classList.add('active');
+  } else {
+    it.classList.add('active');
+    bpo.classList.remove('active');
+    tabs[1].classList.add('active');
+  }
 }
 
-.qf-tab {
-  flex: 1;
-  padding: 10px;
-  border-radius: 8px;
-  border: 1px solid #e5e7eb;
-  background: #f8fafc;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.25s ease;
-}
-
-/* Active tab */
-.qf-tab.active {
-  background: #2563eb;
-  color: #fff;
-  border-color: #2563eb;
-}
-
-/* Hover */
-.qf-tab:hover {
-  transform: translateY(-1px);
-}
-</style>
+/* 🔥 INITIAL STATE */
+document.addEventListener("DOMContentLoaded", () => {
+  document.getElementById('bpo-form').classList.add('active');
+});
+</script>

@@ -228,6 +228,74 @@
   }
   .qf-security-item svg { width: 13px; height: 13px; stroke: #94a3b8; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
+  /* 🔥 Tabs (Modern Toggle Style) */
+.qf-tabs {
+  display: flex;
+  background: #f1f5f9;
+  border-radius: 12px;
+  padding: 4px;
+  margin-bottom: 24px;
+}
+
+.qf-tab {
+  flex: 1;
+  padding: 10px;
+  border: none;
+  background: transparent;
+  font-family: 'Sora', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: #64748b;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: all 0.35s ease;
+}
+
+.qf-tab.active {
+  background: #fff;
+  color: var(--blue);
+  box-shadow: 0 4px 14px rgba(0,0,0,0.08);
+}
+
+/* 🔥 Smooth Form Transition */
+.qf-dynamic {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: all 0.35s ease;
+  height: 0;
+  overflow: hidden;
+}
+
+.qf-dynamic.active {
+  opacity: 1;
+  transform: translateY(0);
+  pointer-events: auto;
+  height: auto;
+}
+
+/* 🔥 Better checkbox UI */
+.qf-checkboxes label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  padding: 10px 12px;
+  border: 1.5px solid var(--border);
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.25s ease;
+}
+
+.qf-checkboxes label:hover {
+  border-color: var(--blue);
+  background: rgba(37,99,235,0.04);
+}
+
+.qf-checkboxes input:checked + span {
+  color: var(--blue);
+  font-weight: 600;
+}
+
   /* ── BODY LAYOUT ── */
   .quote-body {
   max-width: 1200px;
