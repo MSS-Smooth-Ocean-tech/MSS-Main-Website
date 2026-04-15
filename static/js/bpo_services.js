@@ -1,6 +1,9 @@
 const scriptTag = document.getElementById('roi-data');
 const roiData = scriptTag ? JSON.parse(scriptTag.textContent) : {};
 
+
+
+
 function roiUpdate() {
   const team   = parseInt(document.getElementById('team-slider').value);
   const region = document.getElementById('region-select').value;
@@ -20,11 +23,17 @@ function updateRightChart(pct, mssCost, inHouseCost) {
   const badge  = document.getElementById('savings-badge-hp');
   const barIH  = document.getElementById('bar-inhouse-hp');
   const barMSS = document.getElementById('bar-mss-hp');
+  const arcFill = document.getElementById('arc-fill');
+  const arcPct  = document.getElementById('arc-pct');
+  if (arcFill && arcPct) {
+    const totalDash = 251; // full arc length
+    const displayPct = Math.max(0, Math.min(100, pct));
+    arcPct.textContent = displayPct + '%';
+    arcFill.style.strokeDashoffset = totalDash - (totalDash * displayPct / 100);
+  }
 
-  if (!badge || !barIH || !barMSS) return;
 
-  badge.textContent = Math.max(0, pct) + '% Saved';
-  badge.style.visibility = 'visible';
+if (!barIH || !barMSS) return;
 
   barIH.style.height  = '0px';
   barMSS.style.height = '0px';

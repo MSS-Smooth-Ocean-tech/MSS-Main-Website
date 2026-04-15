@@ -51,8 +51,21 @@
        <!-- RIGHT -->
       <div class="calc-right">
         <div class="calc-chart-wrap">
+          <div class="arc-wrap">
+            <svg viewBox="0 0 200 110" width="400" height="250">
+              <path d="M 20,100 A 80,80 0 0,1 180,100"
+                fill="none" stroke="#e2e8f0" stroke-width="9" stroke-linecap="round"/>
+              <path id="arc-fill" d="M 20,100 A 80,80 0 0,1 180,100"
+                fill="none" stroke="#2563eb" stroke-width="9" stroke-linecap="round"
+                stroke-dasharray="251" stroke-dashoffset="251"
+                style="transition: stroke-dashoffset 0.7s cubic-bezier(.34,1.1,.64,1)"/>
+            </svg>
+            <div class="arc-center">
+              <span class="arc-pct" id="arc-pct">0%</span>
+              <span class="arc-label">Saved!</span>
+            </div>
+          </div>
           <div class="calc-bars">
-
             <div class="calc-bar-col">
               <div class="bar-track">
                 <div class="bar-fill bar-inhouse" id="bar-inhouse-hp"></div>
@@ -61,9 +74,6 @@
             </div>
 
             <div class="calc-bar-col">
-              <div class="bar-top-badge">
-                <span class="savings-badge" id="savings-badge-hp" style="visibility:hidden;">0% Saved</span>
-              </div>
               <div class="bar-track">
                 <div class="bar-fill bar-mss" id="bar-mss-hp"></div>
               </div>
