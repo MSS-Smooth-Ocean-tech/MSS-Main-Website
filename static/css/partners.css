@@ -117,8 +117,8 @@
     font-family: 'Sora', sans-serif;
     font-size: 0.9rem;
     font-weight: 700;
-    padding: 13px 26px;
-    border-radius: 10px;
+    padding: 15px 30px;
+    border-radius: 7px;
     border: none;
     cursor: pointer;
     transition: background 0.2s, transform 0.2s;
@@ -181,6 +181,7 @@
     color: var(--blue);
     display: block;
     margin-bottom: 12px;
+    text-align: center;
   }
   .sec-title {
     font-family: 'Sora', sans-serif;
@@ -189,12 +190,14 @@
     color: var(--navy);
     line-height: 1.2;
     margin-bottom: 12px;
+    text-align: center;
   }
   .sec-sub {
     font-size: 1rem;
     color: var(--muted);
     line-height: 1.7;
     margin-bottom: 56px;
+    text-align: center;
   }
 
   /* ── PARTNERSHIP PATH ── */
@@ -533,9 +536,6 @@
     content: '';
     position: absolute;
     inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.04) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.04) 1px, transparent 1px);
     background-size: 40px 40px;
   }
   .partner-cta-inner { position: relative; max-width: 600px; margin: 0 auto; }

@@ -1,0 +1,127 @@
+<!-- ══ PARTNERSHIP MODELS ══ -->
+<section class="models-section">
+  <div class="section-wrap">
+    <h2 class="sec-title">Flexible Partnership Models</h2>
+    <p class="sec-sub">Choose the model that best fits your business and start delivering value to your clients.</p>
+
+    <div class="model-grid">
+
+      <div class="model-card">
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M17 21v-2a4 4 0 0 0-4-4H5a4 4 0 0 0-4 4v2"/>
+            <circle cx="9" cy="7" r="4"/>
+            <path d="M23 21v-2a4 4 0 0 0-3-3.87"/>
+            <path d="M16 3.13a4 4 0 0 1 0 7.75"/>
+          </svg>
+        </div>
+        <div class="model-name">Referral Partner</div>
+        <p class="model-desc">Earn competitive commission on every successful referral you bring to Maritime Support Solutions.</p>
+      </div>
+
+      <div class="model-card">
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <path d="M8 21h8"/>
+            <path d="M12 17v4"/>
+          </svg>
+        </div>
+        <div class="model-name">Reseller Partner</div>
+        <p class="model-desc">White-label MSS services and offer them as your own, expanding your portfolio without extra overhead.</p>
+      </div>
+
+      <div class="model-card">
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <polyline points="16 18 22 12 16 6"/>
+            <polyline points="8 6 2 12 8 18"/>
+          </svg>
+        </div>
+        <div class="model-name">Technology Partner</div>
+        <p class="model-desc">Integrate our OCR and API solutions directly into your platform for enhanced document processing capabilities.</p>
+      </div>
+
+      <div class="model-card">
+        <div class="model-icon">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+            <path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/>
+          </svg>
+        </div>
+        <div class="model-name">Operational Partner</div>
+        <p class="model-desc">Outsource your back-office processes to MSS and focus on your core business while we handle the rest.</p>
+      </div>
+
+    </div>
+  </div>
+</section>
+<style>
+ /* ── PARTNERSHIP MODELS ── */
+.models-section {
+  background: var(--bg);
+}
+
+.model-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 28px;
+}
+
+@media (max-width: 640px) {
+  .model-grid { grid-template-columns: 1fr; }
+}
+
+.model-card {
+  background: #fff;
+  border: 1.5px solid var(--border);
+  border-radius: var(--radius);
+  padding: 44px 36px;
+  display: flex;
+  flex-direction: column;
+  transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+}
+.model-card:hover {
+  border-color: var(--blue);
+  box-shadow: 0 8px 32px rgba(37,99,235,0.08);
+  transform: translateY(-4px);
+}
+
+.model-icon {
+  width: 60px;
+  height: 60px;
+  background: rgba(37,99,235,0.08);
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 28px;
+  transition: background 0.3s ease;
+}
+.model-icon svg {
+  width: 30px;
+  height: 30px;
+  stroke: var(--blue);
+  fill: none;
+  stroke-width: 1.8;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+  transition: stroke 0.3s ease, transform 0.5s ease;
+}
+.model-card:hover .model-icon { background: var(--blue); }
+.model-card:hover .model-icon svg { stroke: #fff; transform: scale(1.1); }
+
+.model-name {
+  font-family: 'Sora', sans-serif;
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--navy);
+  margin-bottom: 12px;
+}
+
+.model-desc {
+  font-size: 1rem;
+  color: var(--muted);
+  line-height: 1.7;
+  margin: 0;
+}
+</style>
