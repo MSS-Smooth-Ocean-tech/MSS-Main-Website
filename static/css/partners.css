@@ -14,6 +14,49 @@
   a { text-decoration: none; color: inherit; }
   ul { list-style: none; }
 
+  .section-wrap-headings{
+    text-align: center;
+
+  }
+  .why-partner-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+  @media (max-width: 900px) {
+    .why-partner-grid {
+      grid-template-columns: 1fr 1fr;
+    }
+  }
+  
+  @media (max-width: 560px) {
+    .why-partner-grid {
+      grid-template-columns: 1fr;
+    }
+  }
+  
+  .why-partner-card {
+    background: #fff;
+    border: 1.5px solid var(--border);
+    border-radius: 20px;
+    padding: 36px 28px;
+    display: flex;
+    flex-direction: column;
+    box-shadow: 0 2px 16px rgba(0,0,0,0.06);
+    transition: border-color 0.2s, box-shadow 0.2s, transform 0.2s;
+  }
+  .why-partner-card p{
+    width: 70%;
+  }
+  .why-partner-card:hover {
+    border-color: var(--blue);
+    box-shadow: 0 12px 40px rgba(37,99,235,0.1);
+    transform: translateY(-3px);
+  }
+
+
+
+
   /* ── HERO ── */
   .partner-hero {
     position: relative;
