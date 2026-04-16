@@ -1,31 +1,206 @@
 <section class="ecosystem-section">
   <div class="section-wrap" style="text-align:center;">
-    <span class="eyebrow" style="display:block; text-align:center;">IT Division of MSS</span>
-    <img src="{{ url_for('static', path='/img/sot_logo.png') }}" alt="logo" style="width:200px; margin:16px auto;">
+    <h2 class="sec-title">IT Division of MSS</h2>
     <p class="sec-sub" style="max-width:520px; margin:0 auto 56px;">We design solutions that streamline processes, reduce manual effort, and integrate seamlessly with existing systems—enabling smarter, faster, and more connected logistics operations.</p>
-
-    <div class="orbit-scene">
-      <div class="o-ring o-ring-1"></div>
-      <div class="o-ring o-ring-2"></div>
-      <div class="o-center">Our Ecosystem</div>
-
-      <!-- Inner -->
-      <div class="o-pill-wrap" data-radius="170" data-speed="0.4" data-angle="0">
-        <div class="o-pill">OCR</div>
-      </div>
-      <div class="o-pill-wrap" data-radius="170" data-speed="0.4" data-angle="180">
-        <div class="o-pill">API / EDI</div>
+    <div class="ecosystem-wrap">
+      <!-- LEFT SIDE (RADIAL) -->
+      <div class="eco-circle">
+        <div class="eco-center">
+          <img src="{{ url_for('static', path='/img/sot_logo.png') }}" />
+        </div>
       </div>
 
-      <!-- Outer -->
-      <div class="o-pill-wrap" data-radius="280" data-speed="-0.25" data-angle="90">
-        <div class="o-pill">CRM / TMS</div>
-      </div>
-      <div class="o-pill-wrap" data-radius="280" data-speed="-0.25" data-angle="270">
-        <div class="o-pill">Integrations</div>
+      <!-- RIGHT SIDE -->
+      <div class="eco-list">
+        <div class="eco-item">
+          <div class="eco-icon">
+            <svg viewBox="0 0 24 24">
+              <rect x="3" y="3" width="7" height="7"/>
+              <rect x="14" y="3" width="7" height="7"/>
+              <rect x="14" y="14" width="7" height="7"/>
+              <rect x="3" y="14" width="7" height="7"/>
+            </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">CRM / TMS</div>
+            <div class="eco-desc">Manage operations and logistics workflows efficiently.</div>
+          </div>
+        </div>
+
+        <div class="eco-item">
+          <div class="eco-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z"/>
+            <path d="M8 9h8M8 13h6"/>
+          </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">OCR</div>
+            <div class="eco-desc">Extract and process data from documents automatically.</div>
+          </div>
+        </div>
+
+        <div class="eco-item">
+          <div class="eco-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="5" cy="12" r="2"/>
+            <circle cx="19" cy="6" r="2"/>
+            <circle cx="19" cy="18" r="2"/>
+            <line x1="7" y1="12" x2="17" y2="6"/>
+            <line x1="7" y1="12" x2="17" y2="18"/>
+          </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">API / EDI</div>
+            <div class="eco-desc">Enable seamless system communication and integration.</div>
+          </div>
+        </div>
+
+        <div class="eco-item">
+          <div class="eco-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M4 4h16v16H4z"/>
+            <path d="M8 9h8M8 13h6"/>
+          </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">OCR</div>
+            <div class="eco-desc">Extract and process data from documents automatically.</div>
+          </div>
+        </div>
+
+        <div class="eco-item">
+          <div class="eco-icon">
+          <svg viewBox="0 0 24 24">
+            <circle cx="5" cy="12" r="2"/>
+            <circle cx="19" cy="6" r="2"/>
+            <circle cx="19" cy="18" r="2"/>
+            <line x1="7" y1="12" x2="17" y2="6"/>
+            <line x1="7" y1="12" x2="17" y2="18"/>
+          </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">API / EDI</div>
+            <div class="eco-desc">Enable seamless system communication and integration.</div>
+          </div>
+        </div>
+
+        <div class="eco-item">
+          <div class="eco-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M9 3h6v4a2 2 0 1 1 0 4v4h-6v-4a2 2 0 1 0 0-4z"/>
+          </svg>
+          </div>
+          <div class="eco-content">
+            <div class="eco-title">Integrations</div>
+            <div class="eco-desc">Connect with external platforms and tools easily.</div>
+          </div>
+        </div>
       </div>
     </div>
   </div>
 </section>
+<script>
+(function() {
+  const items = Array.from(document.querySelectorAll('.eco-item'));
+  const container = document.querySelector('.eco-list');
+  const circle = document.querySelector('.eco-circle');
 
+  if (!items.length) return;
 
+  const W = container.offsetWidth;
+  const H = container.offsetHeight;
+
+  // 🔥 CENTER FIX (slight upward correction)
+  const cx = W / 2;
+  const cy = H / 2 - 40;
+
+  // 🔥 DISTANCE CONTROL (closer to circle)
+  const radiusX = 200;
+
+  // 🔥 GAP CONTROL (more vertical spacing)
+  const radiusY = 240;
+
+  const total = items.length;
+
+  let rightItems = [];
+  let leftItems  = [];
+
+  /* ============================
+     SPLIT LOGIC (FINAL)
+  ============================ */
+
+  if (total <= 4) {
+    // all on right
+    rightItems = items;
+    leftItems = [];
+  } else {
+    // balanced split
+    const rightCount = Math.ceil(total / 2);
+    rightItems = items.slice(0, rightCount);
+    leftItems  = items.slice(rightCount);
+  }
+
+  const rightCount = rightItems.length;
+  const leftCount  = leftItems.length;
+
+  
+
+  /* ============================
+     CIRCLE POSITION
+  ============================ */
+/* ============================
+   CIRCLE POSITION (FINAL)
+============================ */
+
+if (total <= 4) {
+  // small set → bring circle closer to pills
+  circle.style.left = "42%";
+} else {
+  // 5+ items → always center (same as 6 case)
+  circle.style.left = "50%";
+}
+
+circle.style.top = "50%";
+circle.style.transform = "translate(-50%, -50%)";
+
+  /* ============================
+     RIGHT SIDE
+  ============================ */
+  rightItems.forEach((el, i) => {
+    const spread = rightCount === 4 ? 180 : 140;
+    const start = -spread / 2;
+
+    const angle = (start + (spread / (rightCount - 1 || 1)) * i) * Math.PI / 180;
+
+    const x = cx + radiusX * Math.cos(angle);
+    const y = cy + radiusY * Math.sin(angle);
+
+    el.style.left = x + 'px';
+    el.style.top  = y + 'px';
+
+    el.classList.add('right');
+    el.classList.remove('left');
+  });
+
+  /* ============================
+     LEFT SIDE
+  ============================ */
+  leftItems.forEach((el, i) => {
+    const spread = leftCount === 4 ? 180 : 140;
+    const start = -spread / 2;
+
+    const angle = (start + (spread / (leftCount - 1 || 1)) * i) * Math.PI / 180;
+
+    const x = cx - radiusX * Math.cos(angle);
+    const y = cy + radiusY * Math.sin(angle);
+
+    el.style.left = (x - 320) + 'px';
+    el.style.top  = y + 'px';
+
+    el.classList.add('left');
+    el.classList.remove('right');
+  });
+
+})();
+</script>

@@ -153,13 +153,15 @@
   .share-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* Hero image */
-  .article-hero-img {
-    width: 100%;
-    height: 380px;
-    object-fit: cover;
-    border-radius: 16px;
-    margin-bottom: 12px;
-  }
+.article-hero-img {
+  width: 50%;
+  height: 300px;
+  object-fit: cover;
+  object-position: center top;  /* add this */
+  border-radius: 16px;
+  display: block;               /* add this */
+  margin: 0 auto 24px;             /* center and add bottom margin */
+}
   .article-img-caption {
     font-size: 0.78rem;
     color: var(--muted);
@@ -182,6 +184,74 @@
     line-height: 1.85;
     margin-bottom: 18px;
   }
+  /* ── NORMALIZE CMS-INJECTED INLINE STYLES ── */
+.article-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #374151;
+}
+.article-body * {
+  font-family: 'DM Sans', sans-serif !important;
+  line-height: 1.85 !important;
+  text-align: left !important;
+  margin-top: 0 !important;        /* add this */
+  padding-top: 0 !important;       /* add this */
+  padding-bottom: 0 !important;    /* add this */
+}
+
+.article-body p {
+  font-size: 0.98rem !important;
+  margin-bottom: 1.4em !important;  /* this is the single source of truth for spacing */
+}
+
+.article-body h2 {
+  font-size: 1.4rem !important;
+  line-height: 1.3 !important;
+  margin-bottom: 14px !important;
+  margin-top: 40px !important;      /* override the * reset for headings */
+}
+
+.article-body h3 {
+  font-size: 1.15rem !important;
+  line-height: 1.35 !important;
+  margin-bottom: 10px !important;
+  margin-top: 28px !important;
+}
+
+.article-body li {
+  font-size: 0.98rem !important;
+  margin-bottom: 6px !important;
+}
+
+/* Strip editor span/div wrappers that carry rogue styles */
+.article-body span,
+.article-body div {
+  font-size: inherit !important;
+  color: inherit !important;
+  background: none !important;
+}
+
+/* Images inside body */
+.article-body img {
+  max-width: 100%;
+  height: auto !important;
+  display: block;
+  border-radius: var(--radius);
+  margin: 24px 0;
+}
+
+/* Lists */
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+  list-style: revert;   /* restore bullets/numbers stripped by your * reset */
+}
+
+.article-body li {
+  font-size: 0.98rem !important;
+  margin-bottom: 6px;
+}
 
   /* Benefit list */
   .benefit-list {
