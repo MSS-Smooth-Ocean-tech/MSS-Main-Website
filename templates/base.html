@@ -177,6 +177,23 @@
         }
       })
     </script>
+    <script>
+      (function() {
+        const links = document.querySelectorAll('.mss-nav-links a');
+        const currentPath = window.location.pathname;
+
+        links.forEach(link => {
+          const linkPath = new URL(link.href).pathname;
+
+          if (
+            currentPath === linkPath || 
+            (linkPath !== "/" && currentPath.startsWith(linkPath))
+          ) {
+            link.classList.add('active');
+          }
+        });
+      })();
+      </script>
 
     {% block extra_js %}
     {% endblock %}
