@@ -2,202 +2,336 @@
 <div class="quote-body">
   <!-- ── TOP: Request a Quote form full width ── -->
   <div class="quote-form-wrap">
-  <div class="quote-form-card">
+    <div class="quote-form-card">
+      <!-- TITLE -->
+      <div class="qf-title">Request a Quote</div>
 
-    <!-- TITLE -->
-    <div class="qf-title">Request a Quote</div>
-
-    <!-- TOGGLE -->
-    <div class="qf-tabs">
-      <button class="qf-tab active" onclick="switchForm('bpo')">BPO Services</button>
-      <button class="qf-tab" onclick="switchForm('it')">IT Services</button>
-    </div>
-
-    <!-- COMMON FIELDS -->
-    <div class="qf-row">
-      <div>
-        <label class="qf-label">Full Name</label>
-        <input type="text" class="qf-input" placeholder="John Doe" />
-      </div>
-      <div>
-        <label class="qf-label">Work Email</label>
-        <input type="email" class="qf-input" placeholder="john@company.com" />
-      </div>
-    </div>
-
-    <!-- BPO FORM -->
-    <div id="bpo-form" class="qf-dynamic">
-
-      <div class="qf-field">
-        <label class="qf-label">Company Name</label>
-        <input type="text" class="qf-input" placeholder="Logistics Company" />
+      <!-- TOGGLE -->
+      <div class="qf-tabs">
+        <button class="qf-tab active" onclick="switchForm('bpo')">BPO Services</button>
+        <button class="qf-tab" onclick="switchForm('it')">IT Services</button>
       </div>
 
-      <div class="qf-field">
-        <label class="qf-label">Service Interest</label>
-        <div class="qf-checkboxes">
-          <label><input type="checkbox"> <span> Freight Forwarding </span></label>
-          <label><input type="checkbox"> Customs Clearance</label>
-          <label><input type="checkbox"> Documentation</label>
-          <label><input type="checkbox"> Warehousing</label>
+      <!-- COMMON FIELDS -->
+
+      <!-- BPO FORM -->
+      <div id="bpo-form" class="qf-dynamic">
+        <div class="qf-row">
+          <div>
+            <label class="qf-label">Full Name</label>
+            <input type="text" class="qf-input" placeholder="John Doe" />
+          </div>
+          <div>
+            <label class="qf-label">Work Email</label>
+            <input type="email" class="qf-input" placeholder="john@company.com" />
+          </div>
+        </div>
+        <div class="qf-field">
+          <label class="qf-label">Company Name</label>
+          <input type="text" class="qf-input" placeholder="Logistics Company" />
+        </div>
+
+        <div class="qf-field">
+          <label class="qf-label">Service Interest</label>
+
+          <!-- Segment tabs -->
+          <div class="si-tabs">
+            <button type="button" class="si-tab active" onclick="switchSegment('nvocc')">NVOCC</button>
+            <button type="button" class="si-tab" onclick="switchSegment('liner')">Liner Agency</button>
+            <button type="button" class="si-tab" onclick="switchSegment('fwd')">Forwarders</button>
+            <button type="button" class="si-tab" onclick="switchSegment('other')">Other</button>
+          </div>
+
+          <!-- NVOCC -->
+          <div class="si-panel active" id="si-nvocc">
+            <div class="si-category-label">Select Category</div>
+            <div class="si-categories">
+              <button type="button" class="si-cat-btn active" onclick="switchCat(this, 'nvocc-cat-inv')">Inventory Management</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-expc')">Export Coordination</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-expd')">Export Documentation</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-impc')">Import Coordination</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-impd')">Import Documentation</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-trans')">Transshipment Support</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-term')">Terminal Accounting</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-slot')">Slot Invoice Accounting</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'nvocc-cat-soa')">Principal SOA</button>
+            </div>
+
+            <div class="si-types-wrap">
+              <div class="si-category-label">Select Service Type(s)</div>
+
+              <div class="si-types active" id="nvocc-cat-inv">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Inventory Updates" />Inventory Updates</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Load/Discharge Updates" />Load/Discharge Updates</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Inventory Reconciliation" />Inventory Reconciliation</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Inventory Reporting" />Inventory Reporting</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-expc">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Export Manifest Filing" />Export Manifest Filing</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - DG/OOG Approvals" />DG/OOG Approvals</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-expd">
+                <label><input type="checkbox" name="service[]" value="NVOCC - BL Draft Follow-Up" />BL Draft Follow-Up</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Bill of Lading Preparation" />Bill of Lading Preparation</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - BL Approval" />BL Approval</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Pre-alert Management" />Pre-alert Management</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - TDR Reporting" />TDR Reporting</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Customer Invoicing" />Customer Invoicing</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-impc">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Pre-alert Receipt" />Pre-alert Receipt</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Import Manifest Filing" />Import Manifest Filing</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-impd">
+                <label><input type="checkbox" name="service[]" value="NVOCC - ERP Updates & Arrival Notice" />ERP Updates & Arrival Notice</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Arrival Notice Dispatch" />Arrival Notice Dispatch</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Customer Invoicing (Import)" />Customer Invoicing</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-trans">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Transshipment Pre-alert Management" />Pre-alert Management</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Transshipment ERP Updates" />ERP Updates</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Transshipment TDR Reporting" />TDR Reporting</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-term">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Invoice Processing" />Invoice Processing</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Terminal ERP Updates" />ERP Updates</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Exception Coordination" />Exception Coordination</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Outstanding Monitoring" />Outstanding Monitoring</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Terminal Reconciliation" />Reconciliation</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-slot">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Invoice Validation" />Invoice Validation</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - ERP Posting" />ERP Posting</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Slot Outstanding Monitoring" />Outstanding Monitoring</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Slot Reconciliation" />Reconciliation</label>
+              </div>
+              <div class="si-types" id="nvocc-cat-soa">
+                <label><input type="checkbox" name="service[]" value="NVOCC - Income & Expense Review" />Income & Expense Review</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Charge Review" />Charge Review</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Detention Review" />Detention Review</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - Misc Revenue & Cost Review" />Misc Revenue & Cost Review</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - SOA Preparation" />SOA Preparation</label>
+                <label><input type="checkbox" name="service[]" value="NVOCC - SOA Submission" />SOA Submission</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- LINER AGENCY -->
+          <div class="si-panel" id="si-liner">
+            <div class="si-category-label">Select Category</div>
+            <div class="si-categories">
+              <button type="button" class="si-cat-btn active" onclick="switchCat(this, 'liner-cat-inv')">Inventory Management</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-impc')">Import Coordination</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-impd')">Import Documentation</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-expc')">Export Coordination</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-expd')">Export Documentation</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-trans')">Transshipment Support</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-term')">Terminal Accounting</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-slot')">Slot Invoice Accounting</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'liner-cat-soa')">Principal SOA</button>
+            </div>
+            <div class="si-types-wrap">
+              <div class="si-category-label">Select Service Type(s)</div>
+              <div class="si-types active" id="liner-cat-inv">
+                <label><input type="checkbox" name="service[]" value="Liner - Inventory Updates" />Inventory Updates</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Load/Discharge Updates" />Load/Discharge Updates</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Inventory Reporting" />Inventory Reporting</label>
+              </div>
+              <div class="si-types" id="liner-cat-impc">
+                <label><input type="checkbox" name="service[]" value="Liner - Pre-alert Receipt" />Pre-alert Receipt</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Import Manifest Filing" />Import Manifest Filing</label>
+              </div>
+              <div class="si-types" id="liner-cat-impd">
+                <label><input type="checkbox" name="service[]" value="Liner - ERP Updates & Arrival Notice" />ERP Updates & Arrival Notice</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Arrival Notice Dispatch" />Arrival Notice Dispatch</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Customer Invoicing" />Customer Invoicing</label>
+              </div>
+              <div class="si-types" id="liner-cat-expc">
+                <label><input type="checkbox" name="service[]" value="Liner - Export Manifest Filing" />Export Manifest Filing</label>
+                <label><input type="checkbox" name="service[]" value="Liner - DG/OOG Approvals" />DG/OOG Approvals</label>
+              </div>
+              <div class="si-types" id="liner-cat-expd">
+                <label><input type="checkbox" name="service[]" value="Liner - BL Draft Follow-Up" />BL Draft Follow-Up</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Bill of Lading Preparation" />Bill of Lading Preparation</label>
+                <label><input type="checkbox" name="service[]" value="Liner - BL Approval" />BL Approval</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Pre-alert Management" />Pre-alert Management</label>
+                <label><input type="checkbox" name="service[]" value="Liner - TDR Reporting" />TDR Reporting</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Customer Invoicing (Export)" />Customer Invoicing</label>
+              </div>
+              <div class="si-types" id="liner-cat-trans">
+                <label><input type="checkbox" name="service[]" value="Liner - Transshipment Pre-alert Management" />Pre-alert Management</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Transshipment ERP Updates" />ERP Updates</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Transshipment TDR Reporting" />TDR Reporting</label>
+              </div>
+              <div class="si-types" id="liner-cat-term">
+                <label><input type="checkbox" name="service[]" value="Liner - Invoice Processing" />Invoice Processing</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Terminal ERP Updates" />ERP Updates</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Exception Coordination" />Exception Coordination</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Outstanding Monitoring" />Outstanding Monitoring</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Reconciliation" />Reconciliation</label>
+              </div>
+              <div class="si-types" id="liner-cat-slot">
+                <label><input type="checkbox" name="service[]" value="Liner - Invoice Validation" />Invoice Validation</label>
+                <label><input type="checkbox" name="service[]" value="Liner - ERP Posting" />ERP Posting</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Slot Outstanding Monitoring" />Outstanding Monitoring</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Slot Reconciliation" />Reconciliation</label>
+              </div>
+              <div class="si-types" id="liner-cat-soa">
+                <label><input type="checkbox" name="service[]" value="Liner - Income & Expense Review" />Income & Expense Review</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Charge Review" />Charge Review</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Detention Review" />Detention Review</label>
+                <label><input type="checkbox" name="service[]" value="Liner - Misc Revenue & Cost Review" />Misc Revenue & Cost Review</label>
+                <label><input type="checkbox" name="service[]" value="Liner - SOA Preparation" />SOA Preparation</label>
+                <label><input type="checkbox" name="service[]" value="Liner - SOA Submission" />SOA Submission</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- FORWARDERS -->
+          <div class="si-panel" id="si-fwd">
+            <div class="si-category-label">Select Category</div>
+            <div class="si-categories">
+              <button type="button" class="si-cat-btn active" onclick="switchCat(this, 'fwd-cat-seaexp')">Sea Export</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-seaimp')">Sea Import</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-cs')">Customer Service</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-airimp')">Air Import</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-airexp')">Air Export</button>
+              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-acc')">Accounting</button>
+            </div>
+            <div class="si-types-wrap">
+              <div class="si-category-label">Select Service Type(s)</div>
+              <div class="si-types active" id="fwd-cat-seaexp">
+                <label><input type="checkbox" name="service[]" value="Fwd - Pre-Shipment Coordination" />Pre-Shipment Coordination</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Pre-Shipment Documentation" />Pre-Shipment Documentation</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Compliance Filing" />Compliance Filing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Export Documentation" />Documentation</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Export Customer Communication" />Customer Communication</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Financial Processing" />Financial Processing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Agent Coordination" />Agent Coordination</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Export Operational Closure" />Operational Closure</label>
+              </div>
+              <div class="si-types" id="fwd-cat-seaimp">
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Pre-Shipment Coordination" />Pre-Shipment Coordination</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Documentation" />Documentation</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Operational Processing" />Operational Processing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Tracking" />Tracking</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Customer Communication" />Customer Communication</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Sea Import Operational Closure" />Operational Closure</label>
+              </div>
+              <div class="si-types" id="fwd-cat-cs">
+                <label><input type="checkbox" name="service[]" value="Fwd - Nomination Handling" />Nomination Handling</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Commercial Support" />Commercial Support</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - CS Coordination" />Coordination</label>
+              </div>
+              <div class="si-types" id="fwd-cat-airimp">
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Documentation" />Documentation</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Operational Processing" />Operational Processing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Tracking" />Tracking</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Customer Communication" />Customer Communication</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Operational Closure" />Operational Closure</label>
+              </div>
+              <div class="si-types" id="fwd-cat-airexp">
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Operational Processing" />Operational Processing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Documentation" />Documentation</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Customer Communication" />Customer Communication</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Operational Closure" />Operational Closure</label>
+              </div>
+              <div class="si-types" id="fwd-cat-acc">
+                <label><input type="checkbox" name="service[]" value="Fwd - Invoicing" />Invoicing</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Accounts Payable" />Accounts Payable</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Job Accounting" />Job Accounting</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Receivables Management" />Receivables Management</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Receivables Follow-up" />Receivables Follow-up</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Reporting" />Reporting</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Agent Accounting" />Agent Accounting</label>
+                <label><input type="checkbox" name="service[]" value="Fwd - Banking" />Banking</label>
+              </div>
+            </div>
+          </div>
+
+          <!-- OTHER -->
+          <div class="si-panel" id="si-other">
+            <div class="si-other-note">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round">
+                <circle cx="12" cy="12" r="10" />
+                <line x1="12" y1="8" x2="12" y2="12" />
+                <line x1="12" y1="16" x2="12.01" y2="16" />
+              </svg>Please describe your service requirement in the box below and our team will get back to you.
+            </div>
+            <textarea class="qf-textarea si-other-textarea" placeholder="Describe your requirement here..."></textarea>
+          </div>
+        </div>
+        <div class="qf-field">
+          <label class="qf-label">Message</label>
+          <textarea class="qf-textarea"></textarea>
         </div>
       </div>
 
-    </div>
+      <!-- MESSAGE -->
 
-    <!-- IT FORM -->
-    <div id="it-form" class="qf-dynamic" style="display:none;">
-
-      <div class="qf-field">
-        <label class="qf-label">Project Type</label>
-        <div class="qf-checkboxes">
-          <label><input type="checkbox"> Web Development</label>
-          <label><input type="checkbox"> Mobile App</label>
-          <label><input type="checkbox"> AI Solutions</label>
-          <label><input type="checkbox"> Automation</label>
+      <div id="it-form" class="qf-dynamic">
+        <div class="qf-row">
+          <div>
+            <label class="qf-label">Full Name</label>
+            <input type="text" class="qf-input" placeholder="John Doe" />
+          </div>
+          <div>
+            <label class="qf-label">Work Email</label>
+            <input type="email" class="qf-input" placeholder="john@company.com" />
+          </div>
+        </div>
+        <div class="qf-field">
+          <label class="qf-label">Message</label>
+          <textarea class="qf-textarea"></textarea>
         </div>
       </div>
 
-      <div class="qf-field">
-        <label class="qf-label">Estimated Budget</label>
-        <input type="text" class="qf-input" placeholder="$5,000 - $50,000" />
+      <!-- BUTTON -->
+      <button class="btn-submit">Get Custom Quote</button>
+    </div>
+  </div>
+
+  <!-- ── OFFICE LOCATIONS ── -->
+  <div class="office-section">
+    <h3 class="office-heading">Our Offices</h3>
+
+    <div class="office-grid">
+      <!-- Kannur -->
+      <div class="office-card">
+        <div class="office-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21s8-6 8-11a8 8 0 1 0-16 0c0 5 8 11 8 11z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </div>
+        <div class="office-title">Kannur Head Office</div>
+        <p class="office-address">
+          Malabar Innovation Entrepreneurship Zone, Building No:446, <br />
+          Mangattuparamba, Near Kannur University Campus, Kalliasseri,<br />
+          Kannur, Kerala - 670 567, India
+        </p>
+        <a href="#" class="office-link">Find on Map →</a>
       </div>
 
+      <!-- Mumbai -->
+      <div class="office-card">
+        <div class="office-icon">
+          <svg viewBox="0 0 24 24">
+            <path d="M12 21s8-6 8-11a8 8 0 1 0-16 0c0 5 8 11 8 11z" />
+            <circle cx="12" cy="10" r="3" />
+          </svg>
+        </div>
+        <div class="office-title">Mumbai Operational Office</div>
+        <p class="office-address">
+          Office No 26, Arenja Tower CHS Ltd. Plot No 49 Sector 11 Belapur, <br /> Navi Mumbai, Maharastra-400614, India
+        </p>
+        <a href="#" class="office-link">Find on Map →</a>
+      </div>
     </div>
-
-    <!-- MESSAGE -->
-    <div class="qf-field">
-      <label class="qf-label">Message</label>
-      <textarea class="qf-textarea"></textarea>
-    </div>
-
-    <!-- BUTTON -->
-    <button class="btn-submit">
-      Get Custom Quote
-    </button>
-
   </div>
 </div>
 
-  <!-- ── WHY GLOBAL LEADERS ── -->
-<!--<div class="why-block">
-  <h2 class="why-title">Why Global Leaders Choose Us?</h2>
-  <p class="why-body">
-    Navigating complex international waters requires more than just ships; 
-    it requires a partner who understands the intricacies of maritime law, 
-    efficient route planning, and timely delivery.
-  </p>
 
-  <div class="why-cards">
-    <div class="why-card">
-      <div class="why-card-icon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10"/>
-          <polyline points="12 6 12 12 16 14"/>
-        </svg>
-      </div>
-      <div>
-        <div class="why-card-title">On-Time Guarantee</div>
-        <p class="why-card-desc">99.5% on-time arrival rate for all major routes.</p>
-      </div>
-    </div>
-
-    <div class="why-card">
-      <div class="why-card-icon">
-        <svg viewBox="0 0 24 24">
-          <circle cx="12" cy="12" r="10"/>
-          <line x1="2" y1="12" x2="22" y2="12"/>
-        </svg>
-      </div>
-      <div>
-        <div class="why-card-title">Global Network</div>
-        <p class="why-card-desc">Access to 200+ ports across 6 continents.</p>
-      </div>
-    </div>
-  </div>
-</div>-->
-
-<!-- ── MAP SECTION ── -->
-<!--<div class="map-section">
-
-  <h3 class="map-heading">Our Location</h3>
-
-  <div class="map-container">
-    <iframe
-      src="https://maps.google.com/maps?q=Kannur%20Kerala&t=&z=13&ie=UTF8&iwloc=&output=embed"
-      loading="lazy"
-      allowfullscreen>
-    </iframe>
-  </div>
-
-</div> -->
-
-
-<!-- ── OFFICE LOCATIONS ── -->
-<div class="office-section">
-
-  <h3 class="office-heading">Our Offices</h3>
-
-  <div class="office-grid">
-
-    <!-- Kannur -->
-    <div class="office-card">
-      <div class="office-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 21s8-6 8-11a8 8 0 1 0-16 0c0 5 8 11 8 11z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
-      </div>
-      <div class="office-title">Kannur Head Office</div>
-      <p class="office-address">
-        Malabar Innovation Entrepreneurship Zone, Building No:446, <br>
-Mangattuparamba, Near Kannur University Campus, Kalliasseri,<br>
-Kannur, Kerala - 670 567, India
-      </p>
-      <a href="#" class="office-link">Find on Map →</a>
-    </div>
-
-    <!-- Mumbai -->
-    <div class="office-card">
-      <div class="office-icon">
-        <svg viewBox="0 0 24 24">
-          <path d="M12 21s8-6 8-11a8 8 0 1 0-16 0c0 5 8 11 8 11z"/>
-          <circle cx="12" cy="10" r="3"/>
-        </svg>
-      </div>
-      <div class="office-title">Mumbai Operational Office</div>
-      <p class="office-address">
-        Office No 26, Arenja Tower CHS Ltd. Plot No 49 Sector 11 Belapur, <br> Navi Mumbai,
-Maharastra-400614, India
-      </p>
-      <a href="#" class="office-link">Find on Map →</a>
-    </div>
-
-  </div>
-
-</div>
-</div>
-
-<script>
-  function switchForm(type) {
-  const bpo = document.getElementById('bpo-form');
-  const it  = document.getElementById('it-form');
-  const tabs = document.querySelectorAll('.qf-tab');
-
-  tabs.forEach(tab => tab.classList.remove('active'));
-
-  if (type === 'bpo') {
-    bpo.style.display = 'block';
-    it.style.display = 'none';
-    tabs[0].classList.add('active');
-  } else {
-    bpo.style.display = 'none';
-    it.style.display = 'block';
-    tabs[1].classList.add('active');
-  }
-}
-
-</script>
 <script>
 function switchForm(type) {
   const bpo = document.getElementById('bpo-form');
@@ -222,4 +356,138 @@ function switchForm(type) {
 document.addEventListener("DOMContentLoaded", () => {
   document.getElementById('bpo-form').classList.add('active');
 });
+
+function switchSegment(seg) {
+  document.querySelectorAll('.si-tab').forEach(t => t.classList.remove('active'));
+  document.querySelectorAll('.si-panel').forEach(p => p.classList.remove('active'));
+  event.target.classList.add('active');
+  document.getElementById('si-' + seg).classList.add('active');
+}
+
+function switchCat(btn, targetId) {
+  const panel = btn.closest('.si-panel');
+  panel.querySelectorAll('.si-cat-btn').forEach(b => b.classList.remove('active'));
+  panel.querySelectorAll('.si-types').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.getElementById(targetId).classList.add('active');
+}
+
+document.addEventListener('DOMContentLoaded', function() {
+  document.getElementById('si-nvocc').classList.add('active');
+});
 </script>
+<style>
+  /* ── SERVICE INTEREST SELECTOR ── */
+.si-tabs {
+  display: flex;
+  gap: 6px;
+  flex-wrap: wrap;
+  margin-bottom: 16px;
+}
+
+.si-tab {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.78rem;
+  font-weight: 700;
+  padding: 7px 16px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.si-tab:hover { border-color: var(--blue); color: var(--blue); }
+.si-tab.active { background: var(--navy); color: #fff; border-color: var(--navy); }
+
+/* Panel visibility */
+.si-panel { display: none; }
+.si-panel.active { display: block; }
+
+.si-category-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 15px;
+}
+
+/* Category pills */
+.si-categories {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 16px;
+}
+
+.si-cat-btn {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 6px 13px;
+  border-radius: 100px;
+  border: 1.5px solid var(--border);
+  background: transparent;
+  color: var(--muted);
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.si-cat-btn:hover { border-color: var(--blue); color: var(--blue); }
+.si-cat-btn.active { background: rgba(37,99,235,0.08); color: var(--blue); border-color: rgba(37,99,235,0.3); }
+
+/* Service type checkboxes */
+.si-types-wrap {
+  background: var(--bg);
+  border: 1.5px solid var(--border);
+  border-radius: 10px;
+  padding: 14px 16px;
+}
+
+.si-types { display: none; }
+.si-types.active { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+
+@media (max-width: 480px) { .si-types.active { grid-template-columns: 1fr; } }
+
+.si-types label {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  color: var(--navy);
+  cursor: pointer;
+  padding: 4px 0;
+}
+.si-types label input[type="checkbox"] {
+  accent-color: var(--blue);
+  width: 15px;
+  height: 15px;
+  flex-shrink: 0;
+  cursor: pointer;
+}
+
+/* Other note */
+.si-other-note {
+  display: flex;
+  align-items: flex-start;
+  gap: 10px;
+  background: rgba(37,99,235,0.05);
+  border: 1.5px solid rgba(37,99,235,0.15);
+  border-radius: 10px;
+  padding: 14px 16px;
+  font-size: 0.83rem;
+  color: var(--muted);
+  line-height: 1.6;
+}
+.si-other-note svg {
+  width: 16px; height: 16px;
+  stroke: var(--blue);
+  flex-shrink: 0;
+  margin-top: 2px;
+}
+.si-other-textarea {
+  margin-top: 12px;
+  width: 100%;
+}
+</style>

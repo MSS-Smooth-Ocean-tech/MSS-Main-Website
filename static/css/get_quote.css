@@ -18,8 +18,8 @@
   .quote-hero {
     position: relative;
     min-height: 700px;
-    background: linear-gradient(to right, rgba(8,15,30,0.95) 45%, rgba(8,15,30,0.6) 100%),
-                url('https://images.unsplash.com/photo-1578575437130-527eed3abbec?w=1600&q=80') center/cover no-repeat;
+    background: linear-gradient(to right, rgba(8,15,30,0.95) 25%, rgba(8,15,30,0.6) 100%),
+                url('/static/img/getaquote_hero.jpeg') center/cover no-repeat;
     display: flex;
     align-items: center;
     padding: 120px 32px 80px;
@@ -118,7 +118,7 @@
     letter-spacing: 0.1em;
     text-transform: uppercase;
     color: var(--muted);
-    margin-bottom: 6px;
+    margin-bottom: 15px;
   }
   .qf-input {
     width: 100%;
@@ -666,3 +666,5 @@
   }
   .status-stat strong { color: #fff; font-family: 'Sora', sans-serif; }
   .status-divider { width: 1px; height: 16px; background: rgba(255,255,255,0.15); }
+
+  
