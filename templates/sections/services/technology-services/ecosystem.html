@@ -1,206 +1,132 @@
 <section class="ecosystem-section">
   <div class="section-wrap" style="text-align:center;">
     <h2 class="sec-title">IT Division of MSS</h2>
-    <p class="sec-sub" style="max-width:520px; margin:0 auto 56px;">We design solutions that streamline processes, reduce manual effort, and integrate seamlessly with existing systems—enabling smarter, faster, and more connected logistics operations.</p>
-    <div class="ecosystem-wrap">
-      <!-- LEFT SIDE (RADIAL) -->
-      <div class="eco-circle">
-        <div class="eco-center">
-          <img src="{{ url_for('static', path='/img/sot_logo.png') }}" />
-        </div>
-      </div>
+    <p class="sec-sub" style="max-width:520px; margin:0 auto 56px;">
+      We design solutions that streamline processes, reduce manual effort,
+      and integrate seamlessly with existing systems.
+    </p>
+    <div class="eco-orbit-wrap">
 
-      <!-- RIGHT SIDE -->
-      <div class="eco-list">
-        <div class="eco-item">
-          <div class="eco-icon">
-            <svg viewBox="0 0 24 24">
-              <rect x="3" y="3" width="7" height="7"/>
-              <rect x="14" y="3" width="7" height="7"/>
-              <rect x="14" y="14" width="7" height="7"/>
-              <rect x="3" y="14" width="7" height="7"/>
-            </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">CRM / TMS</div>
-            <div class="eco-desc">Manage operations and logistics workflows efficiently.</div>
-          </div>
-        </div>
+      <svg class="eco-svg" viewBox="0 0 680 620" xmlns="http://www.w3.org/2000/svg">
+        <defs>
+          <marker id="arr-dash" viewBox="0 0 10 10" refX="8" refY="5"
+            markerWidth="5" markerHeight="5" orient="auto">
+            <path d="M2 1L8 5L2 9" fill="none" stroke="#93c5fd"
+              stroke-width="1.8" stroke-linecap="round" stroke-linejoin="round"/>
+          </marker>
+          <radialGradient id="glow-bg" cx="50%" cy="50%" r="50%">
+            <stop offset="0%"   stop-color="#dbeafe" stop-opacity="0.55"/>
+            <stop offset="100%" stop-color="#dbeafe" stop-opacity="0"/>
+          </radialGradient>
+        </defs>
 
-        <div class="eco-item">
-          <div class="eco-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M4 4h16v16H4z"/>
-            <path d="M8 9h8M8 13h6"/>
-          </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">OCR</div>
-            <div class="eco-desc">Extract and process data from documents automatically.</div>
-          </div>
-        </div>
+        <ellipse cx="340" cy="310" rx="230" ry="230" fill="url(#glow-bg)" class="eco-pulse"/>
 
-        <div class="eco-item">
-          <div class="eco-icon">
-          <svg viewBox="0 0 24 24">
-            <circle cx="5" cy="12" r="2"/>
-            <circle cx="19" cy="6" r="2"/>
-            <circle cx="19" cy="18" r="2"/>
-            <line x1="7" y1="12" x2="17" y2="6"/>
-            <line x1="7" y1="12" x2="17" y2="18"/>
-          </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">API / EDI</div>
-            <div class="eco-desc">Enable seamless system communication and integration.</div>
-          </div>
-        </div>
+        <circle cx="340" cy="310" r="196" fill="none" stroke="#93c5fd" stroke-width="0.5" opacity="1"/>
+        <circle cx="340" cy="310" r="170" fill="none" stroke="#93c5fd" stroke-width="0.4" opacity="1"/>
 
-        <div class="eco-item">
-          <div class="eco-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M4 4h16v16H4z"/>
-            <path d="M8 9h8M8 13h6"/>
-          </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">OCR</div>
-            <div class="eco-desc">Extract and process data from documents automatically.</div>
-          </div>
-        </div>
+        <circle cx="340" cy="310" r="185" fill="none" stroke="#3b82f6"
+          stroke-width="0.8" stroke-dasharray="6 10" opacity="0.3" class="eco-dash-orbit"/>
 
-        <div class="eco-item">
-          <div class="eco-icon">
-          <svg viewBox="0 0 24 24">
-            <circle cx="5" cy="12" r="2"/>
-            <circle cx="19" cy="6" r="2"/>
-            <circle cx="19" cy="18" r="2"/>
-            <line x1="7" y1="12" x2="17" y2="6"/>
-            <line x1="7" y1="12" x2="17" y2="18"/>
-          </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">API / EDI</div>
-            <div class="eco-desc">Enable seamless system communication and integration.</div>
-          </div>
-        </div>
+        <circle cx="340" cy="310" r="215" fill="none" stroke="#93c5fd"
+          stroke-width="0.5" stroke-dasharray="3 18" opacity="0.2" class="eco-dash-outer"/>
 
-        <div class="eco-item">
-          <div class="eco-icon">
-          <svg viewBox="0 0 24 24">
-            <path d="M9 3h6v4a2 2 0 1 1 0 4v4h-6v-4a2 2 0 1 0 0-4z"/>
-          </svg>
-          </div>
-          <div class="eco-content">
-            <div class="eco-title">Integrations</div>
-            <div class="eco-desc">Connect with external platforms and tools easily.</div>
-          </div>
-        </div>
-      </div>
+        <line x1="340" y1="250" x2="340" y2="147" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+        <line x1="397" y1="272" x2="464" y2="234" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+        <line x1="397" y1="348" x2="464" y2="386" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+        <line x1="340" y1="370" x2="340" y2="463" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+        <line x1="283" y1="348" x2="216" y2="386" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+        <line x1="283" y1="272" x2="216" y2="234" stroke="#93c5fd" stroke-width="1"
+           marker-end="url(#arr-dash)" opacity="0.7" class="eco-dashflow"/>
+
+        <circle cx="340" cy="250" r="3" fill="#60a5fa" opacity="0.6"/>
+        <circle cx="397" cy="272" r="3" fill="#60a5fa" opacity="0.6"/>
+        <circle cx="397" cy="348" r="3" fill="#60a5fa" opacity="0.6"/>
+        <circle cx="340" cy="370" r="3" fill="#60a5fa" opacity="0.6"/>
+        <circle cx="283" cy="348" r="3" fill="#60a5fa" opacity="0.6"/>
+        <circle cx="283" cy="272" r="3" fill="#60a5fa" opacity="0.6"/>
+
+        <image href="{{ url_for('static', path='/img/sot_logo.png') }}"
+          x="280" y="270" width="120" height="70"/>
+
+        <g class="eco-node">
+          <circle cx="340" cy="125" r="46" fill="white" stroke="#dc2626" stroke-width="1.5"/>
+          <circle cx="340" cy="125" r="38" fill="#fee2e2" fill-opacity="0.6"/>
+          <foreignObject x="315" y="100" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-gear" style="color:#dc2626;"></i>
+            </div>
+          </foreignObject>
+          <text x="340" y="55" text-anchor="middle" class="eco-node-title">Automation</text>
+          <text x="340" y="70" text-anchor="middle" class="eco-node-desc">Workflow Automation</text>
+        </g>
+
+        <g class="eco-node">
+          <circle cx="500" cy="218" r="46" fill="white" stroke="#2563eb" stroke-width="1.5"/>
+          <circle cx="500" cy="218" r="38" fill="#dbeafe" fill-opacity="0.5"/>
+          <foreignObject x="475" y="193" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-plug" style="color:#2563eb;"></i>
+            </div>
+          </foreignObject>
+          <text x="568" y="198" text-anchor="start" class="eco-node-title">Integration</text>
+          <text x="568" y="212" text-anchor="start" class="eco-node-desc">Client System</text>
+        </g>
+
+        <g class="eco-node">
+          <circle cx="500" cy="402" r="46" fill="white" stroke="#0d9488" stroke-width="1.5"/>
+          <circle cx="500" cy="402" r="38" fill="#ccfbf1" fill-opacity="0.5"/>
+          <foreignObject x="475" y="377" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-share-nodes" style="color:#0d9488;"></i>
+            </div>
+          </foreignObject>
+          <text x="568" y="400" text-anchor="start" class="eco-node-title">EDI</text>
+          <text x="568" y="414" text-anchor="start" class="eco-node-desc">Ports and Customs</text>
+        </g>
+
+        <g class="eco-node">
+          <circle cx="340" cy="495" r="46" fill="white" stroke="#d97706" stroke-width="1.5"/>
+          <circle cx="340" cy="495" r="38" fill="#fef3c7" fill-opacity="0.5"/>
+          <foreignObject x="315" y="470" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-chart-simple" style="color:#d97706;"></i>
+            </div>
+          </foreignObject>
+          <text x="340" y="565" text-anchor="middle" class="eco-node-title">Analytics</text>
+          <text x="340" y="580" text-anchor="middle" class="eco-node-desc">Reporting</text>
+        </g>
+
+        <g class="eco-node">
+          <circle cx="180" cy="402" r="46" fill="white" stroke="#7c3aed" stroke-width="1.5"/>
+          <circle cx="180" cy="402" r="38" fill="#ede9fe" fill-opacity="0.5"/>
+          <foreignObject x="155" y="377" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-screwdriver-wrench" style="color:#7c3aed;"></i>
+            </div>
+          </foreignObject>
+          <text x="112" y="400" text-anchor="end" class="eco-node-title">Inhouse</text>
+          <text x="112" y="414" text-anchor="end" class="eco-node-desc">Developed Tools</text>
+        </g>
+
+        <g class="eco-node">
+          <circle cx="180" cy="218" r="46" fill="white" stroke="#16a34a" stroke-width="1.5"/>
+          <circle cx="180" cy="218" r="38" fill="#dcfce7" fill-opacity="0.5"/>
+          <foreignObject x="155" y="193" width="50" height="50">
+            <div class="eco-fa-icon">
+              <i class="fa-solid fa-puzzle-piece" style="color:#16a34a;"></i>
+            </div>
+          </foreignObject>
+          <text x="112" y="198" text-anchor="end" class="eco-node-title">Integrations</text>
+          <text x="112" y="212" text-anchor="end" class="eco-node-desc">External tools</text>
+        </g>
+
+      </svg>
     </div>
   </div>
 </section>
-<script>
-(function() {
-  const items = Array.from(document.querySelectorAll('.eco-item'));
-  const container = document.querySelector('.eco-list');
-  const circle = document.querySelector('.eco-circle');
-
-  if (!items.length) return;
-
-  const W = container.offsetWidth;
-  const H = container.offsetHeight;
-
-  // 🔥 CENTER FIX (slight upward correction)
-  const cx = W / 2;
-  const cy = H / 2 - 40;
-
-  // 🔥 DISTANCE CONTROL (closer to circle)
-  const radiusX = 200;
-
-  // 🔥 GAP CONTROL (more vertical spacing)
-  const radiusY = 240;
-
-  const total = items.length;
-
-  let rightItems = [];
-  let leftItems  = [];
-
-  /* ============================
-     SPLIT LOGIC (FINAL)
-  ============================ */
-
-  if (total <= 4) {
-    // all on right
-    rightItems = items;
-    leftItems = [];
-  } else {
-    // balanced split
-    const rightCount = Math.ceil(total / 2);
-    rightItems = items.slice(0, rightCount);
-    leftItems  = items.slice(rightCount);
-  }
-
-  const rightCount = rightItems.length;
-  const leftCount  = leftItems.length;
-
-  
-
-  /* ============================
-     CIRCLE POSITION
-  ============================ */
-/* ============================
-   CIRCLE POSITION (FINAL)
-============================ */
-
-if (total <= 4) {
-  // small set → bring circle closer to pills
-  circle.style.left = "42%";
-} else {
-  // 5+ items → always center (same as 6 case)
-  circle.style.left = "50%";
-}
-
-circle.style.top = "50%";
-circle.style.transform = "translate(-50%, -50%)";
-
-  /* ============================
-     RIGHT SIDE
-  ============================ */
-  rightItems.forEach((el, i) => {
-    const spread = rightCount === 4 ? 180 : 140;
-    const start = -spread / 2;
-
-    const angle = (start + (spread / (rightCount - 1 || 1)) * i) * Math.PI / 180;
-
-    const x = cx + radiusX * Math.cos(angle);
-    const y = cy + radiusY * Math.sin(angle);
-
-    el.style.left = x + 'px';
-    el.style.top  = y + 'px';
-
-    el.classList.add('right');
-    el.classList.remove('left');
-  });
-
-  /* ============================
-     LEFT SIDE
-  ============================ */
-  leftItems.forEach((el, i) => {
-    const spread = leftCount === 4 ? 180 : 140;
-    const start = -spread / 2;
-
-    const angle = (start + (spread / (leftCount - 1 || 1)) * i) * Math.PI / 180;
-
-    const x = cx - radiusX * Math.cos(angle);
-    const y = cy + radiusY * Math.sin(angle);
-
-    el.style.left = (x - 320) + 'px';
-    el.style.top  = y + 'px';
-
-    el.classList.add('left');
-    el.classList.remove('right');
-  });
-
-})();
-</script>
