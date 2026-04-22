@@ -11,8 +11,8 @@ async def services_home(request: Request):
 async def bpo_services(request: Request):
     context = {"request": request}
     costs = {
-        "North America": {"actual_cost": 3797, "updated_cost": 1000},
-        "South America": {"actual_cost": 1052, "updated_cost": 500},
+        "North America": {"actual_cost": 3797, "updated_cost": 1500},
+        "South America": {"actual_cost": 1052, "updated_cost": 750},
         "Europe": {"actual_cost": 2949, "updated_cost": 950},
         "North Africa": {"actual_cost": 544, "updated_cost": 500},
         "West Africa": {"actual_cost": 544, "updated_cost": 500},
