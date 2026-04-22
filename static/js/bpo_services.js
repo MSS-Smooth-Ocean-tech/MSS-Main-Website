@@ -12,7 +12,7 @@ function roiUpdate() {
   if (!data) return;
   
   document.getElementById('team-val').textContent = team + ' FTEs';
-  const mssFTEs = 2 + (team - 1) * 0.75;
+  const mssFTEs = team <= 2 ? 2 : 2 + (team - 1) * 0.85;
   const inHouseCost = data.actual_cost * team * 12;
   const mssCost     = data.updated_cost * mssFTEs * 12;
   const pct = Math.round(((inHouseCost - mssCost) / inHouseCost) * 100);
@@ -26,7 +26,7 @@ function updateRightChart(pct, mssCost, inHouseCost) {
   const arcFill = document.getElementById('arc-fill');
   const arcPct  = document.getElementById('arc-pct');
   if (arcFill && arcPct) {
-    const totalDash = 251; // full arc length
+    const totalDash = 251; 
     const displayPct = Math.max(0, Math.min(100, pct));
     arcPct.textContent = displayPct + '%';
     arcFill.style.strokeDashoffset = totalDash - (totalDash * displayPct / 100);
