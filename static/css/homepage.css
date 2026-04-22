@@ -223,7 +223,7 @@ a { text-decoration: none; color: inherit; }
   max-width: 520px; margin: 0 auto 56px; line-height: 1.7;
 }
 .cards-grid {
-  display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px;
+  display: grid; grid-template-columns: repeat(2, 1fr); gap: 20px;
 }
 .s-card {
   border: 1px solid #e2e8f0;
