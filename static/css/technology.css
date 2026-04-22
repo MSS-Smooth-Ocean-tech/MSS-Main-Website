@@ -233,7 +233,7 @@
     font-size: 26px;
   }
     .eco-orbit-wrap {
-      max-width: 930px;
+      max-width: 900px;
       margin: 0 auto;
     }
   
@@ -245,7 +245,7 @@
     .eco-node-title {
       font-family: 'Sora', sans-serif;
       font-weight: 700;
-      font-size: 13px;
+      font-size: 12px;
       fill: #0f172a;
     }
   
