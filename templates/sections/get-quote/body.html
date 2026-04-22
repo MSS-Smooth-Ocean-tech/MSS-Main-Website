@@ -96,20 +96,13 @@
                 <label><input type="checkbox" name="service[]" value="NVOCC - Invoice Processing" />Invoice Processing</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - Terminal ERP Updates" />ERP Updates</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - Exception Coordination" />Exception Coordination</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Outstanding Monitoring" />Outstanding Monitoring</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Terminal Reconciliation" />Reconciliation</label>
               </div>
               <div class="si-types" id="nvocc-cat-slot">
-                <label><input type="checkbox" name="service[]" value="NVOCC - Invoice Validation" />Invoice Validation</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - ERP Posting" />ERP Posting</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Slot Outstanding Monitoring" />Outstanding Monitoring</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Slot Reconciliation" />Reconciliation</label>
               </div>
               <div class="si-types" id="nvocc-cat-soa">
                 <label><input type="checkbox" name="service[]" value="NVOCC - Income & Expense Review" />Income & Expense Review</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Charge Review" />Charge Review</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - Detention Review" />Detention Review</label>
-                <label><input type="checkbox" name="service[]" value="NVOCC - Misc Revenue & Cost Review" />Misc Revenue & Cost Review</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - SOA Preparation" />SOA Preparation</label>
                 <label><input type="checkbox" name="service[]" value="NVOCC - SOA Submission" />SOA Submission</label>
               </div>
@@ -167,20 +160,14 @@
                 <label><input type="checkbox" name="service[]" value="Liner - Invoice Processing" />Invoice Processing</label>
                 <label><input type="checkbox" name="service[]" value="Liner - Terminal ERP Updates" />ERP Updates</label>
                 <label><input type="checkbox" name="service[]" value="Liner - Exception Coordination" />Exception Coordination</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Outstanding Monitoring" />Outstanding Monitoring</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Reconciliation" />Reconciliation</label>
               </div>
               <div class="si-types" id="liner-cat-slot">
                 <label><input type="checkbox" name="service[]" value="Liner - Invoice Validation" />Invoice Validation</label>
                 <label><input type="checkbox" name="service[]" value="Liner - ERP Posting" />ERP Posting</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Slot Outstanding Monitoring" />Outstanding Monitoring</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Slot Reconciliation" />Reconciliation</label>
               </div>
               <div class="si-types" id="liner-cat-soa">
                 <label><input type="checkbox" name="service[]" value="Liner - Income & Expense Review" />Income & Expense Review</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Charge Review" />Charge Review</label>
                 <label><input type="checkbox" name="service[]" value="Liner - Detention Review" />Detention Review</label>
-                <label><input type="checkbox" name="service[]" value="Liner - Misc Revenue & Cost Review" />Misc Revenue & Cost Review</label>
                 <label><input type="checkbox" name="service[]" value="Liner - SOA Preparation" />SOA Preparation</label>
                 <label><input type="checkbox" name="service[]" value="Liner - SOA Submission" />SOA Submission</label>
               </div>
@@ -194,8 +181,6 @@
               <button type="button" class="si-cat-btn active" onclick="switchCat(this, 'fwd-cat-seaexp')">Sea Export</button>
               <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-seaimp')">Sea Import</button>
               <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-cs')">Customer Service</button>
-              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-airimp')">Air Import</button>
-              <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-airexp')">Air Export</button>
               <button type="button" class="si-cat-btn" onclick="switchCat(this, 'fwd-cat-acc')">Accounting</button>
             </div>
             <div class="si-types-wrap">
@@ -221,30 +206,11 @@
               <div class="si-types" id="fwd-cat-cs">
                 <label><input type="checkbox" name="service[]" value="Fwd - Nomination Handling" />Nomination Handling</label>
                 <label><input type="checkbox" name="service[]" value="Fwd - Commercial Support" />Commercial Support</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - CS Coordination" />Coordination</label>
-              </div>
-              <div class="si-types" id="fwd-cat-airimp">
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Documentation" />Documentation</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Operational Processing" />Operational Processing</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Tracking" />Tracking</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Customer Communication" />Customer Communication</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Import Operational Closure" />Operational Closure</label>
-              </div>
-              <div class="si-types" id="fwd-cat-airexp">
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Operational Processing" />Operational Processing</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Documentation" />Documentation</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Customer Communication" />Customer Communication</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Air Export Operational Closure" />Operational Closure</label>
               </div>
               <div class="si-types" id="fwd-cat-acc">
                 <label><input type="checkbox" name="service[]" value="Fwd - Invoicing" />Invoicing</label>
                 <label><input type="checkbox" name="service[]" value="Fwd - Accounts Payable" />Accounts Payable</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Job Accounting" />Job Accounting</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Receivables Management" />Receivables Management</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Receivables Follow-up" />Receivables Follow-up</label>
                 <label><input type="checkbox" name="service[]" value="Fwd - Reporting" />Reporting</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Agent Accounting" />Agent Accounting</label>
-                <label><input type="checkbox" name="service[]" value="Fwd - Banking" />Banking</label>
               </div>
             </div>
           </div>
