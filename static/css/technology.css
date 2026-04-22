@@ -67,12 +67,11 @@
     font-weight: 800;
     color: #fff;
     line-height: 1.1;
-    max-width: 660px;
     margin-bottom: 24px;
   }
   .tech-hero p {
     font-size: 1.05rem;
-    color: rgba(255,255,255,0.6);
+    color: #fff;
     max-width: 500px;
     line-height: 1.75;
     margin-bottom: 40px;
@@ -135,13 +134,15 @@
     color: var(--navy);
     line-height: 1.2;
     margin-bottom: 14px;
+    text-align: center;
   }
   .sec-sub {
     font-size: 1rem;
     color: var(--muted);
     line-height: 1.7;
-    max-width: 520px;
     margin-bottom: 56px;
+    text-align: center;
+
   }
 
   /* ── DIGITAL MATURITY JOURNEY ── */
@@ -494,7 +495,7 @@
     gap: 16px;
   }
   .solutions-header .sec-title { color: black; margin-bottom: 6px; }
-  .solutions-header .sec-sub { color: rgba(255,255,255,0.5); margin-bottom: 0; }
+  .solutions-header .sec-sub { margin-bottom: 0; }
   .view-all-link {
     display: inline-flex;
     align-items: center;
