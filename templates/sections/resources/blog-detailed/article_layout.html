@@ -1,23 +1,17 @@
 <!-- ══ ARTICLE LAYOUT ══ -->
 <div class="article-layout">
 
-  <!-- ── MAIN CONTENT ── -->
-  <main class="article-main">
-
-    <span class="article-tag">Maritime Technology</span>
-
+  <!-- ── HEADER: full width ── -->
+  <div class="article-header">
     <h1 class="article-headline">{{ blog.title }}</h1>
-
     <p class="article-intro">{{ blog.summary }}</p>
-
-    <!-- Author row -->
     <div class="article-author-row">
       <div class="author-info">
         {% if blog.author_pfp %}
         <img src="{{ blog.author_pfp }}" alt="Author Avatar" class="author-avatar" />
         {% else %}
-        <div class="author-avatar" style="background:#2563eb; color:white; display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-weight:700; overflow:hidden;">
-          {{ blog.author_name[0] | upper if blog.author_name else (blog.added_by[0] | upper if blog.added_by else 'M') }}
+        <div class="author-avatar" style="background:#2563eb; color:white; display:flex; align-items:center; justify-content:center; font-family:'Sora',sans-serif; font-weight:700;">
+          {{ blog.author_name[0]|upper if blog.author_name else (blog.added_by[0]|upper if blog.added_by else 'M') }}
         </div>
         {% endif %}
         <div>
@@ -32,42 +26,96 @@
         </div>
       </div>
     </div>
+  </div>
 
-    <!-- Hero image -->
-    {% if blog.cover_image %}
-    <img
-      src="{{ blog.cover_image }}"
-      alt="{{ blog.title }} Cover Image"
-      class="article-hero-img"
-    />
-    {% endif %}
-
-    <!-- Article body -->
-    <div class="article-body">
-        {{ blog.body | safe }}
+  <!-- ── BODY: image floats left, content wraps naturally ── -->
+  {% if blog.cover_image %}
+  <div class="article-body article-body-with-image">
+    <div class="article-float-img">
+      <img src="{{ blog.cover_image }}" alt="{{ blog.title }}" loading="eager" />
     </div>
+    {{ blog.body | safe }}
+  </div>
+  {% else %}
+  <div class="article-body">
+    {{ blog.body | safe }}
+  </div>
+  {% endif %}
 
-    <!-- Share footer -->
-    <div class="article-share-footer">
-      <div class="share-footer-label">Share This Insight</div>
-      <div class="share-footer-btns">
-        <!--
-        <button class="share-btn">
-          <svg viewBox="0 0 24 24"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect x="2" y="9" width="4" height="12"/><circle cx="4" cy="4" r="2"/></svg>
-          LinkedIn
-        </button>
-        <button class="share-btn">
-          <svg viewBox="0 0 24 24"><path d="M23 3a10.9 10.9 0 0 1-3.14 1.53 4.48 4.48 0 0 0-7.86 3v1A10.66 10.66 0 0 1 3 4s-4 9 5 13a11.64 11.64 0 0 1-7 2c9 5 20 0 20-11.5a4.5 4.5 0 0 0-.08-.83A7.72 7.72 0 0 0 23 3z"/></svg>
-          Twitter
-        </button>
-        -->
-        <button class="share-btn">
-          <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
-          Copy Link
-        </button>
-      </div>
+  <!-- ── SHARE FOOTER ── -->
+  <div class="article-share-footer">
+    <div class="share-footer-label">Share This Insight</div>
+    <div class="share-footer-btns">
+      <button class="share-btn" onclick="navigator.clipboard.writeText(window.location.href)">
+        <svg viewBox="0 0 24 24"><path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"/><path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"/></svg>
+        Copy Link
+      </button>
     </div>
-
-  </main>
+  </div>
 
 </div>
+
+<!-- Split body content: first 2 blocks beside image, rest below -->
+<script>
+(function() {
+  var raw = document.createElement('div');
+  raw.innerHTML = {{ blog.body | tojson | safe }};
+
+  var children = Array.from(raw.children);
+  var inline = document.getElementById('body-inline');
+  var rest   = document.getElementById('body-rest');
+  var imgEl  = document.querySelector('.article-mid-image img');
+
+  if (!inline || !rest) return;
+
+  // Put all content in inline first
+  children.forEach(function(el) {
+    inline.appendChild(el.cloneNode(true));
+  });
+
+  function splitContent() {
+    var imgHeight = document.querySelector('.article-mid-image').offsetHeight;
+
+    // Fallback: if image height still 0, use 300px
+    if (imgHeight < 10) imgHeight = 300;
+
+    var inlineChildren = Array.from(inline.children);
+    var accumulated = 0;
+    var splitIndex = inlineChildren.length;
+
+    for (var i = 0; i < inlineChildren.length; i++) {
+      var elHeight = inlineChildren[i].offsetHeight;
+      // Don't split in the middle of a heading — always keep heading with next element
+      var isHeading = /^H[1-6]$/.test(inlineChildren[i].tagName);
+      accumulated += elHeight;
+      if (accumulated > imgHeight && !isHeading) {
+        splitIndex = i + 1;
+        break;
+      }
+    }
+
+    // Move overflow to rest
+    var currentChildren = Array.from(inline.children);
+    for (var j = splitIndex; j < currentChildren.length; j++) {
+      rest.appendChild(currentChildren[j]);
+    }
+  }
+
+  if (imgEl) {
+    if (imgEl.complete) {
+      // Image already cached — split immediately
+      splitContent();
+    } else {
+      // Wait for image to load then split
+      imgEl.addEventListener('load', splitContent);
+      // Fallback if image fails to load
+      imgEl.addEventListener('error', splitContent);
+    }
+  } else {
+    // No image — move everything to rest
+    Array.from(inline.children).forEach(function(el) {
+      rest.appendChild(el);
+    });
+  }
+})();
+</script>
