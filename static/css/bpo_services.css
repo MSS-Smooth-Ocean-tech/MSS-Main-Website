@@ -17,7 +17,7 @@
 
   /* ── HERO ── */
   .bpo-hero {
-    background: linear-gradient(135deg, #0a1628 0%, #0f2a4a 50%, #0f172a 100%);;
+    background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
     padding: 200px 24px 120px;
     text-align: center;
   }
@@ -55,7 +55,7 @@
   .bpo-hero h1 span { color: var(--blue); }
   .bpo-hero p {
     font-size: 1.1rem;
-    color: var(--muted);
+    color: #fff;
     max-width: 640px;
     margin: 0 auto 44px;
     line-height: 1.7;

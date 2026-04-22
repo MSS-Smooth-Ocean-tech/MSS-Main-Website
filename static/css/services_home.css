@@ -22,7 +22,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Hero Section */
 .sh-hero {
-  padding: 140px 24px 80px;
+  padding: 140px 24px 45px;
   background: linear-gradient(135deg, #0f172a 0%, #1e3a8a 100%);
   color: #fff;
   text-align: center;
@@ -96,7 +96,7 @@ h1, h2, h3, h4, h5, h6 {
 
 /* Services Section */
 .sh-services {
-  padding: 100px 24px;
+  padding: 30px 24px;
   max-width: 1200px;
   margin: 0 auto;
 }
