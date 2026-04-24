@@ -36,121 +36,154 @@
   .breadcrumb a:hover { color: var(--blue); }
   .breadcrumb-sep { color: var(--border); }
   .breadcrumb-current { color: var(--navy); font-weight: 600; }
+/* ── ARTICLE LAYOUT ── */
+.article-layout {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 32px 100px;
+}
 
-  /* ── ARTICLE LAYOUT ── */
-  .article-layout {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 0 32px 100px;
-    display: block;
-  }
-  @media (max-width: 960px) { .article-layout { max-width: 100%; } }
+/* ── HEADER ── */
+.article-header {
+  margin-bottom: 36px;
+  padding-bottom: 28px;
+  border-bottom: 1.5px solid var(--border);
+}
 
-  /* ── ARTICLE MAIN ── */
-  .article-main {}
+/* ── FLOAT IMAGE ── */
+.article-body-with-image .article-float-img {
+  float: left;
+  width: 480px;
+  margin: 0 44px 28px 0;
+  border-radius: 14px;
+  overflow: hidden;
+  background: transparent;
+  border: none;
+}
 
-  .article-tag {
-    display: inline-block;
-    font-family: 'Sora', sans-serif;
-    font-size: 0.68rem;
-    font-weight: 700;
-    letter-spacing: 0.1em;
-    text-transform: uppercase;
-    background: rgba(37,99,235,0.08);
-    color: var(--blue);
-    padding: 4px 12px;
-    border-radius: 100px;
-    margin-bottom: 16px;
-  }
+.article-body-with-image .article-float-img img {
+  display: block !important;
+  width: 100% !important;
+  height: auto !important;
+  max-height: 390px !important;
+  object-fit: contain !important;
+  object-position: center !important;
+}
 
-  .article-headline {
-    font-family: 'Sora', sans-serif;
-    font-size: clamp(1.8rem, 3.5vw, 2.8rem);
-    font-weight: 800;
-    color: var(--navy);
-    line-height: 1.15;
-    margin-bottom: 18px;
-  }
+.article-body-with-image::after {
+  content: '';
+  display: table;
+  clear: both;
+}
 
-  .article-intro {
-    font-size: 1.05rem;
-    color: var(--muted);
-    line-height: 1.75;
-    margin-bottom: 28px;
-  }
+/* ── BODY TYPOGRAPHY ── */
+.article-body {
+  font-size: 1rem;
+  line-height: 1.85;
+  color: #374151;
+}
 
-  /* Author row */
-  .article-author-row {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 20px 0;
-    border-top: 1px solid var(--border);
-    border-bottom: 1px solid var(--border);
-    margin-bottom: 24px;
-    flex-wrap: wrap;
-    gap: 16px;
-  }
-  .author-info {
-    display: flex;
-    align-items: center;
-    gap: 12px;
-  }
-  .author-avatar {
-    width: 44px; height: 44px;
-    border-radius: 50%;
-    object-fit: cover;
-    border: 2px solid var(--border);
-  }
-  .author-name {
-    font-family: 'Sora', sans-serif;
-    font-size: 0.9rem;
-    font-weight: 700;
-    color: var(--navy);
-    text-transform: capitalize;
-  }
-  .author-role {
-    font-size: 0.78rem;
-    color: var(--muted);
-    margin-top: 2px;
-  }
-  .article-meta-row {
-    display: flex;
-    align-items: center;
-    gap: 16px;
-    font-size: 0.8rem;
-    color: var(--muted);
-  }
-  .article-meta-item {
-    display: flex;
-    align-items: center;
-    gap: 5px;
-  }
-  .article-meta-item svg { width: 13px; height: 13px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+.article-body * {
+  font-family: 'DM Sans', sans-serif !important;
+  line-height: 1.85 !important;
+  text-align: left !important;
+  margin-top: 0 !important;
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
+}
 
-  /* Social share */
-  .article-share {
-    display: flex;
-    align-items: center;
-    gap: 10px;
-    margin-bottom: 32px;
+.article-body p {
+  font-size: 0.98rem !important;
+  margin-bottom: 1.4em !important;
+}
+
+.article-body h2 {
+  font-size: 1.4rem !important;
+  font-weight: 700 !important;
+  line-height: 1.3 !important;
+  margin-bottom: 14px !important;
+  margin-top: 40px !important;
+}
+
+.article-body h3 {
+  font-size: 1.15rem !important;
+  font-weight: 700 !important;
+  line-height: 1.35 !important;
+  margin-bottom: 10px !important;
+  margin-top: 28px !important;
+}
+
+.article-body span,
+.article-body div {
+  font-size: inherit !important;
+  color: inherit !important;
+  background: none !important;
+}
+
+/* Images INSIDE body content — NOT the float cover image */
+.article-body > img,
+.article-body p img,
+.article-body div img {
+  max-width: 100% !important;
+  height: auto !important;
+  display: block !important;
+  border-radius: var(--radius) !important;
+  margin: 24px 0 !important;
+}
+
+.article-body ul,
+.article-body ol {
+  padding-left: 1.5em;
+  margin-bottom: 1.25em;
+  list-style: revert;
+}
+
+.article-body li {
+  font-size: 0.98rem !important;
+  margin-bottom: 6px !important;
+}
+
+/* ── MOBILE ── */
+@media (max-width: 760px) {
+  .article-body-with-image .article-float-img {
+    float: none;
+    width: 100%;
+    margin: 0 0 24px 0;
   }
-  .share-btn {
-    display: flex;
-    align-items: center;
-    gap: 6px;
-    padding: 7px 14px;
-    border-radius: 8px;
-    border: 1.5px solid var(--border);
-    background: #fff;
-    font-size: 0.8rem;
-    font-weight: 600;
-    color: var(--navy);
-    cursor: pointer;
-    transition: border-color 0.2s, color 0.2s;
-  }
-  .share-btn:hover { border-color: var(--blue); color: var(--blue); }
-  .share-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
+}
+
+/* ── SHARE FOOTER ── */
+.article-share-footer {
+  border-top: 1px solid var(--border);
+  padding-top: 28px;
+  margin-top: 48px;
+}
+.share-footer-label {
+  font-family: 'Sora', sans-serif;
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--muted);
+  margin-bottom: 14px;
+}
+.share-footer-btns { display: flex; gap: 10px; flex-wrap: wrap; }
+.share-btn {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 7px 14px;
+  border-radius: 8px;
+  border: 1.5px solid var(--border);
+  background: #fff;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--navy);
+  cursor: pointer;
+  transition: border-color 0.2s, color 0.2s;
+}
+.share-btn:hover { border-color: var(--blue); color: var(--blue); }
+.share-btn svg { width: 14px; height: 14px; stroke: currentColor; fill: none; stroke-width: 2; stroke-linecap: round; stroke-linejoin: round; }
 
   /* Hero image */
 .article-hero-img {
