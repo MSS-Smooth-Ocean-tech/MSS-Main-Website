@@ -79,10 +79,6 @@
                 '<svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>' +
                 (featured.added_on ? featured.added_on.substring(0, 10) : '') +
               '</span>' +
-              '<span class="read-time" style="margin-left: 15px;">' +
-                '<i class="fas fa-user-edit" style="margin-right: 5px;"></i>' +
-                'By ' + (featured.author_name ? featured.author_name : (featured.added_by ? featured.added_by.split('@')[0].replace('.', ' ') : '')) +
-              '</span>' +
             '</div>' +
             '<h2>' + featured.title + '</h2>' +
             '<p>' + featured.summary + '</p>' +
@@ -135,7 +131,6 @@
               '<div class="article-meta">' +
                 '<span>' + (blog.added_on ? blog.added_on.substring(0, 10) : '') + '</span>' +
                 '<div class="article-meta-dot"></div>' +
-                '<span style="text-transform: capitalize;">By ' + (blog.author_name ? blog.author_name : (blog.added_by ? blog.added_by.split('@')[0].replace('.', ' ') : '')) + '</span>' +
               '</div>' +
               '<div class="article-title" style="white-space: nowrap; overflow: hidden; text-overflow: ellipsis; max-width: 100%;">' + blog.title + '</div>' +
               '<p class="article-desc" style="display: -webkit-box; -webkit-line-clamp: 2; -webkit-box-orient: vertical; overflow: hidden;">' + blog.summary + '</p>' +
