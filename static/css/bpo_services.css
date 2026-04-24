@@ -21,15 +21,6 @@
     padding: 200px 24px 120px;
     text-align: center;
   }
-  .bpo-hero-grid {
-    position: absolute;
-    inset: 0;
-    background-image:
-      linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px),
-      linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px);
-    background-size: 60px 60px;
-    pointer-events: none;
-  }
   .bpo-hero-badge {
     display: inline-flex;
     align-items: center;
@@ -101,6 +92,19 @@
     border-color: rgba(190,190,190,0.61);
     transform: translateY(-3px);
   }
+    .btn-cta-white {
+    background: #fff;
+    color: var(--blue);
+    font-family: 'Sora', sans-serif;
+    font-size: 0.92rem;
+    font-weight: 700;
+    padding: 14px 28px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s, transform 0.2s;
+  }
+  .btn-cta-white:hover { background: #f0f4ff; transform: translateY(-2px); }
 
   /* ── SECTION WRAPPER ── */
   .section-wrap {

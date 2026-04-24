@@ -341,6 +341,12 @@ function switchCat(btn, targetId) {
 document.addEventListener('DOMContentLoaded', function() {
   document.getElementById('si-nvocc').classList.add('active');
 });
+
+document.addEventListener('DOMContentLoaded', function() {
+    if (window.location.hash === '#it') {
+      switchForm('it');
+    }
+  });
 </script>
 <style>
   /* ── SERVICE INTEREST SELECTOR ── */
