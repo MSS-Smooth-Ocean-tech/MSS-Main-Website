@@ -9,21 +9,26 @@
 
   <!-- ── BODY ── -->
   {% if blog.cover_image %}
-  <div class="article-body article-body-with-image">
-    <div class="article-float-img">
-      <img
-        src="{{ blog.cover_image }}"
-        alt="{{ blog.title }}"
-        loading="eager"
-      />
-    </div>
+<div class="article-body article-body-with-image">
+  
+  <div class="article-float-img">
+    <img
+      src="{{ blog.cover_image }}"
+      alt="{{ blog.title }}"
+      loading="eager"
+    />
+  </div>
+
+  <div class="article-text">
     {{ blog.body | safe }}
   </div>
-  {% else %}
-  <div class="article-body">
-    {{ blog.body | safe }}
-  </div>
-  {% endif %}
+
+</div>
+{% else %}
+<div class="article-body">
+  {{ blog.body | safe }}
+</div>
+{% endif %}
 
   <!-- ── SHARE FOOTER ── -->
   <div class="article-share-footer">
@@ -37,3 +42,36 @@
   </div>
 
 </div>
+<style>
+  .article-float-img {
+  float: left;
+  width: 320px;
+  margin: 0 30px 20px 0;
+}
+
+.article-float-img img {
+  width: 100%;
+  border-radius: 8px;
+}
+
+/* 🔥 THIS FIXES YOUR ISSUE */
+.article-text > *:first-child {
+  margin-top: 0;
+}
+
+/* Prevent elements from breaking the float */
+.article-text h1,
+.article-text h2,
+.article-text h3,
+.article-text div,
+.article-text section {
+  clear: none !important;
+}
+
+/* Optional: cleaner flow */
+.article-body::after {
+  content: "";
+  display: block;
+  clear: both;
+}
+</style>
