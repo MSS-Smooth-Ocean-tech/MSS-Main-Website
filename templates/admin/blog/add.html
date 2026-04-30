@@ -291,36 +291,175 @@
             fixed_toolbar_container: '#inlineCanvasToolbar',
             menubar: false,
             statusbar: false,
+
+            /* FIX spacing + typing */
+            forced_root_block: 'p',
+            force_br_newlines: false,
+            force_p_newlines: true,
+
+            /* FIX nbsp issue */
+            entity_encoding: 'raw',
+            cleanup: true,
+            verify_html: true,
+
             plugins: [
-                'advlist', 'autolink', 'lists', 'link',
+                'advlist', 'autolink', 'lists', 'link', 'image',
                 'charmap', 'anchor', 'searchreplace',
                 'visualblocks', 'code', 'fullscreen',
-                'table', 'help', 'wordcount', 'autoresize'
+                'table', 'help', 'wordcount', 'autoresize',
+                'emoticons', 'codesample', 'pagebreak',
+                'nonbreaking', 'insertdatetime', 'media',
+                'quickbars' // ✅ NEW
             ],
-            toolbar: [
-                'undo redo | blocks',
-                'bold italic underline strikethrough',
-                'forecolor backcolor | alignleft aligncenter alignright alignjustify',
-                'bullist numlist outdent indent',
-                'blockquote hr | table link',
-                'removeformat | code fullscreen'
-            ].join(' | '),
+
+            /* ✅ NEW: better typing UX */
+            quickbars_selection_toolbar: 'bold italic | quicklink h2 h3 blockquote',
+            quickbars_insert_toolbar: 'image table hr',
+
             toolbar_mode: 'wrap',
             autoresize_bottom_margin: 30,
+
+            toolbar1: 'undo redo | cut copy paste pastetext | selectall | searchreplace | fullscreen code',
+            toolbar2: 'blocks fontfamily fontsize | bold italic underline strikethrough | forecolor backcolor | removeformat',
+            toolbar3: 'alignleft aligncenter alignright alignjustify | lineheight | outdent indent | blockquote hr pagebreak',
+            toolbar4: 'bullist numlist | table | link image media | charmap emoticons codesample | insertdatetime',
+
+            toolbar_mode: 'wrap',
+            autoresize_bottom_margin: 30,
+
+            /* Line height options */
+            lineheight_formats: '1 1.1 1.2 1.3 1.4 1.5 1.6 1.7 1.8 1.9 2 2.5 3',
+
+            /* Font sizes */
+            fontsize_formats: '10px 11px 12px 13px 14px 15px 16px 18px 20px 22px 24px 28px 32px 36px 40px 48px',
+
+            /* Font families */
+            font_family_formats:
+                'Arial=arial,helvetica,sans-serif;' +
+                'Georgia=georgia,palatino;' +
+                'Inter=inter,sans-serif;' +
+                'Helvetica=helvetica;' +
+                'Courier New=courier new,courier;' +
+                'Times New Roman=times new roman,times;' +
+                'Trebuchet MS=trebuchet ms,geneva;' +
+                'Verdana=verdana,geneva;',
+
+            /* Block formats */
+            block_formats:
+                'Paragraph=p;' +
+                'Heading 1=h1;' +
+                'Heading 2=h2;' +
+                'Heading 3=h3;' +
+                'Heading 4=h4;' +
+                'Heading 5=h5;' +
+                'Heading 6=h6;' +
+                'Preformatted=pre;' +
+                'Blockquote=blockquote;',
+
+            /* Table defaults */
+            table_default_attributes: { border: '0' },
+            table_default_styles: {
+                'border-collapse': 'collapse',
+                'width': '100%'
+            },
+            table_cell_class_list: [
+                { title: 'None', value: '' },
+                { title: 'Highlight', value: 'table-highlight' }
+            ],
+
+            /* Image settings */
+            image_advtab: true,
+            image_caption: true,
+            image_dimensions: true,
+
+            /* Paste settings — clean up Word/Google Docs paste */
+            paste_as_text: false,
+            paste_remove_styles_if_webkit: false,
+            paste_strip_class_attributes: 'none',
+            paste_retain_style_properties: 'all',
+            smart_paste: true,
+
+            /* Link settings */
+            link_default_target: '_blank',
+            link_assume_external_targets: true,
+
             content_style: `
                 body {
-                  font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial;
-                  font-size: 15px;
-                  line-height: 1.65;
-                  padding: 12px;
+                    font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Arial, sans-serif;
+                    font-size: 15px;
+                    line-height: 1.5;
+                    color: #111827;
+                    padding: 16px 20px;
+                    margin: 0;
+                    max-width: 100%;
                 }
-                h1 { font-size: 1.8em; }
-                h2 { font-size: 1.5em; }
-                h3 { font-size: 1.3em; }
+                p {
+                    margin: 0 0 0.3em 0;
+                    padding: 0;
+                }
+                h1 { font-size: 2em; font-weight: 700; margin: 1em 0 0.4em; line-height: 1.2; }
+                h2 { font-size: 1.5em; font-weight: 700; margin: 0.9em 0 0.4em; line-height: 1.25; }
+                h3 { font-size: 1.25em; font-weight: 600; margin: 0.8em 0 0.35em; line-height: 1.3; }
+                h4 { font-size: 1.1em; font-weight: 600; margin: 0.75em 0 0.3em; }
+                h5 { font-size: 1em; font-weight: 600; margin: 0.7em 0 0.3em; }
+                h6 { font-size: 0.9em; font-weight: 600; margin: 0.65em 0 0.3em; color: #6b7280; }
+                ul, ol {
+                    margin: 0 0 0.75em 0;
+                    padding-left: 1.6em;
+                }
+                li {
+                    margin-bottom: 0.3em;
+                    padding: 0;
+                    line-height: 1.5;
+                }
+                li p { margin: 0; padding: 0; }
                 blockquote {
-                  border-left: 4px solid #dfe1e6;
-                  padding-left: 12px;
-                  color: #6b778c;
+                    border-left: 4px solid #42ace0;
+                    padding: 8px 16px;
+                    margin: 0.75em 0;
+                    color: #6b7280;
+                    background: #f9fafb;
+                    border-radius: 0 6px 6px 0;
+                }
+                blockquote p { margin: 0; }
+                pre {
+                    background: #1e293b;
+                    color: #e2e8f0;
+                    padding: 16px;
+                    border-radius: 6px;
+                    font-size: 0.875em;
+                    overflow-x: auto;
+                    margin: 0.75em 0;
+                }
+                code {
+                    background: #f1f5f9;
+                    padding: 2px 6px;
+                    border-radius: 4px;
+                    font-size: 0.875em;
+                    color: #e11d48;
+                }
+                table {
+                    border-collapse: collapse;
+                    width: 100%;
+                    margin: 0.75em 0;
+                }
+                table td, table th {
+                    border: 1px solid #e5e7eb;
+                    padding: 10px 14px;
+                    font-size: 0.9em;
+                }
+                table th {
+                    background: #f9fafb;
+                    font-weight: 600;
+                }
+                table tr:nth-child(even) td { background: #fafafa; }
+                a { color: #2563eb; text-decoration: underline; }
+                a:hover { color: #1d4ed8; }
+                img { max-width: 100%; height: auto; border-radius: 6px; }
+                hr {
+                    border: none;
+                    border-top: 1.5px solid #e5e7eb;
+                    margin: 1.5em 0;
                 }
             `,
             init_instance_callback: function (editor) {
