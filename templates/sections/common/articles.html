@@ -123,15 +123,6 @@
 }
 
 .li-card-body { padding: 24px; display: flex; flex-direction: column; flex: 1; }
-.li-card-author {
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.78rem;
-  color: #64748b;
-  margin-bottom: 12px;
-}
-.li-card-author svg { stroke: #64748b; }
 .li-card-title {
   font-family: 'Sora', sans-serif;
   font-size: 1rem;
@@ -212,7 +203,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                 const months = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
                 const month = monthNum ? months[parseInt(monthNum)-1] : '';
                 
-                const authorStr = item.author_name ? item.author_name : (item.added_by ? item.added_by.split('@')[0].replace('.', ' ') : '');
                 
                 grid.innerHTML += `
                 <a href="/resources/${item.slug}" class="li-card">
@@ -225,10 +215,6 @@ document.addEventListener('DOMContentLoaded', async () => {
                     <div class="li-card-tag">Insight</div>
                   </div>
                   <div class="li-card-body">
-                    <div class="li-card-author" style="text-transform: capitalize;">
-                      <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" width="14" height="14"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
-                      ${authorStr}
-                    </div>
                     <div class="li-card-title">${item.title}</div>
                     <div class="li-card-divider"></div>
                     <p class="li-card-desc" style="display: -webkit-box; -webkit-line-clamp: 3; -webkit-box-orient: vertical; overflow: hidden;">${item.summary}</p>
